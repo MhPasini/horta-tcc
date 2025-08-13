@@ -1,0 +1,21 @@
+extends Control
+
+
+@onready var x = $Panel/VBoxContainer/Coords/X
+@onready var y = $Panel/VBoxContainer/Coords/Y
+@onready var option_button = $Panel2/VBoxContainer/OptionButton
+
+@onready var plantar_btn = $Functions/PlantarBtn
+
+var cell_x : int
+var cell_y : int
+var seed_type : int
+
+func get_input_values() -> void:
+	cell_x = int(x.text)
+	cell_y = int(y.text)
+	seed_type = option_button.selected + 1
+
+func _on_plantar_btn_pressed():
+	get_input_values()
+	Events.test_plant.emit(Vector2i(cell_x,cell_y), seed_type)
