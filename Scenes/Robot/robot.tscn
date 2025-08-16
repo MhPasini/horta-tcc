@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bswelfcys8bfe"]
+
+[ext_resource type="Texture2D" uid="uid://n7jugvbb10uj" path="res://Textures/Robot/drone_shadow.png" id="1_ahakn"]
+[ext_resource type="Texture2D" uid="uid://buesw6espyu6l" path="res://Textures/Robot/mine_drone_idle_new.png" id="2_fr5qm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1phco"]
+atlas = ExtResource("2_fr5qm")
+region = Rect2(0, 0, 17, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb51f"]
+atlas = ExtResource("2_fr5qm")
+region = Rect2(17, 0, 17, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnt18"]
+atlas = ExtResource("2_fr5qm")
+region = Rect2(34, 0, 17, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ewbju"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1phco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb51f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnt18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb51f")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 4.0
+}]
+
+[node name="Robot" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="Shadow" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_ahakn")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(1.25, 1.25)
+sprite_frames = SubResource("SpriteFrames_ewbju")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.635951

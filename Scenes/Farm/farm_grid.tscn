@@ -4,5 +4,3 @@
 
 [node name="FarmGrid" type="Node"]
 script = ExtResource("1_o3jga")
-size = Vector2i(6, 6)
-gridOffset = Vector2i(40, 120)

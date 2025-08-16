@@ -19,3 +19,11 @@ func get_input_values() -> void:
 func _on_plantar_btn_pressed():
 	get_input_values()
 	Events.test_plant.emit(Vector2i(cell_x,cell_y), seed_type)
+
+func _on_regar_btn_pressed():
+	get_input_values()
+	Events.test_water.emit(Vector2i(cell_x,cell_y))
+
+func _on_colher_btn_pressed():
+	get_input_values()
+	Events.test_harvest.emit(Vector2i(cell_x,cell_y))
