@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x4kxrktagrbx"
-path="res://.godot/imported/Grass_summer.png-60c6a89f969649ee252c98eb49c69136.ctex"
+uid="uid://mihuivxbn2p7"
+path="res://.godot/imported/selectbox_full.png-be8cd3cce7e726f3a400db82ed11bd97.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Grass_summer.png"
-dest_files=["res://.godot/imported/Grass_summer.png-60c6a89f969649ee252c98eb49c69136.ctex"]
+source_file="res://UI/selectbox_full.png"
+dest_files=["res://.godot/imported/selectbox_full.png-be8cd3cce7e726f3a400db82ed11bd97.ctex"]
 
 [params]
 

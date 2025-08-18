@@ -12,11 +12,15 @@ config_version=5
 
 config/name="Horta-TCC"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://7uwi47cxmttd"
 
 [autoload]
 
 Events="*res://MiscScripts/EVENTS.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=0
 
 [display]
 
@@ -26,6 +30,7 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="uid://dwhwng8dfp47h"
 
 [rendering]
 

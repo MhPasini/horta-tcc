@@ -1,22 +1,27 @@
-[gd_scene load_steps=25 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=28 format=4 uid="uid://dc2877mst36g5"]
 
-[ext_resource type="Texture2D" uid="uid://iq03yt0omy57" path="res://Textures/dirt.png" id="2_qxrlw"]
-[ext_resource type="Texture2D" uid="uid://cl1wgniv3ka0i" path="res://Textures/Flower.png" id="3_o5yvi"]
-[ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="3_rfjv2"]
-[ext_resource type="PackedScene" uid="uid://bwwm5yuwrc2tf" path="res://Scenes/Farm/farm_grid.tscn" id="3_wrm1d"]
-[ext_resource type="Texture2D" uid="uid://btvwmeufvxd22" path="res://Textures/color palette.png" id="4_1l0tm"]
-[ext_resource type="Script" uid="uid://nnrapwttxrgk" path="res://MiscScripts/test_panel.gd" id="4_3dryh"]
-[ext_resource type="Texture2D" uid="uid://cghd2yelq3wso" path="res://Textures/Grass.png" id="4_rku1e"]
-[ext_resource type="Texture2D" uid="uid://b88tlputq7qf5" path="res://Textures/tufts and lumps.png" id="5_rfjv2"]
-[ext_resource type="FontFile" uid="uid://3ytuodnv4vag" path="res://Fonts/ThaleahFat.ttf" id="5_wowpa"]
-[ext_resource type="PackedScene" uid="uid://bswelfcys8bfe" path="res://Scenes/Robot/robot.tscn" id="7_rfjv2"]
-[ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="7_v158k"]
-[ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="8_v158k"]
-[ext_resource type="Script" uid="uid://b5n8ycdnagaug" path="res://Scenes/outputConsole.gd" id="9_rku1e"]
+[ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
+[ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
+[ext_resource type="Texture2D" uid="uid://iq03yt0omy57" path="res://Textures/dirt.png" id="3_qtymf"]
+[ext_resource type="Texture2D" uid="uid://cl1wgniv3ka0i" path="res://Textures/Flower.png" id="4_ypmwd"]
+[ext_resource type="Texture2D" uid="uid://cghd2yelq3wso" path="res://Textures/Grass.png" id="5_oejk7"]
+[ext_resource type="Texture2D" uid="uid://b88tlputq7qf5" path="res://Textures/tufts and lumps.png" id="6_upfqs"]
+[ext_resource type="PackedScene" uid="uid://bwwm5yuwrc2tf" path="res://Scenes/Farm/farm_grid.tscn" id="7_8e3kh"]
+[ext_resource type="PackedScene" uid="uid://bswelfcys8bfe" path="res://Scenes/Robot/robot.tscn" id="8_56qi8"]
+[ext_resource type="Script" uid="uid://nnrapwttxrgk" path="res://MiscScripts/test_panel.gd" id="9_upfqs"]
+[ext_resource type="FontFile" uid="uid://3ytuodnv4vag" path="res://Fonts/ThaleahFat.ttf" id="10_8e3kh"]
+[ext_resource type="Script" uid="uid://b5n8ycdnagaug" path="res://Scenes/UI/outputConsole.gd" id="11_56qi8"]
+[ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="12_2vowc"]
+[ext_resource type="StyleBox" uid="uid://ccxs3w5yce5y2" path="res://UI/Styles/Panel_back.tres" id="12_yox4t"]
+[ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="13_yox4t"]
+[ext_resource type="Texture2D" uid="uid://btvwmeufvxd22" path="res://Textures/color palette.png" id="14_lemb1"]
+[ext_resource type="StyleBox" uid="uid://btd4k0yqt5gr3" path="res://UI/Styles/Panel_front.tres" id="16_lemb1"]
+[ext_resource type="Texture2D" uid="uid://c4hhqh8ei3lok" path="res://UI/confirm.png" id="17_a6ftd"]
+[ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="18_nxex1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 resource_name = "GrassTiles"
-texture = ExtResource("3_rfjv2")
+texture = ExtResource("2_7jvlm")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrains_peering_bit/bottom_right_corner = 0
@@ -79,7 +84,7 @@ texture = ExtResource("3_rfjv2")
 4:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrm1d"]
-texture = ExtResource("2_qxrlw")
+texture = ExtResource("3_qtymf")
 0:0/0 = 0
 0:0/0/terrain_set = 1
 0:0/0/terrains_peering_bit/bottom_right_corner = 0
@@ -155,7 +160,7 @@ sources/0 = SubResource("TileSetAtlasSource_qxrlw")
 sources/1 = SubResource("TileSetAtlasSource_wrm1d")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1phco"]
-texture = ExtResource("3_o5yvi")
+texture = ExtResource("4_ypmwd")
 0:0/next_alternative_id = 10
 0:0/0 = 0
 1:0/next_alternative_id = 2
@@ -184,7 +189,7 @@ texture = ExtResource("3_o5yvi")
 5:3/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nb51f"]
-texture = ExtResource("4_rku1e")
+texture = ExtResource("5_oejk7")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -205,7 +210,7 @@ texture = ExtResource("4_rku1e")
 5:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nnt18"]
-texture = ExtResource("5_rfjv2")
+texture = ExtResource("6_upfqs")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -236,35 +241,16 @@ sources/0 = SubResource("TileSetAtlasSource_1phco")
 sources/1 = SubResource("TileSetAtlasSource_nb51f")
 sources/3 = SubResource("TileSetAtlasSource_nnt18")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1l0tm"]
-bg_color = Color(0.263, 0.278, 0.275, 0.75)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-anti_aliasing = false
-
 [sub_resource type="LabelSettings" id="LabelSettings_h4fw4"]
-font = ExtResource("7_v158k")
+font = ExtResource("12_2vowc")
 font_color = Color(0.937255, 0.807843, 0.537255, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_rku1e"]
-base_font = ExtResource("8_v158k")
+base_font = ExtResource("13_yox4t")
 spacing_top = -4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v158k"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0, 0, 0, 0.25)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-anti_aliasing = false
-
 [node name="Game" type="Node"]
+script = ExtResource("1_huoen")
 
 [node name="Backgroud" type="Node2D" parent="."]
 z_index = -10
@@ -285,9 +271,9 @@ tile_map_data = PackedByteArray("AAD+/xMAAQACAAAAAAD//wUAAQABAAEAAAD//w4AAQACAAE
 tile_set = SubResource("TileSet_ewbju")
 metadata/_edit_lock_ = true
 
-[node name="FarmGrid" parent="." instance=ExtResource("3_wrm1d")]
+[node name="FarmGrid" parent="." instance=ExtResource("7_8e3kh")]
 
-[node name="Robot" parent="." instance=ExtResource("7_rfjv2")]
+[node name="Robot" parent="." instance=ExtResource("8_56qi8")]
 position = Vector2(81, 102)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -296,6 +282,10 @@ metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="ColorPalette" type="Sprite2D" parent="UI"]
+position = Vector2(-30, 224)
+texture = ExtResource("14_lemb1")
+
 [node name="TestPanel" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 8
@@ -303,13 +293,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -129.0
-offset_right = 116.0
-offset_bottom = 3.0
+offset_left = -106.0
+offset_top = -179.0
+offset_right = 59.0
+offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_3dryh")
+script = ExtResource("9_upfqs")
 
 [node name="Functions" type="VBoxContainer" parent="UI/TestPanel"]
 layout_mode = 1
@@ -321,19 +311,19 @@ grow_vertical = 2
 [node name="PlantarBtn" type="Button" parent="UI/TestPanel/Functions"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_fonts/font = ExtResource("10_8e3kh")
 text = "Plantar"
 
 [node name="RegarBtn" type="Button" parent="UI/TestPanel/Functions"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_fonts/font = ExtResource("10_8e3kh")
 text = "Regar"
 
 [node name="ColherBtn" type="Button" parent="UI/TestPanel/Functions"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_fonts/font = ExtResource("10_8e3kh")
 text = "Colher"
 
 [node name="VSeparator" type="VSeparator" parent="UI/TestPanel"]
@@ -369,7 +359,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="UI/TestPanel/Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_fonts/font = ExtResource("10_8e3kh")
 text = "Cell:"
 
 [node name="Coords" type="HBoxContainer" parent="UI/TestPanel/Panel/VBoxContainer"]
@@ -378,7 +368,7 @@ layout_mode = 2
 [node name="X" type="LineEdit" parent="UI/TestPanel/Panel/VBoxContainer/Coords"]
 layout_mode = 2
 theme_override_constants/minimum_character_width = 2
-theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_fonts/font = ExtResource("10_8e3kh")
 placeholder_text = "x"
 max_length = 2
 emoji_menu_enabled = false
@@ -388,7 +378,7 @@ flat = true
 [node name="Y" type="LineEdit" parent="UI/TestPanel/Panel/VBoxContainer/Coords"]
 layout_mode = 2
 theme_override_constants/minimum_character_width = 2
-theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_fonts/font = ExtResource("10_8e3kh")
 placeholder_text = "y"
 max_length = 2
 flat = true
@@ -416,12 +406,12 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="UI/TestPanel/Panel2/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_fonts/font = ExtResource("10_8e3kh")
 text = "Semente"
 
 [node name="OptionButton" type="OptionButton" parent="UI/TestPanel/Panel2/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_wowpa")
+theme_override_fonts/font = ExtResource("10_8e3kh")
 flat = true
 selected = 0
 allow_reselect = true
@@ -435,18 +425,16 @@ popup/item_2/id = 2
 
 [node name="Output" type="Panel" parent="UI"]
 custom_minimum_size = Vector2(280, 88)
-anchors_preset = 12
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
+offset_left = 5.0
 offset_top = -88.0
-offset_right = -340.0
-grow_horizontal = 2
+offset_right = 295.0
 grow_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1l0tm")
-script = ExtResource("9_rku1e")
+theme_override_styles/panel = ExtResource("12_yox4t")
+script = ExtResource("11_56qi8")
 
 [node name="Margins" type="MarginContainer" parent="UI/Output"]
 layout_mode = 1
@@ -466,7 +454,7 @@ theme_override_constants/separation = 2
 
 [node name="Label" type="Label" parent="UI/Output/Margins/VBox"]
 layout_mode = 2
-text = "Console Output"
+text = "Saída do Console"
 label_settings = SubResource("LabelSettings_h4fw4")
 uppercase = true
 
@@ -477,16 +465,151 @@ size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.8, 0.8, 0.792157, 1)
 theme_override_fonts/normal_font = SubResource("FontVariation_rku1e")
 theme_override_font_sizes/normal_font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_v158k")
+theme_override_styles/normal = ExtResource("16_lemb1")
 bbcode_enabled = true
 text = "[color=red]ERRO: [/color]Canteiro fora da área delimitada, ação cancelada!
 [color=red]ERRO: [/color]Canteiro fora da área delimitada, ação cancelada!
 [color=red]ERRO: [/color]Canteiro fora da área delimitada, ação cancelada!"
 scroll_following = true
 
-[node name="ColorPalette" type="Sprite2D" parent="UI"]
-position = Vector2(-30, 224)
-texture = ExtResource("4_1l0tm")
+[node name="RobotStats" type="Panel" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 297.0
+offset_top = -88.0
+offset_right = 458.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("12_yox4t")
+
+[node name="Margins" type="MarginContainer" parent="UI/RobotStats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBox" type="VBoxContainer" parent="UI/RobotStats/Margins"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="UI/RobotStats/Margins/VBox"]
+layout_mode = 2
+text = "Status robô"
+label_settings = SubResource("LabelSettings_h4fw4")
+uppercase = true
+
+[node name="Console" type="RichTextLabel" parent="UI/RobotStats/Margins/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.8, 0.8, 0.792157, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_rku1e")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_styles/normal = ExtResource("16_lemb1")
+bbcode_enabled = true
+text = "[color=cyan]Posição: [/color]L:0 C:1
+[color=Orange]Inventário: [/color](10 / 30)
+[color=Green]Vegetal: [/color]Cenoura
+Canteiro Vazio: [color=red]FALSO[/color]
+Canteiro Seco: [color=red]FALSO[/color]
+Vegetal Maduro: [color=Green]VERDADEIRO[/color]"
+scroll_following = true
+
+[node name="CommandPanel" type="Panel" parent="UI"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -180.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("12_yox4t")
+
+[node name="Label" type="Label" parent="UI/CommandPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 10.0
+offset_right = 90.0
+offset_bottom = 25.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_fonts/font = ExtResource("10_8e3kh")
+text = "Painel de Comandos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/CommandPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 30.0
+offset_right = -2.0
+offset_bottom = 320.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("16_lemb1")
+
+[node name="Label" type="Label" parent="UI/CommandPanel/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = -11.5
+offset_right = 56.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.785398
+pivot_offset = Vector2(56, 12)
+text = "PLACEHOLDER"
+
+[node name="BtnsArea" type="HBoxContainer" parent="UI/CommandPanel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -35.0
+offset_right = -11.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Button" type="Button" parent="UI/CommandPanel/BtnsArea"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("17_a6ftd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button2" type="Button" parent="UI/CommandPanel/BtnsArea"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("18_nxex1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(240, 180)
 
 [connection signal="pressed" from="UI/TestPanel/Functions/PlantarBtn" to="UI/TestPanel" method="_on_plantar_btn_pressed"]
 [connection signal="pressed" from="UI/TestPanel/Functions/RegarBtn" to="UI/TestPanel" method="_on_regar_btn_pressed"]

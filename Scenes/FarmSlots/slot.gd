@@ -31,6 +31,7 @@ var water_level : float = 0.0 : set = _set_water_lvl
 var grow_level : float = 0.0 : set = _set_grow_lvl
 var is_dry : bool = false
 var is_grown : bool = false
+var is_empty : bool = false
 
 @onready var dirt_sprite = $Dirt
 @onready var crop_sprite = $Crop
@@ -100,7 +101,7 @@ func reset_crop() -> void:
 func grow_crop(delta:float):
 	var grow_rate = CROP_DATA[curr_crop][3]
 	water_level -= grow_rate * delta
-	if curr_crop != CROPS.None and not is_grown:
+	if not (is_empty or is_grown):
 		grow_level += grow_rate * delta
 
 #region UPDATE SPRITES
@@ -115,6 +116,7 @@ func update_crop_sprite() -> void:
 #region SETTERS
 func _set_curr_crop(value: int) -> void:
 	curr_crop = value
+	is_empty = not bool(value)
 	update_crop_sprite()
 
 func _set_crop_state(value: int) -> void:
