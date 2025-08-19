@@ -5,9 +5,6 @@ enum DIRT_STATE {Dry, Wet}
 enum CROP_STATE {Seed, Sprout, Grown}
 enum CROPS {None, Carrot, Onion, Radish}
 
-const error_msg = "[color=red]ERRO: [/color]"
-const warning_msg = "[color=yellow]AVISO: [/color]"
-
 @export var carrot_sprite : Texture = preload("res://Textures/crops/carrot.png")
 @export var onion_sprite : Texture = preload("res://Textures/crops/onion.png")
 @export var radish_sprite : Texture = preload("res://Textures/crops/radish.png")
@@ -53,44 +50,47 @@ func set_initial_values() -> void:
 	water_indicator.hide()
 	growth_indicator.hide()
 
-func plant_crop(seed_type:int):
-	var msg : String
-	if curr_crop == CROPS.None:
+func plant_crop(seed_type:int) -> LogResult:
+	var result = LogResult.new()
+	if is_empty:
 		curr_crop = seed_type
 		curr_crop_state = CROP_STATE.Seed
-		msg = "Semente de %s plantada no canteiro: %s." % [CROP_DATA[seed_type][0], grid_pos]
-		Events.console_message.emit(msg)
+		result.msg = "Semente de %s plantada no canteiro: %s." % [CROP_DATA[seed_type][0], grid_pos]
+		result.type = Globals.MSG_TYPE.normal
 		#TODO animação de plantar a semente
 	else:
-		msg = "Já existe uma planta no canteiro %s, ação abortada!"% grid_pos
-		Events.console_message.emit(error_msg + msg)
+		result.msg = "Já existe uma planta no canteiro %s, ação abortada!"% grid_pos
+		result.type = Globals.MSG_TYPE.error
+	return result
 
-func water_crop():
+func water_crop() -> LogResult:
+	var result = LogResult.new()
 	water_level = 10.0
 	curr_dirt_state = DIRT_STATE.Wet
 	water_indicator.show()
 	set_process(true)
+	result.msg = "Canteiro %s regado." % grid_pos
+	result.type = Globals.MSG_TYPE.normal
 	#TODO animação de plantar a semente
-	var msg = "Canteiro %s regado." % grid_pos
-	Events.console_message.emit(msg)
+	return result
 
-func harvest_crop():
-	var msg : String
-	if curr_crop == CROPS.None:
-		msg = "Não há nenhuma planta no canteiro %s, ação abortada!"% grid_pos
-		Events.console_message.emit(error_msg + msg)
+func harvest_crop() -> LogResult:
+	var result = LogResult.new()
+	if is_empty:
+		result.msg = "Não há nenhuma planta no canteiro %s, ação abortada!"% grid_pos
+		result.type = Globals.MSG_TYPE.error
 	elif not is_grown:
-		msg = "A planta no canteiro %s foi removida, mas não estava madura!"% grid_pos
-		Events.console_message.emit(warning_msg + msg)
+		result.msg = "A planta no canteiro %s foi removida, mas não estava madura!"% grid_pos
+		result.type = Globals.MSG_TYPE.warning
 		reset_crop()
 		#TODO animação de remover planta
 	else:
-		msg = "%s coletado(a) no canteiro: %s." % [CROP_DATA[curr_crop][0], grid_pos]
-		Events.console_message.emit(msg)
+		result.msg = "%s coletado(a) no canteiro: %s." % [CROP_DATA[curr_crop][0], grid_pos]
+		result.type = Globals.MSG_TYPE.normal
 		reset_crop()
 		#TODO enviar uma planta para o armazem do robô
 		#TODO animação de colher planta
-	print(msg)
+	return result
 
 func reset_crop() -> void:
 	curr_crop = CROPS.None

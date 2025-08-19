@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bswelfcys8bfe"]
+[gd_scene load_steps=8 format=3 uid="uid://bswelfcys8bfe"]
 
 [ext_resource type="Texture2D" uid="uid://n7jugvbb10uj" path="res://Textures/Robot/drone_shadow.png" id="1_ahakn"]
+[ext_resource type="Script" uid="uid://c5po33upvsuox" path="res://Scenes/Robot/robot.gd" id="1_fr5qm"]
 [ext_resource type="Texture2D" uid="uid://buesw6espyu6l" path="res://Textures/Robot/mine_drone_idle_new.png" id="2_fr5qm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1phco"]
@@ -36,6 +37,7 @@ animations = [{
 }]
 
 [node name="Robot" type="Node2D"]
+script = ExtResource("1_fr5qm")
 metadata/_edit_group_ = true
 
 [node name="Shadow" type="Sprite2D" parent="."]

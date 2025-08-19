@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=30 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://3ytuodnv4vag" path="res://Fonts/ThaleahFat.ttf" id="10_8e3kh"]
 [ext_resource type="Script" uid="uid://b5n8ycdnagaug" path="res://Scenes/UI/outputConsole.gd" id="11_56qi8"]
 [ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="12_2vowc"]
+[ext_resource type="Texture2D" uid="uid://qqy8f5nih4k4" path="res://UI/indicator.png" id="12_lemb1"]
 [ext_resource type="StyleBox" uid="uid://ccxs3w5yce5y2" path="res://UI/Styles/Panel_back.tres" id="12_yox4t"]
 [ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="13_yox4t"]
 [ext_resource type="Texture2D" uid="uid://btvwmeufvxd22" path="res://Textures/color palette.png" id="14_lemb1"]
@@ -241,6 +242,28 @@ sources/0 = SubResource("TileSetAtlasSource_1phco")
 sources/1 = SubResource("TileSetAtlasSource_nb51f")
 sources/3 = SubResource("TileSetAtlasSource_nnt18")
 
+[sub_resource type="Theme" id="Theme_a6ftd"]
+OptionButton/icons/arrow = ExtResource("12_lemb1")
+PopupMenu/constants/h_separation = 0
+PopupMenu/constants/icon_max_width = 0
+PopupMenu/constants/indent = 0
+PopupMenu/constants/item_end_padding = 0
+PopupMenu/constants/item_start_padding = 0
+PopupMenu/constants/outline_size = 0
+PopupMenu/constants/separator_outline_size = 0
+PopupMenu/constants/v_separation = 0
+PopupMenu/font_sizes/font_separator_size = 16
+PopupMenu/font_sizes/font_size = 16
+PopupMenu/fonts/font = ExtResource("13_yox4t")
+PopupMenu/fonts/font_separator = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/styles/hover = null
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = null
+PopupMenu/styles/separator = null
+
 [sub_resource type="LabelSettings" id="LabelSettings_h4fw4"]
 font = ExtResource("12_2vowc")
 font_color = Color(0.937255, 0.807843, 0.537255, 1)
@@ -274,7 +297,8 @@ metadata/_edit_lock_ = true
 [node name="FarmGrid" parent="." instance=ExtResource("7_8e3kh")]
 
 [node name="Robot" parent="." instance=ExtResource("8_56qi8")]
-position = Vector2(81, 102)
+position = Vector2(240, 180)
+offset = Vector2(0, -13)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
@@ -295,36 +319,60 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -106.0
 offset_top = -179.0
-offset_right = 59.0
-offset_bottom = -52.0
+offset_right = 61.0
+offset_bottom = -46.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.9, 0.9)
 script = ExtResource("9_upfqs")
 
 [node name="Functions" type="VBoxContainer" parent="UI/TestPanel"]
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 80.0
-grow_vertical = 2
+offset_right = 81.0
+offset_bottom = 131.0
+theme_override_constants/separation = 1
 
 [node name="PlantarBtn" type="Button" parent="UI/TestPanel/Functions"]
-custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_8e3kh")
+theme_override_fonts/font = ExtResource("13_yox4t")
+theme_override_font_sizes/font_size = 16
 text = "Plantar"
 
 [node name="RegarBtn" type="Button" parent="UI/TestPanel/Functions"]
-custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_8e3kh")
+theme_override_fonts/font = ExtResource("13_yox4t")
+theme_override_font_sizes/font_size = 16
 text = "Regar"
 
 [node name="ColherBtn" type="Button" parent="UI/TestPanel/Functions"]
-custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_8e3kh")
+theme_override_fonts/font = ExtResource("13_yox4t")
+theme_override_font_sizes/font_size = 16
 text = "Colher"
+
+[node name="MoveBtn" type="Button" parent="UI/TestPanel/Functions"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("13_yox4t")
+theme_override_font_sizes/font_size = 16
+text = "Mover"
+
+[node name="OriginBtn" type="Button" parent="UI/TestPanel/Functions"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("13_yox4t")
+theme_override_font_sizes/font_size = 16
+text = "Origem"
+
+[node name="MoveNextBtn" type="Button" parent="UI/TestPanel/Functions"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("13_yox4t")
+theme_override_font_sizes/font_size = 16
+text = "Proximo"
+
+[node name="MovePreviousBtn" type="Button" parent="UI/TestPanel/Functions"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("13_yox4t")
+theme_override_font_sizes/font_size = 16
+text = "Anterior"
 
 [node name="VSeparator" type="VSeparator" parent="UI/TestPanel"]
 layout_mode = 1
@@ -343,8 +391,8 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -79.0
-offset_right = 31.0
-offset_bottom = 60.0
+offset_right = 1.0
+offset_bottom = 44.0
 grow_horizontal = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/TestPanel/Panel"]
@@ -359,7 +407,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="UI/TestPanel/Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_8e3kh")
+theme_override_fonts/font = ExtResource("13_yox4t")
 text = "Cell:"
 
 [node name="Coords" type="HBoxContainer" parent="UI/TestPanel/Panel/VBoxContainer"]
@@ -368,7 +416,7 @@ layout_mode = 2
 [node name="X" type="LineEdit" parent="UI/TestPanel/Panel/VBoxContainer/Coords"]
 layout_mode = 2
 theme_override_constants/minimum_character_width = 2
-theme_override_fonts/font = ExtResource("10_8e3kh")
+theme_override_fonts/font = ExtResource("13_yox4t")
 placeholder_text = "x"
 max_length = 2
 emoji_menu_enabled = false
@@ -378,7 +426,7 @@ flat = true
 [node name="Y" type="LineEdit" parent="UI/TestPanel/Panel/VBoxContainer/Coords"]
 layout_mode = 2
 theme_override_constants/minimum_character_width = 2
-theme_override_fonts/font = ExtResource("10_8e3kh")
+theme_override_fonts/font = ExtResource("13_yox4t")
 placeholder_text = "y"
 max_length = 2
 flat = true
@@ -389,9 +437,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -79.0
-offset_top = 66.0
-offset_right = 31.0
-offset_bottom = 126.0
+offset_top = 46.0
+offset_right = 1.0
+offset_bottom = 90.0
 grow_horizontal = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/TestPanel/Panel2"]
@@ -406,12 +454,13 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="UI/TestPanel/Panel2/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_8e3kh")
+theme_override_fonts/font = ExtResource("13_yox4t")
 text = "Semente"
 
 [node name="OptionButton" type="OptionButton" parent="UI/TestPanel/Panel2/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("10_8e3kh")
+theme = SubResource("Theme_a6ftd")
+theme_override_fonts/font = ExtResource("13_yox4t")
 flat = true
 selected = 0
 allow_reselect = true
@@ -514,7 +563,7 @@ theme_override_fonts/normal_font = SubResource("FontVariation_rku1e")
 theme_override_font_sizes/normal_font_size = 16
 theme_override_styles/normal = ExtResource("16_lemb1")
 bbcode_enabled = true
-text = "[color=cyan]Posição: [/color]L:0 C:1
+text = "[color=cyan]Posição: [/color]x:0 y:1
 [color=Orange]Inventário: [/color](10 / 30)
 [color=Green]Vegetal: [/color]Cenoura
 Canteiro Vazio: [color=red]FALSO[/color]
@@ -614,3 +663,7 @@ position = Vector2(240, 180)
 [connection signal="pressed" from="UI/TestPanel/Functions/PlantarBtn" to="UI/TestPanel" method="_on_plantar_btn_pressed"]
 [connection signal="pressed" from="UI/TestPanel/Functions/RegarBtn" to="UI/TestPanel" method="_on_regar_btn_pressed"]
 [connection signal="pressed" from="UI/TestPanel/Functions/ColherBtn" to="UI/TestPanel" method="_on_colher_btn_pressed"]
+[connection signal="pressed" from="UI/TestPanel/Functions/MoveBtn" to="UI/TestPanel" method="_on_move_btn_pressed"]
+[connection signal="pressed" from="UI/TestPanel/Functions/OriginBtn" to="UI/TestPanel" method="_on_origin_btn_pressed"]
+[connection signal="pressed" from="UI/TestPanel/Functions/MoveNextBtn" to="UI/TestPanel" method="_on_move_next_btn_pressed"]
+[connection signal="pressed" from="UI/TestPanel/Functions/MovePreviousBtn" to="UI/TestPanel" method="_on_move_previous_btn_pressed"]

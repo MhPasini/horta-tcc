@@ -17,6 +17,7 @@ config/icon="uid://7uwi47cxmttd"
 [autoload]
 
 Events="*res://MiscScripts/EVENTS.gd"
+Globals="*res://MiscScripts/Globals.gd"
 
 [debug]
 
