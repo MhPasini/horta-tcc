@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://c23qpaffp606m"]
+
+[ext_resource type="Script" uid="uid://wvgp1jb67vhq" path="res://Scenes/Blocks/code_block.gd" id="1_cy0tu"]
+[ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="2_0xhd1"]
+[ext_resource type="StyleBox" uid="uid://dr2k6gosa1ivj" path="res://UI/Styles/code_block_body.tres" id="2_2dql6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2dql6"]
+font = ExtResource("2_0xhd1")
+font_color = Color(0.341176, 0.341176, 0.341176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dql6"]
+bg_color = Color(0.341176, 0.341176, 0.341176, 1)
+
+[node name="CodeBlock" type="PanelContainer"]
+custom_minimum_size = Vector2(60, 20)
+offset_right = 60.0
+offset_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_2dql6")
+script = ExtResource("1_cy0tu")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = -2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="FuncLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Mover_para"
+label_settings = SubResource("LabelSettings_2dql6")
+
+[node name="X" type="LineEdit" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_constants/minimum_character_width = 2
+theme_override_fonts/font = ExtResource("2_0xhd1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2dql6")
+placeholder_text = "x"
+max_length = 3
+emoji_menu_enabled = false
+flat = true
+
+[node name="Y" type="LineEdit" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_constants/minimum_character_width = 2
+theme_override_fonts/font = ExtResource("2_0xhd1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2dql6")
+placeholder_text = "y"
+max_length = 3
+flat = true

@@ -5,19 +5,19 @@ enum DIRT_STATE {Dry, Wet}
 enum CROP_STATE {Seed, Sprout, Grown}
 enum CROPS {None, Carrot, Onion, Radish}
 
-@export var carrot_sprite : Texture = preload("res://Textures/crops/carrot.png")
-@export var onion_sprite : Texture = preload("res://Textures/crops/onion.png")
-@export var radish_sprite : Texture = preload("res://Textures/crops/radish.png")
+#@export var carrot_sprite : Texture = preload("res://Textures/crops/carrot.png")
+#@export var onion_sprite : Texture = preload("res://Textures/crops/onion.png")
+#@export var radish_sprite : Texture = preload("res://Textures/crops/radish.png")
 
-var CROP_DATA = {
+const CROP_DATA = {
 	CROPS.None:
 		['Vazio', null, 0.0, 0.25], # Vegetal, Textura, GrowLimit, GrowRate
 	CROPS.Carrot:
-		['Cenoura', carrot_sprite, 10.0, 1.0],
+		['Cenoura', Globals.carrot_sprite, 10.0, 1.0],
 	CROPS.Onion:
-		['Cebola', onion_sprite, 10.0, 0.5],
+		['Cebola', Globals.onion_sprite, 10.0, 0.5],
 	CROPS.Radish:
-		['Rabanete', radish_sprite, 20.0, 0.75]
+		['Rabanete', Globals.radish_sprite, 20.0, 0.75]
 }
 
 var grid_pos : Vector2i
@@ -87,8 +87,8 @@ func harvest_crop() -> LogResult:
 	else:
 		result.msg = "%s coletado(a) no canteiro: %s." % [CROP_DATA[curr_crop][0], grid_pos]
 		result.type = Globals.MSG_TYPE.normal
+		Events.add_crop.emit(CROP_DATA[curr_crop][0]) # Cenoura/Cebola/Rabanete
 		reset_crop()
-		#TODO enviar uma planta para o armazem do robô
 		#TODO animação de colher planta
 	return result
 

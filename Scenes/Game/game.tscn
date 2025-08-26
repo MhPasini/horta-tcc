@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=42 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -13,12 +13,18 @@
 [ext_resource type="Script" uid="uid://b5n8ycdnagaug" path="res://Scenes/UI/outputConsole.gd" id="11_56qi8"]
 [ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="12_2vowc"]
 [ext_resource type="Texture2D" uid="uid://qqy8f5nih4k4" path="res://UI/indicator.png" id="12_lemb1"]
-[ext_resource type="StyleBox" uid="uid://ccxs3w5yce5y2" path="res://UI/Styles/Panel_back.tres" id="12_yox4t"]
+[ext_resource type="StyleBox" uid="uid://jaiges0r4i5m" path="res://UI/Styles/solid_background_panel_noBorder.tres" id="13_pa3qg"]
 [ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="13_yox4t"]
 [ext_resource type="Texture2D" uid="uid://btvwmeufvxd22" path="res://Textures/color palette.png" id="14_lemb1"]
 [ext_resource type="StyleBox" uid="uid://btd4k0yqt5gr3" path="res://UI/Styles/Panel_front.tres" id="16_lemb1"]
-[ext_resource type="Texture2D" uid="uid://c4hhqh8ei3lok" path="res://UI/confirm.png" id="17_a6ftd"]
-[ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="18_nxex1"]
+[ext_resource type="StyleBox" uid="uid://dfx58hsumrpqr" path="res://UI/Styles/solid_background_panel.tres" id="17_2lc0x"]
+[ext_resource type="Texture2D" uid="uid://b6hl4dns81us8" path="res://UI/dotted_box.png" id="18_a6ftd"]
+[ext_resource type="Texture2D" uid="uid://c3yxgji52cod1" path="res://UI/play.png" id="18_lemb1"]
+[ext_resource type="Script" uid="uid://d1465excs5gqr" path="res://Scenes/Game/code_panel.gd" id="19_4ti5a"]
+[ext_resource type="Texture2D" uid="uid://theh7wyq5xk4" path="res://UI/pause.png" id="19_a6ftd"]
+[ext_resource type="Script" uid="uid://busg6gaulgh2v" path="res://Scenes/Blocks/side_blocks.gd" id="20_2lc0x"]
+[ext_resource type="Texture2D" uid="uid://duyf8e7n3kagt" path="res://7-billion-humans-CommandsPanel.jpg" id="21_nxex1"]
+[ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/Game/code_container.gd" id="21_pmm7v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 resource_name = "GrassTiles"
@@ -272,6 +278,49 @@ font_color = Color(0.937255, 0.807843, 0.537255, 1)
 base_font = ExtResource("13_yox4t")
 spacing_top = -4
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nxex1"]
+texture = ExtResource("18_a6ftd")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pa3qg"]
+bg_color = Color(0.341176, 0.341176, 0.341176, 1)
+border_width_bottom = 2
+border_color = Color(0.278431, 0.282353, 0.282353, 1)
+corner_radius_top_left = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ti5a"]
+bg_color = Color(0.341176, 0.341176, 0.341176, 1)
+border_width_bottom = 4
+border_color = Color(0.278431, 0.282353, 0.282353, 1)
+corner_radius_bottom_left = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_2lc0x"]
+color = Color(0.278431, 0.282353, 0.282353, 1)
+grow_begin = 2.0
+grow_end = 0.0
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2lc0x"]
+bg_color = Color(1, 1, 1, 1)
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_3gqeb"]
+font = ExtResource("13_yox4t")
+font_color = Color(0.341176, 0.341176, 0.341176, 1)
+
 [node name="Game" type="Node"]
 script = ExtResource("1_huoen")
 
@@ -299,6 +348,7 @@ metadata/_edit_lock_ = true
 [node name="Robot" parent="." instance=ExtResource("8_56qi8")]
 position = Vector2(240, 180)
 offset = Vector2(0, -13)
+storage_cap = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
@@ -317,10 +367,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -106.0
-offset_top = -179.0
-offset_right = 61.0
-offset_bottom = -46.0
+offset_left = -163.0
+offset_top = -160.0
+offset_right = 4.0
+offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.9, 0.9)
@@ -425,6 +475,7 @@ flat = true
 
 [node name="Y" type="LineEdit" parent="UI/TestPanel/Panel/VBoxContainer/Coords"]
 layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.509804, 0.701961, 0.847059, 1)
 theme_override_constants/minimum_character_width = 2
 theme_override_fonts/font = ExtResource("13_yox4t")
 placeholder_text = "y"
@@ -472,6 +523,18 @@ popup/item_1/id = 1
 popup/item_2/text = "Rabanete"
 popup/item_2/id = 2
 
+[node name="Label" type="Label" parent="UI/TestPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.5
+offset_top = -22.2222
+offset_right = 45.5
+offset_bottom = 0.777794
+grow_horizontal = 2
+text = "PARA TESTE"
+
 [node name="Output" type="Panel" parent="UI"]
 custom_minimum_size = Vector2(280, 88)
 anchors_preset = 2
@@ -482,7 +545,7 @@ offset_top = -88.0
 offset_right = 295.0
 grow_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("12_yox4t")
+theme_override_styles/panel = ExtResource("13_pa3qg")
 script = ExtResource("11_56qi8")
 
 [node name="Margins" type="MarginContainer" parent="UI/Output"]
@@ -530,7 +593,7 @@ offset_top = -88.0
 offset_right = 458.0
 grow_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("12_yox4t")
+theme_override_styles/panel = ExtResource("13_pa3qg")
 
 [node name="Margins" type="MarginContainer" parent="UI/RobotStats"]
 layout_mode = 1
@@ -576,10 +639,10 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -180.0
+offset_left = -178.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("12_yox4t")
+theme_override_styles/panel = ExtResource("17_2lc0x")
 
 [node name="Label" type="Label" parent="UI/CommandPanel"]
 layout_mode = 1
@@ -597,7 +660,7 @@ text = "Painel de Comandos"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="UI/CommandPanel"]
+[node name="CodePanel" type="Panel" parent="UI/CommandPanel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -607,23 +670,133 @@ offset_right = -2.0
 offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_lemb1")
+script = ExtResource("19_4ti5a")
 
-[node name="Label" type="Label" parent="UI/CommandPanel/Panel"]
+[node name="Tooltip" type="Label" parent="UI/CommandPanel/CodePanel"]
+self_modulate = Color(1, 1, 1, 0.5)
+custom_minimum_size = Vector2(128, 74)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -56.5
-offset_top = -11.5
-offset_right = 56.5
-offset_bottom = 11.5
+offset_left = -64.0
+offset_top = -37.0
+offset_right = 64.0
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = -0.785398
-pivot_offset = Vector2(56, 12)
-text = "PLACEHOLDER"
+theme_override_fonts/font = ExtResource("13_yox4t")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nxex1")
+text = "Arraste os blocos de instruções aqui para programar o robô-ajudante."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CodeContainer" type="MarginContainer" parent="UI/CommandPanel/CodePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("21_pmm7v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CommandPanel/CodePanel/CodeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="InfoPanel" type="Panel" parent="UI/CommandPanel"]
+show_behind_parent = true
+layout_mode = 1
+offset_left = -154.0
+offset_right = 7.0
+offset_bottom = 70.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pa3qg")
+
+[node name="Label" type="Label" parent="UI/CommandPanel/InfoPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.5
+offset_top = -24.0
+offset_right = 56.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Informações do bloco"
+autowrap_mode = 2
+
+[node name="BlocksPanel" type="Panel" parent="UI/CommandPanel"]
+show_behind_parent = true
+custom_minimum_size = Vector2(72, 200)
+layout_mode = 1
+offset_left = -74.0
+offset_top = 70.0
+offset_right = -1.0
+offset_bottom = 270.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ti5a")
+
+[node name="VBox" type="VBoxContainer" parent="UI/CommandPanel/BlocksPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = -1.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_fonts/font = ExtResource("13_yox4t")
+text = "Instruções"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="UI/CommandPanel/BlocksPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_2lc0x")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/CommandPanel/BlocksPanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Blocks" type="VBoxContainer" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="SideBlock" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.619608, 0.788235, 0.85098, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockColor = Color(0.619608, 0.788235, 0.85098, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/SideBlock"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MoverPara"
+label_settings = SubResource("LabelSettings_3gqeb")
 
 [node name="BtnsArea" type="HBoxContainer" parent="UI/CommandPanel"]
 layout_mode = 1
@@ -639,26 +812,45 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="Button" type="Button" parent="UI/CommandPanel/BtnsArea"]
+[node name="Play" type="Button" parent="UI/CommandPanel/BtnsArea"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
-icon = ExtResource("17_a6ftd")
+focus_mode = 0
+icon = ExtResource("18_lemb1")
 flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button2" type="Button" parent="UI/CommandPanel/BtnsArea"]
+[node name="Pause" type="Button" parent="UI/CommandPanel/BtnsArea"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
-icon = ExtResource("18_nxex1")
+focus_mode = 0
+icon = ExtResource("19_a6ftd")
 flat = true
 icon_alignment = 1
 expand_icon = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 180)
+
+[node name="referencia" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(789, 183)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("21_nxex1")
+region_enabled = true
+region_rect = Rect2(520, 0, 490, 570)
+
+[node name="DragLimit" type="Control" parent="."]
+z_index = -10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="UI/TestPanel/Functions/PlantarBtn" to="UI/TestPanel" method="_on_plantar_btn_pressed"]
 [connection signal="pressed" from="UI/TestPanel/Functions/RegarBtn" to="UI/TestPanel" method="_on_regar_btn_pressed"]
@@ -667,3 +859,5 @@ position = Vector2(240, 180)
 [connection signal="pressed" from="UI/TestPanel/Functions/OriginBtn" to="UI/TestPanel" method="_on_origin_btn_pressed"]
 [connection signal="pressed" from="UI/TestPanel/Functions/MoveNextBtn" to="UI/TestPanel" method="_on_move_next_btn_pressed"]
 [connection signal="pressed" from="UI/TestPanel/Functions/MovePreviousBtn" to="UI/TestPanel" method="_on_move_previous_btn_pressed"]
+[connection signal="pressed" from="UI/CommandPanel/BtnsArea/Play" to="UI/CommandPanel/CodePanel" method="_on_play_pressed"]
+[connection signal="pressed" from="UI/CommandPanel/BtnsArea/Pause" to="UI/CommandPanel/CodePanel" method="_on_pause_pressed"]

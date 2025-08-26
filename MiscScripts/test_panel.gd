@@ -17,6 +17,7 @@ func get_input_values() -> void:
 	seed_type = option_button.selected + 1
 
 func _on_plantar_btn_pressed():
+	get_input_values()
 	Events.test_plant.emit(seed_type)
 
 func _on_regar_btn_pressed():

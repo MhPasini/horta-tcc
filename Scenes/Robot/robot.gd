@@ -10,11 +10,18 @@ var grid_pos : Vector2i
 var target_position : Vector2
 var rest_position : Vector2
 var outside_grid : bool = true
+var storage : Dictionary = {
+	"Cenoura": 0,
+	"Cebola": 0,
+	"Rabanete": 0,
+}
 
 @export var offset : Vector2 = Vector2()
 @export var move_speed : float = 50.0
+@export var storage_cap: int = 20
 
 func _ready():
+	Globals.robot_ref = self
 	set_process(false)
 	state = STATE.Idle
 	conect_signals()
@@ -32,6 +39,14 @@ func conect_signals() -> void:
 	Events.test_plant.connect(plant_crop)
 	Events.test_water.connect(water_crop)
 	Events.test_harvest.connect(harvest_crop)
+	
+	Events.move_to.connect(move_to)
+	Events.move_origin.connect(move_to_origin)
+	Events.move_next.connect(move_to_next)
+	Events.move_previous.connect(move_to_previous)
+	Events.plant_crop.connect(add_crop)
+	Events.water_crop.connect(water_crop)
+	Events.harvest_crop.connect(harvest_crop)
 
 func move_to(cell:Vector2i) -> void:
 	if farm.grid.is_inside_grid(cell):
@@ -63,6 +78,7 @@ func move_to_previous() -> void:
 	else :
 		move_to(get_previous_cell()) 
 
+#region PLANT FUNCTIONS 
 func plant_crop(seed_type:int) -> void:
 	if not outside_grid:
 		var result : LogResult = farm.plant_crop_at(grid_pos, seed_type)
@@ -74,6 +90,7 @@ func plant_crop(seed_type:int) -> void:
 	else:
 		send_log_message("Fora da área delimitada, ação cancelada!", Globals.MSG_TYPE.error)
 		#e cancela as ações seguintes
+	Events.task_completed.emit()
 
 func water_crop() -> void:
 	if not outside_grid:
@@ -86,9 +103,11 @@ func water_crop() -> void:
 	else:
 		send_log_message("Fora da área delimitada, ação cancelada!", Globals.MSG_TYPE.error)
 		#e cancela as ações seguintes
+	Events.task_completed.emit()
 
 func harvest_crop() -> void:
 	if not outside_grid:
+		var storage_left = get_storage_left()
 		var result : LogResult = farm.harvest_crop_at(grid_pos)
 		if result.type == Globals.MSG_TYPE.error:
 			#se der um erro, mostrar alguma dica ou informação sobre o erro
@@ -98,16 +117,34 @@ func harvest_crop() -> void:
 			#se der um aviso, mostrar alguma dica ou informação sobre o aviso
 			#mas continua o código
 			pass
+		else : # vegetal maduro coletado
+			if storage_left <= 0:
+				result.msg = "A planta no canteiro %s foi removida, mas não havia espaço para a carregar!" % grid_pos
+				result.type = Globals.MSG_TYPE.warning
 		send_log_message(result.msg, result.type)
 	else:
 		send_log_message("Fora da área delimitada, ação cancelada!", Globals.MSG_TYPE.error)
 		#e cancela as ações seguintes
+	Events.task_completed.emit()
+#endregion
+
+func add_crop(crop:String) -> void:
+	if get_storage_left() > 0:
+		storage[crop] += 1
+	#TODO atualizar logs
 
 func check_position() -> void:
 	if position == target_position:
 		set_process(false)
 		state = STATE.Idle
 		Events.task_completed.emit()
+
+func get_storage_left() -> int:
+	var cargo : int = 0
+	for value in storage.values():
+		cargo += value
+	var storage_left = storage_cap - cargo
+	return storage_left
 
 func get_next_cell() -> Vector2i:
 	var next = Vector2i()
