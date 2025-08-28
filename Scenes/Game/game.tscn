@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=49 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -20,11 +20,13 @@
 [ext_resource type="StyleBox" uid="uid://dfx58hsumrpqr" path="res://UI/Styles/solid_background_panel.tres" id="17_2lc0x"]
 [ext_resource type="Texture2D" uid="uid://b6hl4dns81us8" path="res://UI/dotted_box.png" id="18_a6ftd"]
 [ext_resource type="Texture2D" uid="uid://c3yxgji52cod1" path="res://UI/play.png" id="18_lemb1"]
-[ext_resource type="Script" uid="uid://d1465excs5gqr" path="res://Scenes/Game/code_panel.gd" id="19_4ti5a"]
+[ext_resource type="Script" uid="uid://d1465excs5gqr" path="res://Scenes/Game/cmd_panel.gd" id="19_4ti5a"]
 [ext_resource type="Texture2D" uid="uid://theh7wyq5xk4" path="res://UI/pause.png" id="19_a6ftd"]
 [ext_resource type="Script" uid="uid://busg6gaulgh2v" path="res://Scenes/Blocks/side_blocks.gd" id="20_2lc0x"]
+[ext_resource type="FontVariation" uid="uid://dsb2mliclnrev" path="res://Fonts/ThaleahFat_tabs.tres" id="20_7pdpw"]
 [ext_resource type="Texture2D" uid="uid://duyf8e7n3kagt" path="res://7-billion-humans-CommandsPanel.jpg" id="21_nxex1"]
 [ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/Game/code_container.gd" id="21_pmm7v"]
+[ext_resource type="PackedScene" uid="uid://c23qpaffp606m" path="res://Scenes/Blocks/code_block.tscn" id="22_gqd4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 resource_name = "GrassTiles"
@@ -291,6 +293,45 @@ expand_margin_bottom = 5.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1l3pd"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.25)
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3jd4"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 0.32549)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.937255, 0.807843, 0.537255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56bk2"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 0.32549)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.788235, 0.811765, 0.54902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6k7u1"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 0.32549)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.584314, 0.639216, 0.607843, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pa3qg"]
 bg_color = Color(0.341176, 0.341176, 0.341176, 1)
 border_width_bottom = 2
@@ -298,6 +339,12 @@ border_color = Color(0.278431, 0.282353, 0.282353, 1)
 corner_radius_top_left = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pmm7v"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ti5a"]
 bg_color = Color(0.341176, 0.341176, 0.341176, 1)
@@ -356,11 +403,8 @@ metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ColorPalette" type="Sprite2D" parent="UI"]
-position = Vector2(-30, 224)
-texture = ExtResource("14_lemb1")
-
 [node name="TestPanel" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -643,6 +687,7 @@ offset_left = -178.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("17_2lc0x")
+script = ExtResource("19_4ti5a")
 
 [node name="Label" type="Label" parent="UI/CommandPanel"]
 layout_mode = 1
@@ -660,19 +705,7 @@ text = "Painel de Comandos"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CodePanel" type="Panel" parent="UI/CommandPanel"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 2.0
-offset_top = 30.0
-offset_right = -2.0
-offset_bottom = 320.0
-grow_horizontal = 2
-theme_override_styles/panel = ExtResource("16_lemb1")
-script = ExtResource("19_4ti5a")
-
-[node name="Tooltip" type="Label" parent="UI/CommandPanel/CodePanel"]
+[node name="Tooltip" type="Label" parent="UI/CommandPanel"]
 self_modulate = Color(1, 1, 1, 0.5)
 custom_minimum_size = Vector2(128, 74)
 layout_mode = 1
@@ -682,9 +715,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -64.0
-offset_top = -37.0
+offset_top = -42.0
 offset_right = 64.0
-offset_bottom = 37.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("13_yox4t")
@@ -694,21 +727,99 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="CodeContainer" type="MarginContainer" parent="UI/CommandPanel/CodePanel"]
+[node name="CodePanel" type="Control" parent="UI/CommandPanel"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 30.0
+offset_right = -2.0
+offset_bottom = 320.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 4
+
+[node name="CodeTabs" type="TabContainer" parent="UI/CommandPanel/CodePanel"]
+custom_minimum_size = Vector2(0, 290)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 290.0
+grow_horizontal = 2
+theme_override_colors/font_unselected_color = Color(0.584314, 0.639216, 0.607843, 1)
+theme_override_colors/font_hovered_color = Color(0.788235, 0.811765, 0.54902, 1)
+theme_override_colors/font_selected_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_constants/side_margin = 0
+theme_override_fonts/font = ExtResource("20_7pdpw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1l3pd")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_d3jd4")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_56bk2")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_6k7u1")
+current_tab = 0
+use_hidden_tabs_for_min_size = true
+tab_focus_mode = 0
+
+[node name="Main" type="ScrollContainer" parent="UI/CommandPanel/CodePanel/CodeTabs"]
+layout_mode = 2
+vertical_scroll_mode = 2
+metadata/_tab_index = 0
+
+[node name="CodeContainer" type="MarginContainer" parent="UI/CommandPanel/CodePanel/CodeTabs/Main"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_top = 4
-theme_override_constants/margin_bottom = 4
 script = ExtResource("21_pmm7v")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/CommandPanel/CodePanel/CodeContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
+
+[node name="CodeBlock" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock2" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock3" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock4" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock5" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock6" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock7" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock8" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock9" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock10" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock11" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock12" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock13" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock14" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock15" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
+
+[node name="CodeBlock16" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+layout_mode = 2
 
 [node name="InfoPanel" type="Panel" parent="UI/CommandPanel"]
 show_behind_parent = true
@@ -718,27 +829,29 @@ offset_right = 7.0
 offset_bottom = 70.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pa3qg")
 
-[node name="Label" type="Label" parent="UI/CommandPanel/InfoPanel"]
+[node name="Info" type="RichTextLabel" parent="UI/CommandPanel/InfoPanel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -66.5
-offset_top = -24.0
-offset_right = 56.5
-offset_bottom = 25.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -9.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Informações do bloco"
-autowrap_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_rku1e")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pmm7v")
+bbcode_enabled = true
+text = "Este bloco faz várias coisas, descrição detalhada e etc ..."
+scroll_following = true
 
 [node name="BlocksPanel" type="Panel" parent="UI/CommandPanel"]
 show_behind_parent = true
 custom_minimum_size = Vector2(72, 200)
 layout_mode = 1
-offset_left = -74.0
+offset_left = -79.0
 offset_top = 70.0
 offset_right = -1.0
 offset_bottom = 270.0
@@ -778,7 +891,7 @@ vertical_scroll_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="SideBlock" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+[node name="MoveTo" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
 self_modulate = Color(0.619608, 0.788235, 0.85098, 1)
 custom_minimum_size = Vector2(56, 16)
 layout_mode = 2
@@ -787,7 +900,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
 script = ExtResource("20_2lc0x")
 blockColor = Color(0.619608, 0.788235, 0.85098, 1)
 
-[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/SideBlock"]
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/MoveTo"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -796,6 +909,195 @@ offset_left = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "MoverPara"
+label_settings = SubResource("LabelSettings_3gqeb")
+
+[node name="MoveNext" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.619608, 0.788235, 0.85098, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 1
+blockColor = Color(0.619608, 0.788235, 0.85098, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/MoveNext"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MoverProx"
+label_settings = SubResource("LabelSettings_3gqeb")
+
+[node name="MovePrev" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.619608, 0.788235, 0.85098, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 2
+blockColor = Color(0.619608, 0.788235, 0.85098, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/MovePrev"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MoverAnt"
+label_settings = SubResource("LabelSettings_3gqeb")
+
+[node name="MoveOrig" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.619608, 0.788235, 0.85098, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 3
+blockColor = Color(0.619608, 0.788235, 0.85098, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/MoveOrig"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MoverOrigem"
+label_settings = SubResource("LabelSettings_3gqeb")
+
+[node name="Plantar" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.870588, 0.8, 0.45098, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 4
+blockColor = Color(0.870588, 0.8, 0.45098, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/Plantar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Plantar"
+label_settings = SubResource("LabelSettings_3gqeb")
+
+[node name="Regar" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.870588, 0.8, 0.45098, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 5
+blockColor = Color(0.870588, 0.8, 0.45098, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/Regar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Regar"
+label_settings = SubResource("LabelSettings_3gqeb")
+
+[node name="Colher" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.870588, 0.8, 0.45098, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 6
+blockColor = Color(0.870588, 0.8, 0.45098, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/Colher"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Colher"
+label_settings = SubResource("LabelSettings_3gqeb")
+
+[node name="IfElse" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.831373, 0.6, 0.47451, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 7
+blockColor = Color(0.831373, 0.6, 0.47451, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/IfElse"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SE_SENÃO"
+label_settings = SubResource("LabelSettings_3gqeb")
+
+[node name="ForLoop" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.831373, 0.6, 0.47451, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 8
+blockColor = Color(0.831373, 0.6, 0.47451, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/ForLoop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PARA_FAÇA"
+label_settings = SubResource("LabelSettings_3gqeb")
+
+[node name="While" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.831373, 0.6, 0.47451, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 9
+blockColor = Color(0.831373, 0.6, 0.47451, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/While"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ENQUANTO"
 label_settings = SubResource("LabelSettings_3gqeb")
 
 [node name="BtnsArea" type="HBoxContainer" parent="UI/CommandPanel"]
@@ -842,6 +1144,10 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("21_nxex1")
 region_enabled = true
 region_rect = Rect2(520, 0, 490, 570)
+
+[node name="ColorPalette" type="Sprite2D" parent="."]
+position = Vector2(-30, 224)
+texture = ExtResource("14_lemb1")
 
 [node name="DragLimit" type="Control" parent="."]
 z_index = -10

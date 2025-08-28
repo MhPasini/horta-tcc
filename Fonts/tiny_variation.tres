@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://blsb1kuml66jh"]
+
+[ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="1_aerrb"]
+
+[resource]
+base_font = ExtResource("1_aerrb")
+spacing_top = -5
+spacing_bottom = -5

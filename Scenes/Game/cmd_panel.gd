@@ -1,14 +1,16 @@
-extends Panel
+extends Control
 
-
-var program : Array[BlockData] = []
 var robot : RobotClass
 var is_playing : bool = false
-@onready var code_container = $CodeContainer as CodeContainer
+var program : Array[BlockData] = []
+
+@onready var code_container = $CodePanel/CodeTabs/Main/CodeContainer as CodeContainer
+@onready var info_text = $InfoPanel/Info
 
 
 func _ready():
 	robot = Globals.robot_ref
+	Events.update_info_text.connect(_update_info_text)
 
 func run_program() -> void:
 	for block in program:
@@ -48,9 +50,9 @@ func _execute(block:BlockData) -> void:
 func update_program() -> void:
 	program = code_container.get_code_blocks()
 
-func _check_condition(condition:String) -> bool:
+func _check_condition(condition:String, arg:Variant = null) -> bool:
 	if robot and robot.has_method(condition):
-		return robot.call(condition)
+		return robot.call(condition, arg)
 	else:
 		print("Condição não encontrada: ", condition)
 		return false
@@ -95,6 +97,9 @@ func _block_to_portugol(block:BlockData, indent_level: int = 0) -> String:
 			code += indent + block.name + "()\n"
 	return code
 #endregion
+
+func _update_info_text(new_info:String) -> void:
+	info_text.text = new_info
 
 func _on_play_pressed() -> void:
 	pass # Replace with function body.

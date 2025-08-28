@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://dsb2mliclnrev"]
+
+[ext_resource type="FontFile" uid="uid://3ytuodnv4vag" path="res://Fonts/ThaleahFat.ttf" id="1_ineux"]
+
+[resource]
+base_font = ExtResource("1_ineux")
+spacing_top = -3
+spacing_bottom = -4

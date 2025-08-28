@@ -6,5 +6,5 @@ class_name CodeBlock
 func _ready():
 	pass
 
-func build_block(id:int):
+func build_block(_id:int):
 	pass

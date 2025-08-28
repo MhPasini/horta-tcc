@@ -21,4 +21,8 @@ signal harvest_crop
 signal task_completed
 #endregion
 
+#region CMD SIGNALS
+signal update_info_text(info:String)
+#endregion
+
 signal console_message(msg: String)

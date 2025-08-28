@@ -7,6 +7,7 @@ var blockInfo = BlockInfo.new()
 
 func _ready():
 	self_modulate = blockColor
+	mouse_entered.connect(_on_mouse_entered)
 
 func _get_drag_data(_at_position: Vector2):
 	var drag_data = create_block_data(blockID)
@@ -17,13 +18,16 @@ func _get_drag_data(_at_position: Vector2):
 func create_block_data(ID:int) -> BlockData:
 	var block : BlockData
 	if ID == blockInfo.PARA_FACA:
-		block.loop(1)
+		block = BlockData.loop(1)
 	elif ID == blockInfo.SE_SENAO:
-		block.if_else("is_empty")
+		block = BlockData.if_else("is_empty")
 	elif ID == blockInfo.ENQUANTO:
-		block.while_do("is_empty")
+		block = BlockData.while_do("is_empty")
 	elif ID == blockInfo.FUNCAO:
-		block.function()
+		block = BlockData.function()
 	else:
-		block.method(blockInfo.CODE_DATA[ID]["Name"])
+		block = BlockData.method(blockInfo.CODE_DATA[ID]["Name"])
 	return block
+
+func _on_mouse_entered() -> void:
+	Events.update_info_text.emit(blockInfo.CODE_DATA[blockID]["Info"])

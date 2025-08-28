@@ -1,55 +1,270 @@
-[gd_scene load_steps=6 format=3 uid="uid://c23qpaffp606m"]
+[gd_scene load_steps=15 format=3 uid="uid://c23qpaffp606m"]
 
 [ext_resource type="Script" uid="uid://wvgp1jb67vhq" path="res://Scenes/Blocks/code_block.gd" id="1_cy0tu"]
-[ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="2_0xhd1"]
 [ext_resource type="StyleBox" uid="uid://dr2k6gosa1ivj" path="res://UI/Styles/code_block_body.tres" id="2_2dql6"]
+[ext_resource type="FontVariation" uid="uid://blsb1kuml66jh" path="res://Fonts/tiny_variation.tres" id="3_oc8c7"]
+[ext_resource type="Texture2D" uid="uid://bryrj4jeh5n4j" path="res://UI/check_t.png" id="5_oc8c7"]
+[ext_resource type="Texture2D" uid="uid://bbihctswowu5x" path="res://UI/check_f.png" id="6_2cub8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oc8c7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2dql6"]
-font = ExtResource("2_0xhd1")
+font = ExtResource("3_oc8c7")
 font_color = Color(0.341176, 0.341176, 0.341176, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dql6"]
 bg_color = Color(0.341176, 0.341176, 0.341176, 1)
+border_width_top = 2
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="Theme" id="Theme_h5wt2"]
+PopupMenu/constants/close_h_offset = 0
+PopupMenu/constants/close_v_offset = 0
+PopupMenu/constants/h_separation = 4
+PopupMenu/constants/icon_max_width = 0
+PopupMenu/constants/indent = 0
+PopupMenu/constants/item_end_padding = 0
+PopupMenu/constants/item_start_padding = 0
+PopupMenu/constants/outline_size = 0
+PopupMenu/constants/separator_outline_size = 0
+PopupMenu/constants/title_height = 0
+PopupMenu/constants/title_outline_size = 0
+PopupMenu/constants/v_separation = 0
+PopupMenu/fonts/font = ExtResource("3_oc8c7")
+PopupMenu/fonts/font_separator = null
+PopupMenu/icons/radio_checked = ExtResource("5_oc8c7")
+PopupMenu/icons/radio_unchecked = ExtResource("6_2cub8")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbiee"]
+content_margin_left = 4.0
+bg_color = Color(0.26, 0.26, 0.26, 1)
+border_width_top = 2
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g76dd"]
+content_margin_left = 4.0
+bg_color = Color(0.341176, 0.341176, 0.341176, 1)
+border_width_top = 2
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_h5wt2"]
+size = Vector2(0, 6)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2dql6"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g76dd"]
+size = Vector2(0, 6)
 
 [node name="CodeBlock" type="PanelContainer"]
-custom_minimum_size = Vector2(60, 20)
-offset_right = 60.0
-offset_bottom = 20.0
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("2_2dql6")
+custom_minimum_size = Vector2(45, 16)
+offset_right = 45.0
+offset_bottom = 16.0
+size_flags_horizontal = 2
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oc8c7")
 script = ExtResource("1_cy0tu")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(0.619608, 0.788235, 0.85098, 1)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_2dql6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = -2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="Methods" type="HBoxContainer" parent="MarginContainer"]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 2
 
-[node name="FuncLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="Name" type="Label" parent="MarginContainer/Methods"]
 layout_mode = 2
-text = "Mover_para"
+text = "Plantar"
 label_settings = SubResource("LabelSettings_2dql6")
 
-[node name="X" type="LineEdit" parent="MarginContainer/HBoxContainer"]
+[node name="Coords" type="HBoxContainer" parent="MarginContainer/Methods"]
+visible = false
 layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="X" type="LineEdit" parent="MarginContainer/Methods/Coords"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
 theme_override_colors/font_placeholder_color = Color(0.619608, 0.788235, 0.85098, 1)
 theme_override_constants/minimum_character_width = 2
-theme_override_fonts/font = ExtResource("2_0xhd1")
+theme_override_fonts/font = ExtResource("3_oc8c7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2dql6")
 placeholder_text = "x"
+alignment = 1
 max_length = 3
 emoji_menu_enabled = false
-flat = true
 
-[node name="Y" type="LineEdit" parent="MarginContainer/HBoxContainer"]
+[node name="Y" type="LineEdit" parent="MarginContainer/Methods/Coords"]
 layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
 theme_override_colors/font_placeholder_color = Color(0.619608, 0.788235, 0.85098, 1)
 theme_override_constants/minimum_character_width = 2
-theme_override_fonts/font = ExtResource("2_0xhd1")
+theme_override_fonts/font = ExtResource("3_oc8c7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2dql6")
 placeholder_text = "y"
+alignment = 1
 max_length = 3
-flat = true
+
+[node name="SeedSelection" type="OptionButton" parent="MarginContainer/Methods"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme = SubResource("Theme_h5wt2")
+theme_override_colors/font_hover_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_fonts/font = ExtResource("3_oc8c7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g76dd")
+theme_override_constants/arrow_margin = 2
+theme_override_constants/modulate_arrow = 0
+theme_override_icons/arrow = SubResource("PlaceholderTexture2D_h5wt2")
+selected = 0
+fit_to_longest_item = false
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Cenoura"
+popup/item_0/id = 0
+popup/item_1/text = "Cebola"
+popup/item_1/id = 1
+popup/item_2/text = "Rabanete"
+popup/item_2/id = 2
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Methods"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_2dql6")
+
+[node name="IfLoop" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="Name" type="Label" parent="MarginContainer/IfLoop"]
+layout_mode = 2
+text = "SE"
+label_settings = SubResource("LabelSettings_2dql6")
+
+[node name="Condition" type="OptionButton" parent="MarginContainer/IfLoop"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme = SubResource("Theme_h5wt2")
+theme_override_colors/font_hover_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_fonts/font = ExtResource("3_oc8c7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g76dd")
+theme_override_constants/arrow_margin = 2
+theme_override_constants/modulate_arrow = 0
+theme_override_icons/arrow = SubResource("PlaceholderTexture2D_g76dd")
+icon_alignment = 2
+selected = 0
+fit_to_longest_item = false
+allow_reselect = true
+item_count = 6
+popup/item_0/text = "lote_vazio"
+popup/item_0/id = 0
+popup/item_1/text = "lote_seco"
+popup/item_1/id = 1
+popup/item_2/text = "planta_ok"
+popup/item_2/id = 2
+popup/item_3/text = "robo_cheio"
+popup/item_3/id = 3
+popup/item_4/text = "pos_x"
+popup/item_4/id = 4
+popup/item_5/text = "pos_y"
+popup/item_5/id = 5
+
+[node name="Condition2" type="OptionButton" parent="MarginContainer/IfLoop"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme = SubResource("Theme_h5wt2")
+theme_override_colors/font_hover_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_fonts/font = ExtResource("3_oc8c7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g76dd")
+theme_override_constants/arrow_margin = 2
+theme_override_constants/modulate_arrow = 0
+theme_override_icons/arrow = SubResource("PlaceholderTexture2D_g76dd")
+icon_alignment = 2
+selected = 0
+fit_to_longest_item = false
+allow_reselect = true
+item_count = 4
+popup/item_0/text = "=="
+popup/item_0/id = 0
+popup/item_1/text = ">"
+popup/item_1/id = 1
+popup/item_2/text = "<"
+popup/item_2/id = 2
+popup/item_3/text = "!="
+popup/item_3/id = 3
+
+[node name="val" type="LineEdit" parent="MarginContainer/IfLoop"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_colors/font_placeholder_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_constants/minimum_character_width = 2
+theme_override_fonts/font = ExtResource("3_oc8c7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2dql6")
+text = "0"
+placeholder_text = "0"
+alignment = 1
+max_length = 1
+expand_to_text_length = true
+emoji_menu_enabled = false
+virtual_keyboard_type = 2
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+
+[node name="Do" type="Label" parent="MarginContainer/IfLoop"]
+layout_mode = 2
+text = ":"
+label_settings = SubResource("LabelSettings_2dql6")
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/IfLoop"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_2dql6")
