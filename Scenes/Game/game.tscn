@@ -769,56 +769,11 @@ size_flags_vertical = 3
 theme_override_constants/margin_top = 4
 script = ExtResource("21_pmm7v")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer"]
+[node name="List" type="VBoxContainer" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="CodeBlock" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock2" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock3" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock4" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock5" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock6" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock7" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock8" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock9" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock10" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock11" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock12" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock13" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock14" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock15" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
-layout_mode = 2
-
-[node name="CodeBlock16" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/VBoxContainer" instance=ExtResource("22_gqd4u")]
+[node name="CodeBlock" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/List" instance=ExtResource("22_gqd4u")]
 layout_mode = 2
 
 [node name="InfoPanel" type="Panel" parent="UI/CommandPanel"]
