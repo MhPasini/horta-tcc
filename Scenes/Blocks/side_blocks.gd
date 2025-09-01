@@ -12,6 +12,7 @@ func _ready():
 func _get_drag_data(_at_position: Vector2):
 	var drag_data = create_block_data(blockID)
 	var preview = BlockPreview.new(label.text, blockColor)
+	drag_data.color = blockColor
 	set_drag_preview(preview)
 	return drag_data
 
@@ -26,7 +27,8 @@ func create_block_data(ID:int) -> BlockData:
 	elif ID == blockInfo.FUNCAO:
 		block = BlockData.function()
 	else:
-		block = BlockData.method(blockInfo.CODE_DATA[ID]["Name"])
+		block = BlockData.method(blockInfo.CODE_DATA[ID]["Name"],
+		blockInfo.CODE_DATA[ID]["BlockText"])
 	return block
 
 func _on_mouse_entered() -> void:

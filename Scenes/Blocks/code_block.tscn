@@ -267,15 +267,19 @@ icon_alignment = 2
 selected = 0
 fit_to_longest_item = false
 allow_reselect = true
-item_count = 4
+item_count = 6
 popup/item_0/text = "=="
 popup/item_0/id = 0
-popup/item_1/text = ">"
+popup/item_1/text = ">="
 popup/item_1/id = 1
-popup/item_2/text = "<"
+popup/item_2/text = "<="
 popup/item_2/id = 2
-popup/item_3/text = "!="
+popup/item_3/text = ">"
 popup/item_3/id = 3
+popup/item_4/text = "<"
+popup/item_4/id = 4
+popup/item_5/text = "!="
+popup/item_5/id = 5
 
 [node name="val" type="LineEdit" parent="MarginContainer/IfElse/args"]
 visible = false
@@ -455,15 +459,19 @@ icon_alignment = 2
 selected = 0
 fit_to_longest_item = false
 allow_reselect = true
-item_count = 4
+item_count = 6
 popup/item_0/text = "=="
 popup/item_0/id = 0
-popup/item_1/text = ">"
+popup/item_1/text = ">="
 popup/item_1/id = 1
-popup/item_2/text = "<"
+popup/item_2/text = "<="
 popup/item_2/id = 2
-popup/item_3/text = "!="
+popup/item_3/text = ">"
 popup/item_3/id = 3
+popup/item_4/text = "<"
+popup/item_4/id = 4
+popup/item_5/text = "!="
+popup/item_5/id = 5
 
 [node name="val" type="LineEdit" parent="MarginContainer/While/args"]
 visible = false
@@ -583,4 +591,11 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxEmpty_wmimg")
 
+[connection signal="text_changed" from="MarginContainer/Methods/Coords/X" to="." method="_on_x_text_changed"]
+[connection signal="text_changed" from="MarginContainer/Methods/Coords/Y" to="." method="_on_y_text_changed"]
+[connection signal="item_selected" from="MarginContainer/Methods/SeedSelection" to="." method="_on_seed_selection_item_selected"]
+[connection signal="item_selected" from="MarginContainer/IfElse/args/Condition" to="." method="_on_if_condition_item_selected"]
+[connection signal="item_selected" from="MarginContainer/IfElse/args/Condition2" to="." method="_on_if_condition_2_item_selected"]
 [connection signal="toggled" from="MarginContainer/IfElse/Else/ElseBtn" to="." method="_on_else_btn_toggled"]
+[connection signal="item_selected" from="MarginContainer/While/args/Condition" to="." method="_on_while_condition_item_selected"]
+[connection signal="item_selected" from="MarginContainer/While/args/Condition2" to="." method="_on_while_condition_2_item_selected"]

@@ -18,46 +18,53 @@ enum {
 const CODE_DATA = {
 	MOVER_PARA: {
 	"Name": "move_to",
-	"Info": "Função para se movimentar até uma posição definida por x e y"
+	"Info": "Função para se movimentar até uma posição definida por x e y",
+	"BlockText": "mover_para"
 	},
 	MOVER_PROX: {
 	"Name": "move_to_next",
-	"Info": "Função para se movimentar até a próxima posição"
+	"Info": "Função para se movimentar até a próxima posição",
+	"BlockText": "mover_prox"
 	},
 	MOVER_ANT: {
 	"Name": "move_to_previous",
-	"Info": "Função para se movimentar até a posição anterior"
+	"Info": "Função para se movimentar até a posição anterior",
+	"BlockText": "mover_ant"
 	},
 	MOVER_ORIG: {
 	"Name": "move_to_origin",
-	"Info": "Função para se movimentar até a posição (0, 0)"
+	"Info": "Função para se movimentar até a posição (0, 0)",
+	"BlockText": "mover_orig"
 	},
 	PLANTAR: {
 	"Name": "plant_crop",
-	"Info": "Função para plantar uma semente no canteiro atual"
+	"Info": "Função para plantar uma semente no canteiro atual",
+	"BlockText": "plantar"
 	},
 	REGAR: {
 	"Name": "water_crop",
-	"Info": "Função para regar o canteiro atual"
+	"Info": "Função para regar o canteiro atual",
+	"BlockText": "regar"
 	},
 	COLHER: {
 	"Name": "harvest_crop",
-	"Info": "Função para colher a planta do canteiro atual"
+	"Info": "Função para colher a planta do canteiro atual",
+	"BlockText": "colher"
 	},
 	SE_SENAO:{
-		"Name": " ",
+		"Name": "if_else",
 		"Info": "Bloco 'SE', executa os blocos internos se 'CONDIÇÃO' for verdadeira"
 	},
 	PARA_FACA:{
-		"Name": " ",
+		"Name": "for_loop",
 		"Info": "Bloco de repetição, executa os blocos internos 'x' vezes"
 	},
 	ENQUANTO:{
-		"Name": " ",
+		"Name": "while_loop",
 		"Info": "Bloco 'ENQUANTO', executa os blocos internos enquanto 'CONDIÇÃO' for verdadeira"
 	},
 	FUNCAO:{
-		"Name": " ",
+		"Name": "custom_function",
 		"Info": "Bloco 'FUNÇÃO', executa os blocos internos quando chamado"
 	}
 }

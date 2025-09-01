@@ -50,9 +50,9 @@ func _execute(block:BlockData) -> void:
 func update_program() -> void:
 	program = code_container.get_code_blocks()
 
-func _check_condition(condition:String, arg:Variant = null) -> bool:
-	if robot and robot.has_method(condition):
-		return robot.call(condition, arg)
+func _check_condition(condition:Array) -> bool:
+	if robot and robot.has_method(condition[0]):
+		return robot.call(condition[0], condition[1])
 	else:
 		print("Condição não encontrada: ", condition)
 		return false

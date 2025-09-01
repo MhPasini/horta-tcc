@@ -128,6 +128,59 @@ func harvest_crop() -> void:
 	Events.task_completed.emit()
 #endregion
 
+#region CHECK CONDITIONS
+func lote_vazio() -> bool:
+	var slot = farm.grid.get_cell_value(grid_pos) as FarmSlot
+	return slot.is_empty
+
+func lote_seco() -> bool:
+	var slot = farm.grid.get_cell_value(grid_pos) as FarmSlot
+	return slot.is_dry
+
+func planta_ok() -> bool:
+	var slot = farm.grid.get_cell_value(grid_pos) as FarmSlot
+	return slot.is_grown
+
+func robo_cheio() -> bool:
+	return false
+
+func pos_x_igual(x:int) -> bool:
+	return grid_pos.x == x
+
+func pos_x_maior_igual(x:int) -> bool:
+	return grid_pos.x >= x
+
+func pos_x_menor_igual(x:int) -> bool:
+	return grid_pos.x <= x
+
+func pos_x_maior(x:int) -> bool:
+	return grid_pos.x > x
+
+func pos_x_menor(x:int) -> bool:
+	return grid_pos.x < x
+
+func pos_x_diferente(x:int) -> bool:
+	return grid_pos.x != x
+
+func pos_y_igual(y:int) -> bool:
+	return grid_pos.y == y
+
+func pos_y_maior_igual(y:int) -> bool:
+	return grid_pos.y >= y
+
+func pos_y_menor_igual(y:int) -> bool:
+	return grid_pos.y <= y
+
+func pos_y_maior(y:int) -> bool:
+	return grid_pos.y > y
+
+func pos_y_menor(y:int) -> bool:
+	return grid_pos.y < y
+
+func pos_y_diferente(y:int) -> bool:
+	return grid_pos.y != y
+#endregion
+
 func add_crop(crop:String) -> void:
 	if get_storage_left() > 0:
 		storage[crop] += 1

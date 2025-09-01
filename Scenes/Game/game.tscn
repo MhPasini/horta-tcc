@@ -26,7 +26,6 @@
 [ext_resource type="FontVariation" uid="uid://dsb2mliclnrev" path="res://Fonts/ThaleahFat_tabs.tres" id="20_7pdpw"]
 [ext_resource type="Texture2D" uid="uid://duyf8e7n3kagt" path="res://7-billion-humans-CommandsPanel.jpg" id="21_nxex1"]
 [ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/Game/code_container.gd" id="21_pmm7v"]
-[ext_resource type="PackedScene" uid="uid://c23qpaffp606m" path="res://Scenes/Blocks/code_block.tscn" id="22_gqd4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 resource_name = "GrassTiles"
@@ -331,6 +330,8 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.584314, 0.639216, 0.607843, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3gqeb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pa3qg"]
 bg_color = Color(0.341176, 0.341176, 0.341176, 1)
@@ -773,8 +774,13 @@ script = ExtResource("21_pmm7v")
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="CodeBlock" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/List" instance=ExtResource("22_gqd4u")]
+[node name="BottonMargin" type="HSeparator" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/List"]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
+mouse_filter = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_3gqeb")
 
 [node name="InfoPanel" type="Panel" parent="UI/CommandPanel"]
 show_behind_parent = true
