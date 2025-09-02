@@ -71,14 +71,14 @@ func water_crop() -> LogResult:
 	set_process(true)
 	result.msg = "Canteiro %s regado." % grid_pos
 	result.type = Globals.MSG_TYPE.normal
-	#TODO animação de plantar a semente
+	#TODO animação de jogar agua
 	return result
 
 func harvest_crop() -> LogResult:
 	var result = LogResult.new()
 	if is_empty:
-		result.msg = "Não há nenhuma planta no canteiro %s, ação abortada!"% grid_pos
-		result.type = Globals.MSG_TYPE.error
+		result.msg = "Não há nenhuma planta no canteiro %s, ação ignorada!"% grid_pos
+		result.type = Globals.MSG_TYPE.warning
 	elif not is_grown:
 		result.msg = "A planta no canteiro %s foi removida, mas não estava madura!"% grid_pos
 		result.type = Globals.MSG_TYPE.warning

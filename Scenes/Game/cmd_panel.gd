@@ -1,7 +1,6 @@
 extends Control
 
 var robot : RobotClass
-var is_playing : bool = false
 var program : Array[BlockData] = []
 
 @onready var code_container = $CodePanel/CodeTabs/Main/CodeContainer as CodeContainer
@@ -13,39 +12,50 @@ func _ready():
 	Events.update_info_text.connect(_update_info_text)
 
 func run_program() -> void:
+	var _ok : bool = true
 	for block in program:
-		_execute(block)
+		_ok = await _execute(block)
+		if not _ok:
+			break
+		await create_tween().tween_interval(.25).finished
+	if _ok:
+		robot.send_log_message("Comandos concluídos")
+	else :
+		robot.send_log_message("Execução terminada")
 
-func _execute(block:BlockData) -> void:
+func _execute(block:BlockData) -> bool:
+	var _ok : bool = true
 	match block.type:
 		block.Type.METHOD:
-			var _ok = await robot.call(block.name)
-			if not _ok:
-				print("Stop code execution.")
-				return
+			_ok = await robot.call(block.name)
+			print("Cmd panel:", _ok)
+			#TODO checar o nome do método para passar os parametros (seed, pos)
+			#if not _ok:
+				#print("Stop code execution.")
 		block.Type.LOOP:
 			for i in range(block.loop_count):
 				for child in block.child_blocks:
-					_execute(child)
+					_ok = await _execute(child)
 		block.Type.WHILE:
 			var max_iterations = 1000
 			var iterations = 0
 			while _check_condition(block.condition) and iterations < max_iterations:
 				for child in block.child_blocks:
-					_execute(child)
+					_ok = await _execute(child)
 					iterations += 1
 			if iterations >= max_iterations:
 				print("Execução do código interrompida, loop >= ", max_iterations)
 		block.Type.IF:
 			if _check_condition(block.condition):
 				for child in block.child_blocks:
-					_execute(child)
+					_ok = await _execute(child)
 			else:
 				for child in block.else_blocks:
-					_execute(child)
+					_ok = await _execute(child)
 		block.Type.FUNCTION:
 			for child in block.child_blocks:
-				_execute(child)
+				_ok = await _execute(child)
+	return _ok
 
 func update_program() -> void:
 	program = code_container.get_code_blocks()
@@ -102,7 +112,8 @@ func _update_info_text(new_info:String) -> void:
 	info_text.text = new_info
 
 func _on_play_pressed() -> void:
-	pass # Replace with function body.
+	update_program()
+	run_program()
 
 func _on_pause_pressed() -> void:
 	pass # Replace with function body.

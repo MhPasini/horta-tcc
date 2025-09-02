@@ -17,5 +17,9 @@ func _drop_data(_at_position: Vector2, data: Variant):
 		$List/BottonMargin.move_to_front()
 
 func get_code_blocks() -> Array:
-	var blocks = $VBoxContainer.get_children()
-	return blocks
+	var blocks = $List.get_children()
+	var block_data : Array[BlockData] = []
+	var _margin = blocks.pop_back() #remove margin node
+	for block in blocks:
+		block_data.append(block.block_data)
+	return block_data

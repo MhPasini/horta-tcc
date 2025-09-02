@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=52 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -368,6 +368,20 @@ border_width_bottom = 1
 [sub_resource type="LabelSettings" id="LabelSettings_3gqeb"]
 font = ExtResource("13_yox4t")
 font_color = Color(0.341176, 0.341176, 0.341176, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7pdpw"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gqd4u"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1l3pd"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_huoen")
@@ -1080,6 +1094,9 @@ custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7pdpw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gqd4u")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1l3pd")
 icon = ExtResource("18_lemb1")
 flat = true
 icon_alignment = 1
@@ -1126,5 +1143,5 @@ grow_vertical = 2
 [connection signal="pressed" from="UI/TestPanel/Functions/OriginBtn" to="UI/TestPanel" method="_on_origin_btn_pressed"]
 [connection signal="pressed" from="UI/TestPanel/Functions/MoveNextBtn" to="UI/TestPanel" method="_on_move_next_btn_pressed"]
 [connection signal="pressed" from="UI/TestPanel/Functions/MovePreviousBtn" to="UI/TestPanel" method="_on_move_previous_btn_pressed"]
-[connection signal="pressed" from="UI/CommandPanel/BtnsArea/Play" to="UI/CommandPanel/CodePanel" method="_on_play_pressed"]
-[connection signal="pressed" from="UI/CommandPanel/BtnsArea/Pause" to="UI/CommandPanel/CodePanel" method="_on_pause_pressed"]
+[connection signal="pressed" from="UI/CommandPanel/BtnsArea/Play" to="UI/CommandPanel" method="_on_play_pressed"]
+[connection signal="pressed" from="UI/CommandPanel/BtnsArea/Pause" to="UI/CommandPanel" method="_on_pause_pressed"]

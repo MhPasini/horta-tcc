@@ -119,7 +119,7 @@ func _create_new_condition(text, aux) -> String:
 	return new_condition
 
 func _on_seed_selection_item_selected(index):
-	block_data.seed = index
+	block_data.plant_seed = index
 
 func _on_if_condition_2_item_selected(index):
 	var id = $MarginContainer/IfElse/args/Condition.get_selected_id()
