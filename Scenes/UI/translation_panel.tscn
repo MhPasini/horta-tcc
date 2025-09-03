@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://bbr1c04w36s35"]
+
+[ext_resource type="StyleBox" uid="uid://jaiges0r4i5m" path="res://UI/Styles/solid_background_panel_noBorder.tres" id="1_casqd"]
+[ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="2_1ulpo"]
+[ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="3_tu8x3"]
+[ext_resource type="StyleBox" uid="uid://btd4k0yqt5gr3" path="res://UI/Styles/Panel_front.tres" id="4_ai7x5"]
+[ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="5_3q8i4"]
+
+[sub_resource type="GDScript" id="GDScript_casqd"]
+resource_name = "TranslationPanel"
+script/source = "extends Panel
+
+func _ready():
+	Events.to_portugol.connect(_update_text)
+
+func _update_text(new_text) -> void:
+	$Margins/VBox/Console.text = new_text
+
+func _on_close_btn_pressed():
+	queue_free()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_h4fw4"]
+font = ExtResource("2_1ulpo")
+font_color = Color(0.937255, 0.807843, 0.537255, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_rku1e"]
+base_font = ExtResource("3_tu8x3")
+spacing_top = -4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_diago"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fl2fe"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_56h2t"]
+
+[node name="TranslationPanel" type="Panel"]
+custom_minimum_size = Vector2(360, 320)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 370.0
+offset_bottom = 330.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_casqd")
+script = SubResource("GDScript_casqd")
+
+[node name="Margins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBox" type="VBoxContainer" parent="Margins"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="Margins/VBox"]
+layout_mode = 2
+text = "Tradução do Programa"
+label_settings = SubResource("LabelSettings_h4fw4")
+uppercase = true
+
+[node name="Console" type="RichTextLabel" parent="Margins/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_colors/default_color = Color(0.8, 0.8, 0.792157, 1)
+theme_override_fonts/normal_font = SubResource("FontVariation_rku1e")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_styles/normal = ExtResource("4_ai7x5")
+bbcode_enabled = true
+text = "Tradução do código em portugol"
+scroll_following = true
+selection_enabled = true
+drag_and_drop_selection_enabled = false
+
+[node name="CloseBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -24.0
+offset_top = 2.0
+offset_right = -10.0
+offset_bottom = 16.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_diago")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fl2fe")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_56h2t")
+icon = ExtResource("5_3q8i4")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="CloseBtn" to="." method="_on_close_btn_pressed"]

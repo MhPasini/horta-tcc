@@ -23,7 +23,7 @@ func build_block() -> void:
 		block_data.Type.METHOD:
 			_build_method()
 		block_data.Type.LOOP:
-			for_loop.show()
+			_build_for_loop()
 		block_data.Type.WHILE:
 			_build_while()
 		block_data.Type.IF:
@@ -34,18 +34,26 @@ func build_block() -> void:
 func _build_method() -> void:
 	methods.show()
 	var method_name = block_data.name
-	$MarginContainer/Methods/Name.text =block_data.block_text
+	$MarginContainer/Methods/Name.text = block_data.block_text
 	if method_name == "move_to":
 		$MarginContainer/Methods/Coords.show()
 	elif method_name == "plant_crop":
 		$MarginContainer/Methods/SeedSelection.show()
 		$MarginContainer/Methods/SeedSelection.select(0)
+		block_data.plant_seed = 1
+
+func _build_for_loop() -> void:
+	for_loop.show()
+	var for_childs : CodeContainer = $MarginContainer/ForLoop/Childs
+	for_childs.code_list_updated.connect(_on_child_list_updated)
 
 func _build_while() -> void:
 	while_loop.show()
 	$MarginContainer/While/args/Condition.select(0)
 	$MarginContainer/While/args/Condition2.select(0)
 	block_data.condition[0] = "lote_vazio"
+	var while_childs : CodeContainer = $MarginContainer/While/Childs
+	while_childs.code_list_updated.connect(_on_child_list_updated)
 
 func _build_if_else() -> void:
 	if_else.show()
@@ -53,6 +61,10 @@ func _build_if_else() -> void:
 	$MarginContainer/IfElse/args/Condition.select(0)
 	$MarginContainer/IfElse/args/Condition2.select(0)
 	block_data.condition[0] = "lote_vazio"
+	var if_childs : CodeContainer = $MarginContainer/IfElse/IfChilds
+	if_childs.code_list_updated.connect(_on_child_list_updated)
+	var else_childs : CodeContainer = %ElseChilds
+	else_childs.code_list_updated.connect(_on_else_list_updated)
 
 func _build_function() -> void:
 	methods.show()
@@ -70,10 +82,10 @@ func _set_line_edit_filters() -> void:
 func _on_LineEdit_text_changed(new_text: String, line_edit: LineEdit):
 	if not new_text.is_valid_int():
 		line_edit.text = str(new_text.to_int())
-		if line_edit == $MarginContainer/ForLoop/args/val:
-			block_data.loop_count = new_text.to_int()
-			return
-		block_data.condition[1] = new_text.to_int()
+	if line_edit == $MarginContainer/ForLoop/args/val:
+		block_data.loop_count = new_text.to_int()
+		return
+	block_data.condition[1] = new_text.to_int()
 
 func _on_if_condition_item_selected(index):
 	var text = $MarginContainer/IfElse/args/Condition.get_item_text(index)
@@ -119,7 +131,7 @@ func _create_new_condition(text, aux) -> String:
 	return new_condition
 
 func _on_seed_selection_item_selected(index):
-	block_data.plant_seed = index
+	block_data.plant_seed = index + 1
 
 func _on_if_condition_2_item_selected(index):
 	var id = $MarginContainer/IfElse/args/Condition.get_selected_id()
@@ -133,12 +145,18 @@ func _on_while_condition_2_item_selected(index):
 	block_data.condition[0] = _create_new_condition(text, index)
 	print(block_data.condition[0])
 
+func _on_child_list_updated(container:CodeContainer) -> void:
+	block_data.child_blocks = container.get_code_blocks()
+
+func _on_else_list_updated(container:CodeContainer) -> void:
+	block_data.else_blocks = container.get_code_blocks()
+
 func _on_x_text_changed(new_text):
 	if not new_text.is_valid_int():
 		x.text = str(new_text.to_int())
-		block_data.pos.x = new_text.to_int()
+	block_data.pos.x = new_text.to_int()
 
 func _on_y_text_changed(new_text):
 	if not new_text.is_valid_int():
 		y.text = str(new_text.to_int())
-		block_data.pos.y = new_text.to_int()
+	block_data.pos.y = new_text.to_int()

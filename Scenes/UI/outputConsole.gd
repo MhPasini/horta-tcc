@@ -5,8 +5,7 @@ const MAX_LINES = 200
 @onready var console = $Margins/VBox/Console
 
 func _ready():
-	console.clear()
-	add_console_message("Console Iniciado!")
+	clear_console()
 	Events.console_message.connect(add_console_message)
 
 func add_console_message(message: String) -> void:
@@ -18,4 +17,8 @@ func add_console_message(message: String) -> void:
 		console.text = "\n".join(lines.slice(line_count - MAX_LINES))
 
 func clear_console() -> void:
+	console.clear()
+	add_console_message("Console Iniciado!")
+
+func _on_clear_btn_pressed():
 	console.clear()

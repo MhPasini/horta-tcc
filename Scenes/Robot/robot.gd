@@ -88,7 +88,7 @@ func move_to_previous() -> bool:
 
 #region PLANT FUNCTIONS 
 func plant_crop(seed_type:int) -> bool:
-	await create_tween()
+	await create_tween().tween_interval(.5).finished
 	if not outside_grid:
 		var result : LogResult = farm.plant_crop_at(grid_pos, seed_type)
 		if result.type == Globals.MSG_TYPE.error:

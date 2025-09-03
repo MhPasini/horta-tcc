@@ -19,37 +19,37 @@ const CODE_DATA = {
 	MOVER_PARA: {
 	"Name": "move_to",
 	"Info": "Função para se movimentar até uma posição definida por x e y",
-	"BlockText": "mover_para"
+	"BlockText": "MoverPara"
 	},
 	MOVER_PROX: {
 	"Name": "move_to_next",
 	"Info": "Função para se movimentar até a próxima posição",
-	"BlockText": "mover_prox"
+	"BlockText": "MoverProximo"
 	},
 	MOVER_ANT: {
 	"Name": "move_to_previous",
 	"Info": "Função para se movimentar até a posição anterior",
-	"BlockText": "mover_ant"
+	"BlockText": "MoverAnterior"
 	},
 	MOVER_ORIG: {
 	"Name": "move_to_origin",
 	"Info": "Função para se movimentar até a posição (0, 0)",
-	"BlockText": "mover_orig"
+	"BlockText": "MoverOrigem"
 	},
 	PLANTAR: {
 	"Name": "plant_crop",
 	"Info": "Função para plantar uma semente no canteiro atual",
-	"BlockText": "plantar"
+	"BlockText": "Plantar"
 	},
 	REGAR: {
 	"Name": "water_crop",
 	"Info": "Função para regar o canteiro atual",
-	"BlockText": "regar"
+	"BlockText": "Regar"
 	},
 	COLHER: {
 	"Name": "harvest_crop",
 	"Info": "Função para colher a planta do canteiro atual",
-	"BlockText": "colher"
+	"BlockText": "Colher"
 	},
 	SE_SENAO:{
 		"Name": "if_else",
