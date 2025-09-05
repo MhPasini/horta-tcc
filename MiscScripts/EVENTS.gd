@@ -23,7 +23,8 @@ signal task_completed
 
 #region CMD SIGNALS
 signal update_info_text(info:String)
-signal to_portugol(translation:String)
+signal new_translation(translation:String)
+signal request_translation(to:String)
 #endregion
 
 signal console_message(msg: String)
