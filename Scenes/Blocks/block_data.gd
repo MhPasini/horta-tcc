@@ -16,6 +16,7 @@ enum Type {
 @export var child_blocks : Array[BlockData] = []
 @export var else_blocks : Array[BlockData] = []
 @export var plant_seed : int = 0
+@export var seed_name : String = "Cenoura"
 @export var pos : Vector2i = Vector2i.ZERO
 @export var color : Color = Color("9ec9d9")
 @export var block_text : String = ""

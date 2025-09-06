@@ -26,8 +26,8 @@
 [ext_resource type="FontVariation" uid="uid://dsb2mliclnrev" path="res://Fonts/ThaleahFat_tabs.tres" id="20_7pdpw"]
 [ext_resource type="Texture2D" uid="uid://duyf8e7n3kagt" path="res://7-billion-humans-CommandsPanel.jpg" id="21_nxex1"]
 [ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/Game/code_container.gd" id="21_pmm7v"]
+[ext_resource type="Texture2D" uid="uid://bouqb6cp5w3mk" path="res://UI/expression_confused.png" id="23_gqd4u"]
 [ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="24_3gqeb"]
-[ext_resource type="PackedScene" uid="uid://5u7dt8yw3vh4" path="res://Scenes/UI/translation_window.tscn" id="28_gqd4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 resource_name = "GrassTiles"
@@ -847,18 +847,33 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 3.0
 offset_right = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.937255, 0.807843, 0.537255, 1)
-theme_override_fonts/normal_font = SubResource("FontVariation_rku1e")
+theme_override_fonts/normal_font = ExtResource("13_yox4t")
 theme_override_font_sizes/normal_font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxEmpty_pmm7v")
 bbcode_enabled = true
-text = "Este bloco faz várias coisas, descrição detalhada e etc ..."
+text = "Descrição dos blocos"
 scroll_following = true
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/CommandPanel/InfoPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -24.0
+offset_top = 4.0
+offset_right = -13.0
+offset_bottom = 20.0
+grow_horizontal = 0
+texture = ExtResource("23_gqd4u")
+stretch_mode = 5
 
 [node name="BlocksPanel" type="Panel" parent="UI/CommandPanel"]
 show_behind_parent = true
@@ -1212,8 +1227,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
-
-[node name="TranslationWindow" parent="." instance=ExtResource("28_gqd4u")]
 
 [connection signal="pressed" from="UI/TestPanel/Functions/PlantarBtn" to="UI/TestPanel" method="_on_plantar_btn_pressed"]
 [connection signal="pressed" from="UI/TestPanel/Functions/RegarBtn" to="UI/TestPanel" method="_on_regar_btn_pressed"]

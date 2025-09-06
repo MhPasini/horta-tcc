@@ -3,7 +3,7 @@ extends Node
 @onready var start_position = $StartPosition.position
 @onready var robot : RobotClass = $Robot
 @onready var farm : FarmGrid = $FarmGrid
-@export var translationScreen = preload("res://Scenes/UI/translation_panel.tscn")
+@export var translationScreen = preload("res://Scenes/UI/translation_window.tscn")
 
 var active_translation : Object = null
 
@@ -13,7 +13,6 @@ func _ready():
 	robot.farm = farm
 	Events.request_translation.connect(_on_translation_requested)
 	set_mouse_cursors()
-	
 
 func set_mouse_cursors() -> void:
 	Input.set_custom_mouse_cursor(load("res://UI/Cursors/hand_open.png"), Input.CURSOR_POINTING_HAND, Vector2(6, 6))
@@ -35,16 +34,16 @@ func _on_translation_requested(to:String = "portugol") -> void:
 		new_screen.tree_exiting.connect(_on_screen_deletion)
 		await get_tree().process_frame
 	var new_t : String
-	match to:
+	match to.to_lower():
 		"python":
 			print("Tradução para Python...")
-			new_t = "Tradução para Python..."
+			new_t = CodeTranslator.to_python($UI/CommandPanel.program)
 		"c":
 			print("Tradução para C...")
-			new_t = "Tradução para C..."
+			new_t = CodeTranslator.to_c($UI/CommandPanel.program)
 		_:
 			print("Tradução para Portugol...")
-			new_t = $UI/CommandPanel.to_portugol()
+			new_t = CodeTranslator.to_portugol($UI/CommandPanel.program)
 	Events.new_translation.emit(new_t)
 
 func _on_screen_deletion() -> void:

@@ -156,40 +156,40 @@ func planta_ok() -> bool:
 func robo_cheio() -> bool:
 	return storage_full
 
-func pos_x_igual(x:int) -> bool:
+func pos_x_igual(x:int = 0) -> bool:
 	return grid_pos.x == x
 
-func pos_x_maior_igual(x:int) -> bool:
+func pos_x_maior_igual(x:int = 0) -> bool:
 	return grid_pos.x >= x
 
-func pos_x_menor_igual(x:int) -> bool:
+func pos_x_menor_igual(x:int = 0) -> bool:
 	return grid_pos.x <= x
 
-func pos_x_maior(x:int) -> bool:
+func pos_x_maior(x:int = 0) -> bool:
 	return grid_pos.x > x
 
-func pos_x_menor(x:int) -> bool:
+func pos_x_menor(x:int = 0) -> bool:
 	return grid_pos.x < x
 
-func pos_x_diferente(x:int) -> bool:
+func pos_x_diferente(x:int = 0) -> bool:
 	return grid_pos.x != x
 
-func pos_y_igual(y:int) -> bool:
+func pos_y_igual(y:int = 0) -> bool:
 	return grid_pos.y == y
 
-func pos_y_maior_igual(y:int) -> bool:
+func pos_y_maior_igual(y:int = 0) -> bool:
 	return grid_pos.y >= y
 
-func pos_y_menor_igual(y:int) -> bool:
+func pos_y_menor_igual(y:int = 0) -> bool:
 	return grid_pos.y <= y
 
-func pos_y_maior(y:int) -> bool:
+func pos_y_maior(y:int = 0) -> bool:
 	return grid_pos.y > y
 
-func pos_y_menor(y:int) -> bool:
+func pos_y_menor(y:int = 0) -> bool:
 	return grid_pos.y < y
 
-func pos_y_diferente(y:int) -> bool:
+func pos_y_diferente(y:int = 0) -> bool:
 	return grid_pos.y != y
 #endregion
 

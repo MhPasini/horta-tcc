@@ -2,9 +2,11 @@ extends Control
 
 var robot : RobotClass
 var program : Array[BlockData] = []
+var stop_requested : bool = false
 
 @onready var code_container = $CodePanel/CodeTabs/Main/CodeContainer as CodeContainer
 @onready var info_text = $InfoPanel/Info
+
 
 func _ready():
 	robot = Globals.robot_ref
@@ -45,9 +47,11 @@ func _execute(block:BlockData) -> bool:
 			while _check_condition(block.condition) and iterations < max_iterations:
 				for child in block.child_blocks:
 					_ok = await _execute(child)
-					iterations += 1
+				iterations += 1
 			if iterations >= max_iterations:
-				print("Execução do código interrompida, loop >= ", max_iterations)
+				var msg = "Execução do código interrompida, loop >= %d" % max_iterations
+				print(msg)
+				robot.send_log_message(msg, Globals.MSG_TYPE.error)
 				return false
 		block.Type.IF:
 			if _check_condition(block.condition):
@@ -66,10 +70,12 @@ func _on_code_list_updated(_code_container) -> void:
 
 func update_program() -> void:
 	program = code_container.get_code_blocks()
+	$Tooltip.hide()
 
 func clear_program() -> void:
 	program.clear()
 	code_container.clear_code_blocks()
+	$Tooltip.show()
 
 func _check_condition(condition:Array) -> bool:
 	print(condition)
@@ -81,47 +87,6 @@ func _check_condition(condition:Array) -> bool:
 	else:
 		print("Condição não encontrada: ", condition)
 		return false
-
-#region TRADUÇÃO DE BLOCOS
-func to_portugol() -> String:
-	var code = "ALGORITMO\n"
-	code += "INICIO\n"
-	for block in program:
-		code += _block_to_portugol(block, 1)
-	code += "FIM\n"
-	return code
-
-func _block_to_portugol(block:BlockData, indent_level: int = 0) -> String:
-	var indent = ""
-	for i in range(indent_level):
-		indent += "	"
-	var code = ""
-	match block.type:
-		block.Type.METHOD:
-			code += indent + block.name + "()\n"
-		block.Type.LOOP:
-			code += indent + "PARA i DE 1 ATÉ " + str(block.loop_count) + " FAÇA\n"
-			for child in block.child_blocks:
-				code += _block_to_portugol(child, indent_level + 1)
-			code += indent + "FIM PARA\n"
-		block.Type.WHILE:
-			code += indent + "ENQUANTO " + block.condition + "() FAÇA\n"
-			for child in block.child_blocks:
-				code += _block_to_portugol(child, indent_level + 1)
-			code += indent + "FIM ENQUANTO\n"
-		block.Type.IF:
-			code += indent + "SE " + block.condition + "() ENTÃO\n"
-			for child in block.child_blocks:
-				code += _block_to_portugol(child, indent_level + 1)
-			if block.else_blocks.size() > 0:
-				code += indent + "SENÃO\n"
-				for child in block.else_blocks:
-					code += _block_to_portugol(child, indent_level + 1)
-			code += indent + "FIM SE\n"
-		block.Type.FUNCTION:
-			code += indent + block.name + "()\n"
-	return code
-#endregion
 
 func _update_info_text(new_info:String) -> void:
 	info_text.text = new_info
