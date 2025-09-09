@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=60 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -24,10 +24,11 @@
 [ext_resource type="Script" uid="uid://d1465excs5gqr" path="res://Scenes/Game/cmd_panel.gd" id="19_4ti5a"]
 [ext_resource type="Script" uid="uid://busg6gaulgh2v" path="res://Scenes/Blocks/side_blocks.gd" id="20_2lc0x"]
 [ext_resource type="FontVariation" uid="uid://dsb2mliclnrev" path="res://Fonts/ThaleahFat_tabs.tres" id="20_7pdpw"]
-[ext_resource type="Texture2D" uid="uid://duyf8e7n3kagt" path="res://7-billion-humans-CommandsPanel.jpg" id="21_nxex1"]
 [ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/Game/code_container.gd" id="21_pmm7v"]
-[ext_resource type="Texture2D" uid="uid://bouqb6cp5w3mk" path="res://UI/expression_confused.png" id="23_gqd4u"]
+[ext_resource type="Texture2D" uid="uid://c5100p3x3k23x" path="res://UI/Info-icon.png" id="23_gqd4u"]
 [ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="24_3gqeb"]
+[ext_resource type="Texture2D" uid="uid://theh7wyq5xk4" path="res://UI/pause.png" id="26_gqd4u"]
+[ext_resource type="Texture2D" uid="uid://cc2m1ux3flonw" path="res://UI/remove_icon_2.png" id="28_1l3pd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 resource_name = "GrassTiles"
@@ -402,6 +403,48 @@ content_margin_left = 2.0
 content_margin_top = 2.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gqd4u"]
+texture = ExtResource("18_a6ftd")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="GDScript" id="GDScript_1l3pd"]
+resource_name = "RemoveArea"
+script/source = "extends Panel
+
+
+func _ready():
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	Events.drag_block.connect(_update_visibility)
+	hide()
+
+func _can_drop_data(_at_position, data:Variant):
+	if data is CodeBlock:
+		return true
+	else :
+		return false
+
+func _drop_data(_at_position, data:Variant):
+	if data is CodeBlock:
+		var code_container = data.parent_container
+		code_container.remove_code_block(data)
+		Events.drag_block.emit(false)
+
+func _update_visibility(is_visible:bool) -> void:
+	visible = is_visible
+
+func _on_mouse_entered() -> void:
+	Input.set_custom_mouse_cursor(load(\"res://UI/Cursors/trash.png\"), Input.CURSOR_CAN_DROP, Vector2(6, 6))
+
+func _on_mouse_exited() -> void:
+	Input.set_custom_mouse_cursor(load(\"res://UI/Cursors/ok.png\"), Input.CURSOR_CAN_DROP, Vector2(6, 6))
+"
 
 [node name="Game" type="Node"]
 script = ExtResource("1_huoen")
@@ -867,13 +910,13 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -24.0
+offset_left = -21.0
 offset_top = 4.0
 offset_right = -13.0
 offset_bottom = 20.0
 grow_horizontal = 0
 texture = ExtResource("23_gqd4u")
-stretch_mode = 5
+stretch_mode = 3
 
 [node name="BlocksPanel" type="Panel" parent="UI/CommandPanel"]
 show_behind_parent = true
@@ -1155,6 +1198,19 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
+[node name="Stop" type="Button" parent="UI/CommandPanel/BtnsArea"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7pdpw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gqd4u")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1l3pd")
+icon = ExtResource("26_gqd4u")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
 [node name="Clear" type="Button" parent="UI/CommandPanel/BtnsArea"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -1167,6 +1223,49 @@ icon = ExtResource("24_3gqeb")
 flat = true
 icon_alignment = 1
 expand_icon = true
+
+[node name="RemoveArea" type="Panel" parent="UI/CommandPanel"]
+self_modulate = Color(0.85098, 0.588235, 0.356863, 0.992157)
+z_index = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 48.0
+offset_right = -10.0
+offset_bottom = 85.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_gqd4u")
+script = SubResource("GDScript_1l3pd")
+
+[node name="TextureRect" type="TextureRect" parent="UI/CommandPanel/RemoveArea"]
+self_modulate = Color(0.85098, 0.588235, 0.356863, 0.992157)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -13.0
+offset_right = 13.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_1l3pd")
+stretch_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="UI/CommandPanel/RemoveArea"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.270588)
 
 [node name="ResetBtn" type="Button" parent="UI"]
 anchors_preset = 5
@@ -1206,14 +1305,6 @@ text = "Traduzir"
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 180)
 
-[node name="referencia" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(789, 183)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("21_nxex1")
-region_enabled = true
-region_rect = Rect2(520, 0, 490, 570)
-
 [node name="ColorPalette" type="Sprite2D" parent="."]
 position = Vector2(-30, 224)
 texture = ExtResource("14_lemb1")
@@ -1237,6 +1328,7 @@ metadata/_edit_lock_ = true
 [connection signal="pressed" from="UI/TestPanel/Functions/MovePreviousBtn" to="UI/TestPanel" method="_on_move_previous_btn_pressed"]
 [connection signal="pressed" from="UI/Output/ClearBtn" to="UI/Output" method="_on_clear_btn_pressed"]
 [connection signal="pressed" from="UI/CommandPanel/BtnsArea/Play" to="UI/CommandPanel" method="_on_play_pressed"]
+[connection signal="pressed" from="UI/CommandPanel/BtnsArea/Stop" to="UI/CommandPanel" method="_on_stop_pressed"]
 [connection signal="pressed" from="UI/CommandPanel/BtnsArea/Clear" to="UI/CommandPanel" method="_on_clear_pressed"]
 [connection signal="pressed" from="UI/ResetBtn" to="." method="_on_reset_btn_pressed"]
 [connection signal="pressed" from="UI/TranslationBtn" to="." method="_on_translation_btn_pressed"]

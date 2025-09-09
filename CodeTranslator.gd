@@ -2,7 +2,7 @@ extends Resource
 class_name CodeTranslator
 
 static func to_portugol(program:Array[BlockData]) -> String:
-	var code = "ALGORITMO\n"
+	var code = "ALGORITMO\n\n"
 	code += "INICIO\n"
 	for block in program:
 		code += _block_to_portugol(block, 1)
@@ -10,7 +10,7 @@ static func to_portugol(program:Array[BlockData]) -> String:
 	return code
 
 static func to_python(program: Array[BlockData]) -> String:
-	var code = "# Programa gerado automaticamente\n"
+	var code = "# Tradução para Python\n"
 	code += "def main():\n"
 	for block in program:
 		code += _block_to_python(block, 1)
@@ -21,9 +21,9 @@ static func to_python(program: Array[BlockData]) -> String:
 static func to_c(program: Array[BlockData]) -> String:
 	var code = "#include <stdio.h>\n"
 	code += "#include <stdlib.h>\n\n"
-	code += "// Protótipos das funções\n"
-	code += generate_function_prototypes(program)
-	code += "\nint main() {\n"
+	code += "// Tradução para C\n"
+	#code += generate_function_prototypes(program)
+	code += "int main() {\n"
 	for block in program:
 		code += _block_to_c(block, 1)
 	code += "    return 0;\n"
@@ -128,25 +128,24 @@ static func _block_to_c(block: BlockData, indent_level: int = 0) -> String:
 		block.Type.FUNCTION:
 			code += indent + block.name + "();\n"
 	return code
-
-static func generate_function_prototypes(program: Array[BlockData]) -> String:
-	var prototypes = ""
-	var functions_found = []
-	extract_functions_recursive(program, functions_found)
-	for func_name in functions_found:
-		prototypes += "void " + func_name + "();\n"
-		#TODO set params in CodeInfo and get it here
-	return prototypes
-
-static func extract_functions_recursive(blocks: Array[BlockData], functions_found: Array):
-	for block in blocks:
-		if block.type == block.Type.METHOD or block.type == block.Type.FUNCTION:
-			if block.block_text not in functions_found:
-				functions_found.append(block.block_text)
-		if block.child_blocks.size() > 0:
-			extract_functions_recursive(block.child_blocks, functions_found)
-		if block.else_blocks.size() > 0:
-			extract_functions_recursive(block.else_blocks, functions_found)
+#
+#static func generate_function_prototypes(program: Array[BlockData]) -> String:
+	#var prototypes = ""
+	#var functions_found = []
+	#extract_functions_recursive(program, functions_found)
+	#for func_name in functions_found:
+		#prototypes += "void " + func_name + "(" + _get_param_type() + ");\n"
+	#return prototypes
+#
+#static func extract_functions_recursive(blocks: Array[BlockData], functions_found: Array):
+	#for block in blocks:
+		#if block.type == block.Type.METHOD or block.type == block.Type.FUNCTION:
+			#if block.block_text not in functions_found:
+				#functions_found.append(block.block_text)
+		#if block.child_blocks.size() > 0:
+			#extract_functions_recursive(block.child_blocks, functions_found)
+		#if block.else_blocks.size() > 0:
+			#extract_functions_recursive(block.else_blocks, functions_found)
 
 static func _check_cond_2(block:BlockData) -> String:
 	var cond2 = " " + str(block.condition[1]) if block.condition[1] != null else ""
@@ -158,3 +157,6 @@ static func _method_param(block:BlockData) -> String:
 	elif block.name == "plant_crop":
 		return "('%s')" % block.seed_name
 	return "()"
+
+static func _get_param_type(type:int) -> String:
+	return BlockInfo.CODE_DATA[type]["Param"] as String

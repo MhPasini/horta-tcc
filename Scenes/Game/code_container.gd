@@ -6,7 +6,7 @@ const CODE_BLOCK = preload("res://Scenes/Blocks/code_block.tscn")
 signal code_list_updated(container:CodeContainer)
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
-	if data is BlockData:
+	if data is BlockData or data is CodeBlock:
 		return true
 	return false
 
@@ -15,8 +15,12 @@ func _drop_data(_at_position: Vector2, data: Variant):
 		var new_block = CODE_BLOCK.instantiate()
 		new_block.block_data = data
 		list.add_child(new_block)
+		new_block.parent_container = self
 		$List/BottonMargin.move_to_front()
 		code_list_updated.emit(self)
+	elif data is CodeBlock:
+		Events.drag_block.emit(false)
+		pass
 
 func get_code_blocks() -> Array:
 	var blocks = $List.get_children()
@@ -25,6 +29,11 @@ func get_code_blocks() -> Array:
 	for block in blocks:
 		block_data.append(block.block_data)
 	return block_data
+
+func remove_code_block(block:CodeBlock) -> void:
+	block.queue_free()
+	await get_tree().process_frame
+	code_list_updated.emit(self)
 
 func clear_code_blocks() -> void:
 	for child in $List.get_children():

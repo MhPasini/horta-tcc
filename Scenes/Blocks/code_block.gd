@@ -1,6 +1,8 @@
 extends Control
 class_name CodeBlock
 
+var parent_container : CodeContainer
+
 @export var block_data : BlockData
 
 @onready var methods = $MarginContainer/Methods
@@ -12,6 +14,7 @@ class_name CodeBlock
 @onready var val_if = $MarginContainer/IfElse/args/val
 @onready var val_while = $MarginContainer/While/args/val
 @onready var val_loop = $MarginContainer/ForLoop/args/val
+
 
 func _ready():
 	_set_line_edit_filters()
@@ -39,11 +42,12 @@ func _build_method() -> void:
 		$MarginContainer/Methods/Coords.show()
 	elif method_name == "plant_crop":
 		%SeedSelection.show()
-		%SeedSelection.select(0)
-		%SeedSelection.item_selected.emit(0)
+		%SeedSelection.select(block_data.plant_seed)
+		%SeedSelection.item_selected.emit(block_data.plant_seed)
 
 func _build_for_loop() -> void:
 	for_loop.show()
+	val_loop.text = str(block_data.loop_count)
 	var for_childs : CodeContainer = $MarginContainer/ForLoop/Childs
 	for_childs.code_list_updated.connect(_on_child_list_updated)
 
@@ -57,7 +61,6 @@ func _build_while() -> void:
 
 func _build_if_else() -> void:
 	if_else.show()
-	%ElseBtn.button_pressed = true
 	$MarginContainer/IfElse/args/Condition.select(0)
 	$MarginContainer/IfElse/args/Condition2.select(0)
 	$MarginContainer/IfElse/args/Condition.item_selected.emit(0)
@@ -163,3 +166,10 @@ func _on_y_text_changed(new_text):
 	if not new_text.is_valid_int():
 		y.text = str(new_text.to_int())
 	block_data.pos.y = new_text.to_int()
+
+func _get_drag_data(_at_position: Vector2):
+	var preview = BlockPreview.new(block_data.block_text, block_data.color)
+	#TODO fix preview text ( if, while, for )
+	set_drag_preview(preview)
+	Events.drag_block.emit(true)
+	return self

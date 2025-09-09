@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duyf8e7n3kagt"
-path="res://.godot/imported/7-billion-humans-CommandsPanel.jpg-8366d212907312c748528734c3680a94.ctex"
+uid="uid://btjfyyekuae0e"
+path="res://.godot/imported/burn.png-32fb931a1b2a72be07c85db39347b80d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://7-billion-humans-CommandsPanel.jpg"
-dest_files=["res://.godot/imported/7-billion-humans-CommandsPanel.jpg-8366d212907312c748528734c3680a94.ctex"]
+source_file="res://UI/Cursors/burn.png"
+dest_files=["res://.godot/imported/burn.png-32fb931a1b2a72be07c85db39347b80d.ctex"]
 
 [params]
 

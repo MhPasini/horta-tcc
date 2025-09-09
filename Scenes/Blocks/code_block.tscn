@@ -111,6 +111,7 @@ offset_right = 45.0
 offset_bottom = 16.0
 size_flags_horizontal = 2
 size_flags_vertical = 8
+mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_oc8c7")
 script = ExtResource("1_cy0tu")
 
@@ -120,6 +121,7 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("2_2dql6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -363,6 +365,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_2cub8")
 
 [node name="ElseChilds" type="MarginContainer" parent="MarginContainer/IfElse"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 script = ExtResource("6_g76dd")

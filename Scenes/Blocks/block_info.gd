@@ -19,37 +19,44 @@ const CODE_DATA = {
 	MOVER_PARA: {
 	"Name": "move_to",
 	"Info": "Função para se movimentar até uma posição definida por x e y",
-	"BlockText": "MoverPara"
+	"BlockText": "MoverPara",
+	"Param": "Posição: Vector2"
 	},
 	MOVER_PROX: {
 	"Name": "move_to_next",
 	"Info": "Função para se movimentar até a próxima posição",
-	"BlockText": "MoverProximo"
+	"BlockText": "MoverProximo",
+	"Param": ""
 	},
 	MOVER_ANT: {
 	"Name": "move_to_previous",
 	"Info": "Função para se movimentar até a posição anterior",
-	"BlockText": "MoverAnterior"
+	"BlockText": "MoverAnterior",
+	"Param": ""
 	},
 	MOVER_ORIG: {
 	"Name": "move_to_origin",
 	"Info": "Função para se movimentar até a posição (0, 0)",
-	"BlockText": "MoverOrigem"
+	"BlockText": "MoverOrigem",
+	"Param": ""
 	},
 	PLANTAR: {
 	"Name": "plant_crop",
 	"Info": "Função para plantar uma semente no canteiro atual",
-	"BlockText": "Plantar"
+	"BlockText": "Plantar",
+	"Param": "Semente: String"
 	},
 	REGAR: {
 	"Name": "water_crop",
 	"Info": "Função para regar o canteiro atual",
-	"BlockText": "Regar"
+	"BlockText": "Regar",
+	"Param": ""
 	},
 	COLHER: {
 	"Name": "harvest_crop",
 	"Info": "Função para colher a planta do canteiro atual",
-	"BlockText": "Colher"
+	"BlockText": "Colher",
+	"Param": ""
 	},
 	SE_SENAO:{
 		"Name": "if_else",
@@ -65,6 +72,7 @@ const CODE_DATA = {
 	},
 	FUNCAO:{
 		"Name": "custom_function",
-		"Info": "Bloco 'FUNÇÃO', executa os blocos internos quando chamado"
+		"Info": "Bloco 'FUNÇÃO', executa os blocos internos quando chamado",
+		"Param": ""
 	}
 }
