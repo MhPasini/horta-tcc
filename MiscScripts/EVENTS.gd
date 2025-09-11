@@ -26,7 +26,6 @@ signal update_info_text(info:String)
 signal new_translation(translation:String)
 signal request_translation(to:String)
 signal stop_execution
-signal drag_block(drag:bool)
 #endregion
 
 signal console_message(msg: String)

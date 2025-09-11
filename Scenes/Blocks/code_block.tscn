@@ -1,14 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://c23qpaffp606m"]
+[gd_scene load_steps=22 format=3 uid="uid://c23qpaffp606m"]
 
 [ext_resource type="Script" uid="uid://wvgp1jb67vhq" path="res://Scenes/Blocks/code_block.gd" id="1_cy0tu"]
 [ext_resource type="StyleBox" uid="uid://dr2k6gosa1ivj" path="res://UI/Styles/code_block_body.tres" id="2_2dql6"]
 [ext_resource type="FontVariation" uid="uid://blsb1kuml66jh" path="res://Fonts/tiny_variation.tres" id="3_oc8c7"]
 [ext_resource type="Texture2D" uid="uid://bryrj4jeh5n4j" path="res://UI/check_t.png" id="5_oc8c7"]
 [ext_resource type="Texture2D" uid="uid://bbihctswowu5x" path="res://UI/check_f.png" id="6_2cub8"]
-[ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/Game/code_container.gd" id="6_g76dd"]
+[ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/UI/code_container.gd" id="6_g76dd"]
 [ext_resource type="Texture2D" uid="uid://bopm6wy8ja3ug" path="res://UI/indicator-sheet.png" id="7_oc8c7"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oc8c7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2dql6"]
 font = ExtResource("3_oc8c7")
@@ -70,18 +68,18 @@ anti_aliasing = false
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_h5wt2"]
 size = Vector2(0, 6)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2dql6"]
-
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g76dd"]
 size = Vector2(0, 6)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2dql6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oc8c7"]
 bg_color = Color(0.263, 0.278, 0.275, 0.75)
 expand_margin_left = 2.0
-expand_margin_top = 2.0
+expand_margin_top = 6.0
+expand_margin_right = 10.0
+expand_margin_bottom = 6.0
 anti_aliasing = false
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wmimg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2cub8"]
 atlas = ExtResource("7_oc8c7")
@@ -103,29 +101,21 @@ region = Rect2(16, 0, 8, 6)
 atlas = ExtResource("7_oc8c7")
 region = Rect2(0, 0, 8, 6)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2cub8"]
-
 [node name="CodeBlock" type="PanelContainer"]
+self_modulate = Color(0.619608, 0.788235, 0.85098, 1)
 custom_minimum_size = Vector2(45, 16)
 offset_right = 45.0
 offset_bottom = 16.0
 size_flags_horizontal = 2
 size_flags_vertical = 8
 mouse_default_cursor_shape = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_oc8c7")
+theme_override_styles/panel = ExtResource("2_2dql6")
 script = ExtResource("1_cy0tu")
 
-[node name="Panel" type="Panel" parent="."]
-modulate = Color(0.619608, 0.788235, 0.85098, 1)
-layout_mode = 2
-theme_override_styles/panel = ExtResource("2_2dql6")
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_constants/margin_left = 2
 
 [node name="Methods" type="HBoxContainer" parent="MarginContainer"]
 visible = false
@@ -197,14 +187,10 @@ popup/item_1/id = 1
 popup/item_2/text = "Rabanete"
 popup/item_2/id = 2
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/Methods"]
-layout_mode = 2
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxEmpty_2dql6")
-
 [node name="IfElse" type="VBoxContainer" parent="MarginContainer"]
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 3
 
 [node name="args" type="HBoxContainer" parent="MarginContainer/IfElse"]
 layout_mode = 2
@@ -317,6 +303,9 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_2dql6")
 [node name="IfChilds" type="MarginContainer" parent="MarginContainer/IfElse"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
 script = ExtResource("6_g76dd")
 metadata/_custom_type_script = "uid://dm36g3kwl52u2"
 
@@ -329,14 +318,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_oc8c7")
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="BottonMargin" type="HSeparator" parent="MarginContainer/IfElse/IfChilds/List"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 10
-mouse_filter = 2
-theme_override_constants/separation = 10
-theme_override_styles/separator = SubResource("StyleBoxEmpty_wmimg")
-
 [node name="Else" type="HBoxContainer" parent="MarginContainer/IfElse"]
 layout_mode = 2
 
@@ -347,6 +328,7 @@ label_settings = SubResource("LabelSettings_2dql6")
 
 [node name="ElseBtn" type="TextureButton" parent="MarginContainer/IfElse/Else"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(9, 9)
 layout_mode = 2
 size_flags_horizontal = 10
 focus_mode = 0
@@ -356,18 +338,16 @@ texture_pressed = SubResource("AtlasTexture_wmimg")
 texture_hover = SubResource("AtlasTexture_suk4y")
 texture_disabled = SubResource("AtlasTexture_31vst")
 texture_focused = SubResource("AtlasTexture_rkoiy")
-stretch_mode = 5
-
-[node name="RMargin" type="VSeparator" parent="MarginContainer/IfElse/Else"]
-layout_mode = 2
-theme_override_constants/separation = 1
-theme_override_styles/separator = SubResource("StyleBoxEmpty_2cub8")
+stretch_mode = 3
 
 [node name="ElseChilds" type="MarginContainer" parent="MarginContainer/IfElse"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
 script = ExtResource("6_g76dd")
 metadata/_custom_type_script = "uid://dm36g3kwl52u2"
 
@@ -379,22 +359,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_oc8c7")
 [node name="List" type="VBoxContainer" parent="MarginContainer/IfElse/ElseChilds"]
 layout_mode = 2
 theme_override_constants/separation = 1
-
-[node name="BottonMargin" type="HSeparator" parent="MarginContainer/IfElse/ElseChilds/List"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 10
-mouse_filter = 2
-theme_override_constants/separation = 10
-theme_override_styles/separator = SubResource("StyleBoxEmpty_wmimg")
-
-[node name="BottonMargin" type="HSeparator" parent="MarginContainer/IfElse"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 10
-mouse_filter = 2
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxEmpty_wmimg")
 
 [node name="While" type="VBoxContainer" parent="MarginContainer"]
 visible = false
@@ -511,6 +475,9 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_2dql6")
 [node name="Childs" type="MarginContainer" parent="MarginContainer/While"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
 script = ExtResource("6_g76dd")
 metadata/_custom_type_script = "uid://dm36g3kwl52u2"
 
@@ -522,14 +489,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_oc8c7")
 [node name="List" type="VBoxContainer" parent="MarginContainer/While/Childs"]
 layout_mode = 2
 theme_override_constants/separation = 1
-
-[node name="BottonMargin" type="HSeparator" parent="MarginContainer/While/Childs/List"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 10
-mouse_filter = 2
-theme_override_constants/separation = 10
-theme_override_styles/separator = SubResource("StyleBoxEmpty_wmimg")
 
 [node name="ForLoop" type="VBoxContainer" parent="MarginContainer"]
 visible = false
@@ -577,6 +536,9 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_2dql6")
 [node name="Childs" type="MarginContainer" parent="MarginContainer/ForLoop"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
 script = ExtResource("6_g76dd")
 metadata/_custom_type_script = "uid://dm36g3kwl52u2"
 
@@ -588,14 +550,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_oc8c7")
 [node name="List" type="VBoxContainer" parent="MarginContainer/ForLoop/Childs"]
 layout_mode = 2
 theme_override_constants/separation = 1
-
-[node name="BottonMargin" type="HSeparator" parent="MarginContainer/ForLoop/Childs/List"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 10
-mouse_filter = 2
-theme_override_constants/separation = 10
-theme_override_styles/separator = SubResource("StyleBoxEmpty_wmimg")
 
 [connection signal="text_changed" from="MarginContainer/Methods/Coords/X" to="." method="_on_x_text_changed"]
 [connection signal="text_changed" from="MarginContainer/Methods/Coords/Y" to="." method="_on_y_text_changed"]

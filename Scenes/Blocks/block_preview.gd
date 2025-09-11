@@ -6,6 +6,7 @@ const b_style = preload("res://UI/Styles/block_preview.tres")
 const font_color = Globals.block_font_color
 
 func _init(b_text: String, b_color: Color):
+	b_color.a *= 0.7
 	add_theme_font_override("font", b_font)
 	add_theme_stylebox_override("normal", b_style)
 	add_theme_color_override("font_color", font_color)

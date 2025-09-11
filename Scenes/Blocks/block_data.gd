@@ -12,6 +12,7 @@ enum Type {
 @export var type : Type = Type.METHOD
 @export var name : String = ""
 @export var condition : Array = ["", null]
+@export var condition_text : String = ""
 @export var loop_count : int = 1
 @export var child_blocks : Array[BlockData] = []
 @export var else_blocks : Array[BlockData] = []
@@ -31,6 +32,7 @@ static func method(method_name:String, text:String) -> BlockData:
 static func loop(count:int, blocks:Array[BlockData] = []) -> BlockData:
 	var block = BlockData.new()
 	block.type = Type.LOOP
+	block.block_text = "PARA_FAÇA"
 	block.loop_count = count
 	block.child_blocks = blocks
 	return block
@@ -38,6 +40,7 @@ static func loop(count:int, blocks:Array[BlockData] = []) -> BlockData:
 static func while_do(condition_name:String, blocks:Array[BlockData] = []) -> BlockData:
 	var block = BlockData.new()
 	block.type = Type.WHILE
+	block.block_text = "ENQUANTO"
 	block.condition[0] = condition_name
 	block.child_blocks = blocks
 	return block
@@ -45,6 +48,7 @@ static func while_do(condition_name:String, blocks:Array[BlockData] = []) -> Blo
 static func if_else(condition_name:String, if_blocks:Array[BlockData] = [], else_b:Array[BlockData] = []) -> BlockData:
 	var block = BlockData.new()
 	block.type = Type.IF
+	block.block_text = "SE_SENÃO"
 	block.condition[0] = condition_name
 	block.child_blocks = if_blocks
 	block.else_blocks = else_b

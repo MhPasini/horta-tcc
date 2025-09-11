@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=59 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -21,10 +21,10 @@
 [ext_resource type="StyleBox" uid="uid://dfx58hsumrpqr" path="res://UI/Styles/solid_background_panel.tres" id="17_2lc0x"]
 [ext_resource type="Texture2D" uid="uid://b6hl4dns81us8" path="res://UI/dotted_box.png" id="18_a6ftd"]
 [ext_resource type="Texture2D" uid="uid://c3yxgji52cod1" path="res://UI/play.png" id="18_lemb1"]
-[ext_resource type="Script" uid="uid://d1465excs5gqr" path="res://Scenes/Game/cmd_panel.gd" id="19_4ti5a"]
+[ext_resource type="Script" uid="uid://d1465excs5gqr" path="res://Scenes/UI/cmd_panel.gd" id="19_4ti5a"]
 [ext_resource type="Script" uid="uid://busg6gaulgh2v" path="res://Scenes/Blocks/side_blocks.gd" id="20_2lc0x"]
 [ext_resource type="FontVariation" uid="uid://dsb2mliclnrev" path="res://Fonts/ThaleahFat_tabs.tres" id="20_7pdpw"]
-[ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/Game/code_container.gd" id="21_pmm7v"]
+[ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/UI/code_container.gd" id="22_1l3pd"]
 [ext_resource type="Texture2D" uid="uid://c5100p3x3k23x" path="res://UI/Info-icon.png" id="23_gqd4u"]
 [ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="24_3gqeb"]
 [ext_resource type="Texture2D" uid="uid://theh7wyq5xk4" path="res://UI/pause.png" id="26_gqd4u"]
@@ -334,8 +334,6 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.584314, 0.639216, 0.607843, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3gqeb"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pa3qg"]
 bg_color = Color(0.341176, 0.341176, 0.341176, 1)
 border_width_bottom = 2
@@ -417,11 +415,9 @@ axis_stretch_vertical = 1
 resource_name = "RemoveArea"
 script/source = "extends Panel
 
-
 func _ready():
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-	Events.drag_block.connect(_update_visibility)
 	hide()
 
 func _can_drop_data(_at_position, data:Variant):
@@ -434,16 +430,18 @@ func _drop_data(_at_position, data:Variant):
 	if data is CodeBlock:
 		var code_container = data.parent_container
 		code_container.remove_code_block(data)
-		Events.drag_block.emit(false)
-
-func _update_visibility(is_visible:bool) -> void:
-	visible = is_visible
 
 func _on_mouse_entered() -> void:
 	Input.set_custom_mouse_cursor(load(\"res://UI/Cursors/trash.png\"), Input.CURSOR_CAN_DROP, Vector2(6, 6))
 
 func _on_mouse_exited() -> void:
 	Input.set_custom_mouse_cursor(load(\"res://UI/Cursors/ok.png\"), Input.CURSOR_CAN_DROP, Vector2(6, 6))
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_BEGIN and get_viewport().gui_get_drag_data() is CodeBlock:
+		show()
+	if what == NOTIFICATION_DRAG_END:
+		hide()
 "
 
 [node name="Game" type="Node"]
@@ -775,6 +773,7 @@ Vegetal Maduro: [color=Green]VERDADEIRO[/color]"
 scroll_following = true
 
 [node name="CommandPanel" type="Panel" parent="UI"]
+z_index = -1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -862,20 +861,14 @@ metadata/_tab_index = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_top = 4
-script = ExtResource("21_pmm7v")
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("22_1l3pd")
 
 [node name="List" type="VBoxContainer" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
-
-[node name="BottonMargin" type="HSeparator" parent="UI/CommandPanel/CodePanel/CodeTabs/Main/CodeContainer/List"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 10
-mouse_filter = 2
-theme_override_constants/separation = 10
-theme_override_styles/separator = SubResource("StyleBoxEmpty_3gqeb")
 
 [node name="InfoPanel" type="Panel" parent="UI/CommandPanel"]
 show_behind_parent = true
@@ -1226,7 +1219,6 @@ expand_icon = true
 
 [node name="RemoveArea" type="Panel" parent="UI/CommandPanel"]
 self_modulate = Color(0.85098, 0.588235, 0.356863, 0.992157)
-z_index = 1
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -1308,6 +1300,14 @@ position = Vector2(240, 180)
 [node name="ColorPalette" type="Sprite2D" parent="."]
 position = Vector2(-30, 224)
 texture = ExtResource("14_lemb1")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="ColorPalette"]
+offset_left = -43.0
+offset_top = -14.0
+offset_right = -15.0
+offset_bottom = 12.0
+flat = true
+color = Color(0.545098, 0.803922, 0.792157, 1)
 
 [node name="DragLimit" type="Control" parent="."]
 z_index = -10

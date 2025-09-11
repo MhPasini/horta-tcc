@@ -77,7 +77,8 @@ func _on_code_list_updated(_code_container) -> void:
 
 func update_program() -> void:
 	program = code_container.get_code_blocks()
-	$Tooltip.hide()
+	if program.size() > 0: $Tooltip.hide()
+	else: $Tooltip.show()
 
 func clear_program() -> void:
 	program.clear()

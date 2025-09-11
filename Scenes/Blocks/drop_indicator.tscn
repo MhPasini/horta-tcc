@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ot17jkyketsf"]
+
+[ext_resource type="Texture2D" uid="uid://bnq0rlag52wt7" path="res://UI/dotted_box_narrow.png" id="1_4u8wy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uhjek"]
+texture = ExtResource("1_4u8wy")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+expand_margin_right = 7.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 24, 24)
+modulate_color = Color(0.662745, 0.733333, 0.4, 1)
+
+[node name="DropIndicator" type="Panel"]
+custom_minimum_size = Vector2(45, 16)
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_uhjek")

@@ -33,6 +33,8 @@ func _on_translation_requested(to:String = "portugol") -> void:
 		active_translation = new_screen
 		new_screen.tree_exiting.connect(_on_screen_deletion)
 		await get_tree().process_frame
+	else:
+		active_translation.reset_position()
 	var new_t : String
 	match to.to_lower():
 		"python":

@@ -15,13 +15,12 @@ var parent_container : CodeContainer
 @onready var val_while = $MarginContainer/While/args/val
 @onready var val_loop = $MarginContainer/ForLoop/args/val
 
-
 func _ready():
 	_set_line_edit_filters()
 	build_block()
 
 func build_block() -> void:
-	$Panel.modulate = block_data.color
+	self_modulate = block_data.color
 	match block_data.type:
 		block_data.Type.METHOD:
 			_build_method()
@@ -100,7 +99,7 @@ func _on_if_condition_item_selected(index):
 		val_if.text_changed.emit(str(0))
 	else: 
 		block_data.condition[0] = text
-		block_data.block_text = text
+		block_data.condition_text = text
 
 func _on_while_condition_item_selected(index):
 	var text = $MarginContainer/While/args/Condition.get_item_text(index)
@@ -112,7 +111,7 @@ func _on_while_condition_item_selected(index):
 		val_while.text_changed.emit(str(0))
 	else: 
 		block_data.condition[0] = text
-		block_data.block_text = text
+		block_data.condition_text = text
 
 func _create_new_condition(text, aux) -> String:
 	var new_condition = text
@@ -169,7 +168,10 @@ func _on_y_text_changed(new_text):
 
 func _get_drag_data(_at_position: Vector2):
 	var preview = BlockPreview.new(block_data.block_text, block_data.color)
-	#TODO fix preview text ( if, while, for )
 	set_drag_preview(preview)
-	Events.drag_block.emit(true)
+	self.hide()
 	return self
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAG_END:
+		self.show()

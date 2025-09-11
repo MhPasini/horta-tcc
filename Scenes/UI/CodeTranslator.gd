@@ -1,21 +1,26 @@
 extends Resource
 class_name CodeTranslator
 
+#colors
+const pnk = "#d47896"
+const red = "#b8545e"
+const cya = "#8bcdca"
+
 static func to_portugol(program:Array[BlockData]) -> String:
 	var code = "ALGORITMO\n\n"
 	code += "INICIO\n"
 	for block in program:
 		code += _block_to_portugol(block, 1)
-	code += "FIM\n"
+	code += _c("FIM\n", red)
 	return code
 
 static func to_python(program: Array[BlockData]) -> String:
 	var code = "# Tradução para Python\n"
-	code += "def main():\n"
+	code += _c("def ", red) + _c("main", cya) + "():\n"
 	for block in program:
 		code += _block_to_python(block, 1)
-	code += "\nif __name__ == '__main__':\n"
-	code += "    main()\n"
+	code += "\n" + _c("if", pnk) +" __name__ == '__main__':\n"
+	code += "    " + _c("main", cya) + "()\n"
 	return code
 
 static func to_c(program: Array[BlockData]) -> String:
@@ -23,40 +28,40 @@ static func to_c(program: Array[BlockData]) -> String:
 	code += "#include <stdlib.h>\n\n"
 	code += "// Tradução para C\n"
 	#code += generate_function_prototypes(program)
-	code += "int main() {\n"
+	code += "void main() {\n"
 	for block in program:
 		code += _block_to_c(block, 1)
-	code += "    return 0;\n"
+	code += ".   " + _c("return", pnk) + ";\n"
 	code += "}\n"
 	return code
 
 static func _block_to_portugol(block:BlockData, indent_level: int = 0) -> String:
 	var indent = ""
 	for i in range(indent_level):
-		indent += "	"
+		indent += ".   "
 	var code = ""
 	match block.type:
 		block.Type.METHOD:
 			code += indent + block.block_text + _method_param(block) + "\n"
 		block.Type.LOOP:
-			code += indent + "PARA i DE 1 ATÉ " + str(block.loop_count) + " FAÇA\n"
+			code += indent + _c("PARA", pnk) + " i DE 1 ATÉ " + str(block.loop_count) + _c(" FAÇA\n", pnk)
 			for child in block.child_blocks:
 				code += _block_to_portugol(child, indent_level + 1)
-			code += indent + "FIM PARA\n"
+			code += indent + _c("FIM PARA\n", pnk)
 		block.Type.WHILE:
-			code += indent + "ENQUANTO " + block.block_text + _check_cond_2(block) + " FAÇA\n"
+			code += indent + _c("ENQUANTO ", pnk) + block.condition_text + _c_con(block) + _c(" FAÇA\n", pnk)
 			for child in block.child_blocks:
 				code += _block_to_portugol(child, indent_level + 1)
-			code += indent + "FIM ENQUANTO\n"
+			code += indent + _c("FIM ENQUANTO\n", pnk)
 		block.Type.IF:
-			code += indent + "SE " + block.block_text + _check_cond_2(block) + " ENTÃO\n"
+			code += indent + _c("SE ", pnk) + block.condition_text + _c_con(block) + _c(" ENTÃO\n", pnk)
 			for child in block.child_blocks:
 				code += _block_to_portugol(child, indent_level + 1)
 			if block.else_blocks.size() > 0:
-				code += indent + "SENÃO\n"
+				code += indent + _c("SENÃO\n", pnk)
 				for child in block.else_blocks:
 					code += _block_to_portugol(child, indent_level + 1)
-			code += indent + "FIM SE\n"
+			code += indent + _c("FIM SE\n", pnk)
 		block.Type.FUNCTION:
 			code += indent + block.name + "()\n"
 	return code
@@ -70,28 +75,28 @@ static func _block_to_python(block: BlockData, indent_level: int = 0) -> String:
 		block.Type.METHOD:
 			code += indent + block.block_text + _method_param(block) + "\n"
 		block.Type.LOOP:
-			code += indent + "for i in range(" + str(block.loop_count) + "):\n"
+			code += indent + _c("for",pnk)+" i in range(" + str(block.loop_count) + "):\n"
 			if block.child_blocks.size() == 0:
 				code += indent + "    pass\n"
 			else:
 				for child in block.child_blocks:
 					code += _block_to_python(child, indent_level + 1)
 		block.Type.WHILE:
-			code += indent + "while " + block.block_text + _check_cond_2(block) + ":\n"
+			code += indent + _c("while ",pnk) + block.condition_text + _c_con(block) + ":\n"
 			if block.child_blocks.size() == 0:
 				code += indent + "    pass\n"
 			else:
 				for child in block.child_blocks:
 					code += _block_to_python(child, indent_level + 1)
 		block.Type.IF:
-			code += indent + "if " + block.block_text + _check_cond_2(block) + ":\n"
+			code += indent + _c("if ",pnk) + block.condition_text + _c_con(block) + ":\n"
 			if block.child_blocks.size() == 0:
 				code += indent + "    pass\n"
 			else:
 				for child in block.child_blocks:
 					code += _block_to_python(child, indent_level + 1)
 			if block.else_blocks.size() > 0:
-				code += indent + "else:\n"
+				code += indent + _c("else:\n", pnk)
 				for child in block.else_blocks:
 					code += _block_to_python(child, indent_level + 1)
 		block.Type.FUNCTION:
@@ -101,27 +106,27 @@ static func _block_to_python(block: BlockData, indent_level: int = 0) -> String:
 static func _block_to_c(block: BlockData, indent_level: int = 0) -> String:
 	var indent = ""
 	for i in range(indent_level):
-		indent += "    "  # C também usa 4 espaços
+		indent += ".   "  # C também usa 4 espaços
 	var code = ""
 	match block.type:
 		block.Type.METHOD:
 			code += indent + block.block_text + _method_param(block) + ";\n"
 		block.Type.LOOP:
-			code += indent + "for (int i = 0; i < " + str(block.loop_count) + "; i++) {\n"
+			code += indent + _c("for", pnk) + " (int i = 0; i < " + str(block.loop_count) + "; i++) {\n"
 			for child in block.child_blocks:
 				code += _block_to_c(child, indent_level + 1)
 			code += indent + "}\n"
 		block.Type.WHILE:
-			code += indent + "while (" + block.block_text + _check_cond_2(block) + ") {\n"
+			code += indent + _c("while ", pnk) + "(" + block.condition_text + _c_con(block) + ") {\n"
 			for child in block.child_blocks:
 				code += _block_to_c(child, indent_level + 1)
 			code += indent + "}\n"
 		block.Type.IF:
-			code += indent + "if (" + block.block_text + _check_cond_2(block) + ") {\n"
+			code += indent + _c("if ", pnk) + "(" + block.condition_text + _c_con(block) + ") {\n"
 			for child in block.child_blocks:
 				code += _block_to_c(child, indent_level + 1)
 			if block.else_blocks.size() > 0:
-				code += indent + "} else {\n"
+				code += indent + "}" + _c("else ", pnk) + "{\n"
 				for child in block.else_blocks:
 					code += _block_to_c(child, indent_level + 1)
 			code += indent + "}\n"
@@ -147,7 +152,7 @@ static func _block_to_c(block: BlockData, indent_level: int = 0) -> String:
 		#if block.else_blocks.size() > 0:
 			#extract_functions_recursive(block.else_blocks, functions_found)
 
-static func _check_cond_2(block:BlockData) -> String:
+static func _c_con(block:BlockData) -> String:
 	var cond2 = " " + str(block.condition[1]) if block.condition[1] != null else ""
 	return cond2
 
@@ -160,3 +165,6 @@ static func _method_param(block:BlockData) -> String:
 
 static func _get_param_type(type:int) -> String:
 	return BlockInfo.CODE_DATA[type]["Param"] as String
+
+static func _c(v:String, color:String) -> String:
+	return "[color=" + color + "]" + v + "[/color]"

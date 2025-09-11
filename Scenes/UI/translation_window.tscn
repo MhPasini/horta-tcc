@@ -33,6 +33,7 @@ script/source = "extends Window
 
 @onready var console = $Margins/Console
 @onready var translation_btn = $TranslationBtn
+@onready var start_position = position
 
 func _ready():
 	Events.new_translation.connect(_update_text)
@@ -46,6 +47,9 @@ func _on_close_btn_pressed():
 
 func _on_translation_btn_item_selected(index):
 	Events.request_translation.emit(translation_btn.get_item_text(index))
+
+func reset_position() -> void:
+	position = start_position
 "
 
 [sub_resource type="Theme" id="Theme_h5wt2"]
