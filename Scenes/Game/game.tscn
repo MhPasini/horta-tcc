@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=60 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="24_3gqeb"]
 [ext_resource type="Texture2D" uid="uid://theh7wyq5xk4" path="res://UI/pause.png" id="26_gqd4u"]
 [ext_resource type="Texture2D" uid="uid://cc2m1ux3flonw" path="res://UI/remove_icon_2.png" id="28_1l3pd"]
+[ext_resource type="Script" uid="uid://bvtbtorqf117e" path="res://addons/eranot.resizable/resizable.gd" id="29_d3jd4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 resource_name = "GrassTiles"
@@ -722,6 +723,28 @@ theme_override_fonts/font = ExtResource("14_7pdpw")
 text = "Limpar"
 flat = true
 
+[node name="Resizable" type="Control" parent="UI/Output"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("29_d3jd4")
+mode = 1
+border_width = 4
+min_size = Vector2(0, 88)
+max_size = Vector2(0, 270)
+active_handles = 1
+metadata/_custom_type_script = "uid://bvtbtorqf117e"
+
 [node name="RobotStats" type="Panel" parent="UI"]
 anchors_preset = 2
 anchor_top = 1.0
@@ -774,11 +797,12 @@ scroll_following = true
 
 [node name="CommandPanel" type="Panel" parent="UI"]
 z_index = -1
+custom_minimum_size = Vector2(180, 0)
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -178.0
+offset_left = -180.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("17_2lc0x")
@@ -1259,14 +1283,37 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.270588)
 
+[node name="Resizable" type="Control" parent="UI/CommandPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("29_d3jd4")
+mode = 1
+border_width = 4
+min_size = Vector2(180, 0)
+max_size = Vector2(220, 0)
+clamp_to_viewport = true
+active_handles = 4
+metadata/_custom_type_script = "uid://bvtbtorqf117e"
+
 [node name="ResetBtn" type="Button" parent="UI"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -78.5
-offset_top = 10.0
-offset_right = -21.5
-offset_bottom = 24.0
+offset_left = -312.5
+offset_top = 12.0
+offset_right = -255.5
+offset_bottom = 26.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -1307,7 +1354,7 @@ offset_top = -14.0
 offset_right = -15.0
 offset_bottom = 12.0
 flat = true
-color = Color(0.545098, 0.803922, 0.792157, 1)
+color = Color(0.870588, 0.8, 0.45098, 1)
 
 [node name="DragLimit" type="Control" parent="."]
 z_index = -10
