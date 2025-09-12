@@ -16,6 +16,8 @@ var storage : Dictionary = {
 	"Cebola": 0,
 	"Rabanete": 0,
 }
+var stats : Array
+# [pos x, pos y, inv_left, inv_max, slot_seed, is_empty, is_dry, is_grown]
 
 @export var offset : Vector2 = Vector2()
 @export var move_speed : float = 50.0
@@ -25,14 +27,14 @@ func _ready():
 	Globals.robot_ref = self
 	set_process(false)
 	state = STATE.Idle
-	conect_signals()
+	connect_signals()
 
 func _process(delta):
 	if state == STATE.Moving:
 		position = position.move_toward(target_position, move_speed * delta)
 		check_position()
 
-func conect_signals() -> void:
+func connect_signals() -> void:
 	Events.test_move.connect(move_to)
 	Events.test_move_origin.connect(move_to_origin)
 	Events.test_move_next.connect(move_to_next)
@@ -45,7 +47,7 @@ func conect_signals() -> void:
 	Events.move_origin.connect(move_to_origin)
 	Events.move_next.connect(move_to_next)
 	Events.move_previous.connect(move_to_previous)
-	Events.plant_crop.connect(add_crop)
+	Events.add_crop.connect(add_crop)
 	Events.water_crop.connect(water_crop)
 	Events.harvest_crop.connect(harvest_crop)
 
@@ -191,12 +193,12 @@ func pos_y_menor(y:int = 0) -> bool:
 
 func pos_y_diferente(y:int = 0) -> bool:
 	return grid_pos.y != y
+
 #endregion
 
 func add_crop(crop:String) -> void:
 	if get_storage_left() > 0:
 		storage[crop] += 1
-	#TODO atualizar logs
 
 func check_position() -> void:
 	if position == target_position:
@@ -205,12 +207,15 @@ func check_position() -> void:
 		Events.task_completed.emit()
 
 func get_storage_left() -> int:
+	var storage_left = storage_cap - get_storage()
+	storage_full = (storage_left <= 0)
+	return storage_left
+
+func get_storage() -> int:
 	var cargo : int = 0
 	for value in storage.values():
 		cargo += value
-	var storage_left = storage_cap - cargo
-	storage_full = (storage_left <= 0)
-	return storage_left
+	return cargo
 
 func get_next_cell() -> Vector2i:
 	var next = Vector2i()
@@ -236,5 +241,16 @@ func get_previous_cell() -> Vector2i:
 		previous.y = farm_size.y - 1
 	return previous
 
+func get_seed_type() -> String:
+	var slot = farm.grid.get_cell_value(grid_pos) as FarmSlot
+	return slot.get_crop_name()
+
 func send_log_message(msg:String, type:String = Globals.MSG_TYPE.normal) -> void:
 	Events.console_message.emit(type + msg)
+
+#func send_stat_update() -> void:
+	#stats = [
+		#grid_pos.x, grid_pos.y, get_storage(), storage_cap,
+		#get_seed_type(), lote_vazio(), lote_seco(), planta_ok(),
+		#outside_grid]
+	#Events.update_stat_text.emit(stats)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq8i5p40p7o7r"]
+
+[ext_resource type="Script" uid="uid://dm36g3kwl52u2" path="res://Scenes/UI/code_container.gd" id="1_xlsbr"]
+
+[node name="CodeTab" type="ScrollContainer"]
+vertical_scroll_mode = 2
+metadata/_tab_index = 0
+
+[node name="CodeContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_xlsbr")
+
+[node name="List" type="VBoxContainer" parent="CodeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1

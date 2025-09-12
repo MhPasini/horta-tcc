@@ -62,10 +62,23 @@ func show_drop_indicator(drop_position: Vector2) -> void:
 	drop_indicator.visible = true
 	list.move_child(drop_indicator, drop_index)
 
+func add_code_block(block:CodeBlock) -> void:
+	block.reparent(self.list)
+	block.parent_container.emit_update_signal()
+	block.parent_container = self
+	emit_update_signal()
+
+func create_code_block(data:BlockData, at_index:int = 0) -> void:
+	var block_node = CODE_BLOCK.instantiate()
+	block_node.block_data = data
+	list.add_child(block_node)
+	block_node.parent_container = self
+	list.move_child(block_node, at_index)
+
 func remove_code_block(block:CodeBlock) -> void:
 	block.queue_free()
 	await get_tree().process_frame
-	code_list_updated.emit(self)
+	emit_update_signal()
 
 func clear_code_blocks() -> void:
 	for child in $List.get_children():

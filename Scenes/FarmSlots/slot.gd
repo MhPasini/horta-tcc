@@ -55,7 +55,7 @@ func plant_crop(seed_type:int) -> LogResult:
 	if is_empty:
 		curr_crop = seed_type
 		curr_crop_state = CROP_STATE.Seed
-		result.msg = "Semente de %s plantada no canteiro: %s." % [CROP_DATA[seed_type][0], grid_pos]
+		result.msg = "Semente de %s plantada no canteiro: %s." % [get_crop_name(), grid_pos]
 		result.type = Globals.MSG_TYPE.normal
 		#TODO animação de plantar a semente
 	else:
@@ -85,9 +85,9 @@ func harvest_crop() -> LogResult:
 		reset_crop()
 		#TODO animação de remover planta
 	else:
-		result.msg = "%s coletado(a) no canteiro: %s." % [CROP_DATA[curr_crop][0], grid_pos]
+		result.msg = "%s coletado(a) no canteiro: %s." % [get_crop_name(), grid_pos]
 		result.type = Globals.MSG_TYPE.normal
-		Events.add_crop.emit(CROP_DATA[curr_crop][0]) # Cenoura/Cebola/Rabanete
+		Events.add_crop.emit(get_crop_name()) # Cenoura/Cebola/Rabanete
 		reset_crop()
 		#TODO animação de colher planta
 	return result
@@ -103,6 +103,9 @@ func grow_crop(delta:float):
 	water_level -= grow_rate * delta
 	if not (is_empty or is_grown):
 		grow_level += grow_rate * delta
+
+func get_crop_name() -> String:
+	return CROP_DATA[curr_crop][0]
 
 #region UPDATE SPRITES
 func update_dirt_sprite() -> void:

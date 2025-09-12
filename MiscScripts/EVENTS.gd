@@ -16,6 +16,7 @@ signal move_origin
 signal move_next
 signal move_previous
 signal plant_crop(crop:String)
+signal add_crop(crop:String)
 signal water_crop
 signal harvest_crop
 signal task_completed
@@ -25,7 +26,9 @@ signal task_completed
 signal update_info_text(info:String)
 signal new_translation(translation:String)
 signal request_translation(to:String)
+signal create_new_function(block:CodeBlock)
 signal stop_execution
 #endregion
 
 signal console_message(msg: String)
+#signal update_stat_text(stats:Array)

@@ -54,9 +54,11 @@ static func if_else(condition_name:String, if_blocks:Array[BlockData] = [], else
 	block.else_blocks = else_b
 	return block
 
-static func function(blocks:Array[BlockData] = [], func_name:String = "Função 1") -> BlockData:
+static func function(s_block:BlockData = null, func_name:String = "F1") -> BlockData:
 	var block = BlockData.new()
 	block.name = func_name
 	block.type = Type.FUNCTION
-	block.child_blocks = blocks
+	block.block_text = func_name + "()"
+	block.child_blocks.append(s_block)
+	block.color = Color("#b685d1")
 	return block

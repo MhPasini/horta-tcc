@@ -11,14 +11,8 @@ func _ready():
 	robot.position = start_position
 	robot.rest_position = start_position
 	robot.farm = farm
+	#robot.send_stat_update()
 	Events.request_translation.connect(_on_translation_requested)
-	set_mouse_cursors()
-
-func set_mouse_cursors() -> void:
-	Input.set_custom_mouse_cursor(load("res://UI/Cursors/hand_open.png"), Input.CURSOR_POINTING_HAND, Vector2(6, 6))
-	Input.set_custom_mouse_cursor(load("res://UI/Cursors/hand_closed.png"), Input.CURSOR_DRAG, Vector2(6, 6))
-	Input.set_custom_mouse_cursor(load("res://UI/Cursors/ok.png"), Input.CURSOR_CAN_DROP, Vector2(6, 6))
-	Input.set_custom_mouse_cursor(load("res://UI/Cursors/hand_closed.png"), Input.CURSOR_FORBIDDEN, Vector2(6, 6))
 
 func _on_reset_btn_pressed():
 	get_tree().reload_current_scene()

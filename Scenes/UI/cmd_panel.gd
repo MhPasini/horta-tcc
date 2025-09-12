@@ -1,5 +1,7 @@
 extends Control
 
+const code_tab = preload("res://Scenes/UI/code_tab.tscn")
+
 var robot : RobotClass
 var program : Array[BlockData] = []
 var stop_requested : bool = false
@@ -12,9 +14,13 @@ enum {PLAYING, IDLE}
 
 func _ready():
 	robot = Globals.robot_ref
-	Events.update_info_text.connect(_update_info_text)
-	code_container.code_list_updated.connect(_on_code_list_updated)
+	connect_signals()
 	set_play_pause_visibility(false)
+
+func connect_signals() -> void:
+	Events.update_info_text.connect(_update_info_text)
+	Events.create_new_function.connect(_on_create_new_function)
+	code_container.code_list_updated.connect(_on_code_list_updated)
 
 func run_program() -> void:
 	var _ok : bool = true
@@ -42,6 +48,7 @@ func _execute(block:BlockData) -> bool:
 				_ok = await robot.call(block.name, block.plant_seed)
 			else :
 				_ok = await robot.call(block.name)
+			#robot.send_stat_update()
 			print("Cmd %s: " % block.name, _ok)
 		block.Type.LOOP:
 			for i in range(block.loop_count):
@@ -85,6 +92,20 @@ func clear_program() -> void:
 	code_container.clear_code_blocks()
 	$Tooltip.show()
 
+func _on_create_new_function(block:CodeBlock) -> void:
+	var new_tab = code_tab.instantiate()
+	var tab_count = $CodePanel/CodeTabs.get_child_count()
+	var list_index = block.get_index()
+	new_tab.name = "F%d" % tab_count
+	$CodePanel/CodeTabs.add_child(new_tab)
+	var container = new_tab.get_child(0) as CodeContainer
+	container.add_code_block(block)
+	var f_data = BlockData.function(block.block_data, new_tab.name)
+	code_container.create_code_block(f_data, list_index)
+	#TODO criar side_block que aparece só quando esta no main
+	#TODO conectar sinais para atualizar o BlockData quando a função for editada
+	#TODO deletar função e afins quando função ficar vazia.
+
 func set_play_pause_visibility(playing:bool) -> void:
 	$BtnsArea/Play.visible = not playing
 	$BtnsArea/Stop.visible = playing
@@ -118,3 +139,6 @@ func _on_clear_pressed():
 func _on_stop_pressed():
 	robot.send_log_message("[color=Orange]*Parada requisitada*[/color]")
 	stop_requested = true
+
+func _on_code_tabs_tab_changed(tab):
+	Globals.active_code_tab = tab
