@@ -1,6 +1,7 @@
 extends Control
 
 const code_tab = preload("res://Scenes/UI/code_tab.tscn")
+const func_side_block = preload("res://Scenes/Blocks/func_block.tscn")
 
 var robot : RobotClass
 var program : Array[BlockData] = []
@@ -16,6 +17,7 @@ func _ready():
 	robot = Globals.robot_ref
 	connect_signals()
 	set_play_pause_visibility(false)
+	Globals.cmd_panel = self
 
 func connect_signals() -> void:
 	Events.update_info_text.connect(_update_info_text)
@@ -77,6 +79,7 @@ func _execute(block:BlockData) -> bool:
 		block.Type.FUNCTION:
 			for child in block.child_blocks:
 				_ok = await _execute(child)
+				print("Func %s: " % block.name, _ok)
 	return _ok
 
 func _on_code_list_updated(_code_container) -> void:
@@ -96,15 +99,20 @@ func _on_create_new_function(block:CodeBlock) -> void:
 	var new_tab = code_tab.instantiate()
 	var tab_count = $CodePanel/CodeTabs.get_child_count()
 	var list_index = block.get_index()
-	new_tab.name = "F%d" % tab_count
+	var tab_name = "F%d" % tab_count
+	new_tab.name = tab_name
 	$CodePanel/CodeTabs.add_child(new_tab)
 	var container = new_tab.get_child(0) as CodeContainer
 	container.add_code_block(block)
-	var f_data = BlockData.function(block.block_data, new_tab.name)
-	code_container.create_code_block(f_data, list_index)
-	#TODO criar side_block que aparece só quando esta no main
-	#TODO conectar sinais para atualizar o BlockData quando a função for editada
-	#TODO deletar função e afins quando função ficar vazia.
+	container.func_container = true
+	new_tab.add_to_group(tab_name)
+	var f_data = BlockData.function(block.block_data, tab_name)
+	f_data.func_container = container
+	var _f_block = code_container.create_code_block(f_data, list_index)
+	var f_sb = func_side_block.instantiate()
+	f_sb.data = f_data
+	f_sb.add_to_group(tab_name)
+	$BlocksPanel/VBox/ScrollContainer/Blocks.add_child(f_sb)
 
 func set_play_pause_visibility(playing:bool) -> void:
 	$BtnsArea/Play.visible = not playing
@@ -142,3 +150,4 @@ func _on_stop_pressed():
 
 func _on_code_tabs_tab_changed(tab):
 	Globals.active_code_tab = tab
+	Events.code_tab_changed.emit(tab)

@@ -11,4 +11,5 @@ func _init(b_text: String, b_color: Color):
 	add_theme_stylebox_override("normal", b_style)
 	add_theme_color_override("font_color", font_color)
 	get_theme_stylebox("normal").set("bg_color", b_color)
+	custom_minimum_size = Vector2(50.0, 16.0)
 	text = b_text

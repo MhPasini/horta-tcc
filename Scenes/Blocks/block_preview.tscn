@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://4wnqm41ly2sg" path="res://Scenes/Blocks/block_preview.gd" id="2_wlh7i"]
 
 [node name="BlockPreview" type="Label"]
-custom_minimum_size = Vector2(36, 16)
+custom_minimum_size = Vector2(50, 16)
 offset_left = 3.0
-offset_right = 48.0
+offset_right = 53.0
 offset_bottom = 16.0
 theme_override_colors/font_color = Color(0.341176, 0.341176, 0.341176, 1)
 theme_override_fonts/font = ExtResource("2_edtyf")

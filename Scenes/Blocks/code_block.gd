@@ -71,6 +71,8 @@ func _build_if_else() -> void:
 func _build_function() -> void:
 	methods.show()
 	$MarginContainer/Methods/Name.text = block_data.name
+	block_data.func_container.code_list_updated.connect(_on_child_list_updated)
+	add_to_group(block_data.name)
 
 func _on_else_btn_toggled(toggled_on):
 	%ElseChilds.visible = toggled_on

@@ -20,6 +20,7 @@ const block_font_color = Color("575757")
 
 var robot_ref : RobotClass
 var active_code_tab : int = 0
+var cmd_panel
 
 func _ready():
 	set_mouse_cursors()

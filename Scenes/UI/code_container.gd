@@ -4,6 +4,7 @@ class_name CodeContainer
 const CODE_BLOCK = preload("res://Scenes/Blocks/code_block.tscn")
 const DROP_INDICATOR = preload("res://Scenes/Blocks/drop_indicator.tscn")
 var drop_indicator
+var func_container = false
 
 @onready var list = $List
 signal code_list_updated(container:CodeContainer)
@@ -11,6 +12,8 @@ signal code_list_updated(container:CodeContainer)
 func _ready():
 	drop_indicator = DROP_INDICATOR.instantiate()
 	list.add_child(drop_indicator)
+	#list.child_entered_tree.connect(_on_list_changed)
+	list.child_exiting_tree.connect(_on_list_changed)
 	drop_indicator.hide()
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
@@ -25,8 +28,8 @@ func _drop_data(_at_position: Vector2, data: Variant):
 	if data is BlockData:
 		block_node = CODE_BLOCK.instantiate()
 		block_node.block_data = data
-		list.add_child(block_node)
 		block_node.parent_container = self
+		list.add_child(block_node)
 	elif data is CodeBlock:
 		block_node = data
 		block_node.reparent(self.list)
@@ -57,6 +60,10 @@ func get_code_blocks() -> Array:
 		block_data.append(block.block_data)
 	return block_data
 
+func remove_func_group() -> void:
+	var group_name = get_parent().get_groups().pop_back()
+	get_tree().call_group(group_name, "queue_free")
+
 func show_drop_indicator(drop_position: Vector2) -> void:
 	var drop_index = _get_drop_index(drop_position)
 	drop_indicator.visible = true
@@ -68,12 +75,14 @@ func add_code_block(block:CodeBlock) -> void:
 	block.parent_container = self
 	emit_update_signal()
 
-func create_code_block(data:BlockData, at_index:int = 0) -> void:
+func create_code_block(data:BlockData, at_index:int = 0) -> CodeBlock:
 	var block_node = CODE_BLOCK.instantiate()
 	block_node.block_data = data
-	list.add_child(block_node)
 	block_node.parent_container = self
+	list.add_child(block_node)
 	list.move_child(block_node, at_index)
+	emit_update_signal()
+	return block_node
 
 func remove_code_block(block:CodeBlock) -> void:
 	block.queue_free()
@@ -93,3 +102,8 @@ func _notification(what: int) -> void:
 
 func emit_update_signal() -> void:
 	code_list_updated.emit(self)
+
+func _on_list_changed(_node) -> void:
+	if list.get_child_count() <= 2 and func_container:
+		print("Container deleted: ", self.name)
+		remove_func_group()

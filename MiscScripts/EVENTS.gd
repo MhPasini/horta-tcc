@@ -27,6 +27,7 @@ signal update_info_text(info:String)
 signal new_translation(translation:String)
 signal request_translation(to:String)
 signal create_new_function(block:CodeBlock)
+signal code_tab_changed(tab:int)
 signal stop_execution
 #endregion
 

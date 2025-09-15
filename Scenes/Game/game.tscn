@@ -467,7 +467,6 @@ func _can_drop_data(_at_position, data:Variant):
 func _drop_data(_at_position, data:Variant):
 	if data is CodeBlock:
 		Events.create_new_function.emit(data)
-		#add function block to main tab
 
 func _on_mouse_entered() -> void:
 	Input.set_custom_mouse_cursor(load(\"res://UI/Cursors/save.png\"), Input.CURSOR_CAN_DROP, Vector2(6, 6))

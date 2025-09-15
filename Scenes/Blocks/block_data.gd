@@ -21,6 +21,7 @@ enum Type {
 @export var pos : Vector2i = Vector2i.ZERO
 @export var color : Color = Color("9ec9d9")
 @export var block_text : String = ""
+var func_container : CodeContainer
 
 static func method(method_name:String, text:String) -> BlockData:
 	var block = BlockData.new()

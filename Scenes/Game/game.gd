@@ -18,6 +18,7 @@ func _on_reset_btn_pressed():
 	get_tree().reload_current_scene()
 
 func _on_translation_btn_pressed():
+	Globals.cmd_panel.update_program()
 	Events.request_translation.emit("portugol")
 
 func _on_translation_requested(to:String = "portugol") -> void:
