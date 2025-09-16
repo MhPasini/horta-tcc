@@ -75,14 +75,13 @@ func add_code_block(block:CodeBlock) -> void:
 	block.parent_container = self
 	emit_update_signal()
 
-func create_code_block(data:BlockData, at_index:int = 0) -> CodeBlock:
+func create_code_block(data:BlockData, at_index:int = 0) -> void:
 	var block_node = CODE_BLOCK.instantiate()
 	block_node.block_data = data
 	block_node.parent_container = self
 	list.add_child(block_node)
 	list.move_child(block_node, at_index)
 	emit_update_signal()
-	return block_node
 
 func remove_code_block(block:CodeBlock) -> void:
 	block.queue_free()

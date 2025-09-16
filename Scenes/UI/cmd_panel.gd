@@ -98,6 +98,7 @@ func clear_program() -> void:
 func _on_create_new_function(block:CodeBlock) -> void:
 	var new_tab = code_tab.instantiate()
 	var tab_count = $CodePanel/CodeTabs.get_child_count()
+	var old_container = block.parent_container
 	var list_index = block.get_index()
 	var tab_name = "F%d" % tab_count
 	new_tab.name = tab_name
@@ -108,7 +109,7 @@ func _on_create_new_function(block:CodeBlock) -> void:
 	new_tab.add_to_group(tab_name)
 	var f_data = BlockData.function(block.block_data, tab_name)
 	f_data.func_container = container
-	var _f_block = code_container.create_code_block(f_data, list_index)
+	old_container.create_code_block(f_data, list_index)
 	var f_sb = func_side_block.instantiate()
 	f_sb.data = f_data
 	f_sb.add_to_group(tab_name)

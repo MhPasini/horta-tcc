@@ -173,6 +173,7 @@ static func generate_function_prototypes(program: Array[BlockData], lng = "portu
 				prototypes += _c("FUNÇÃO ", red) + _c(func_name, cya) + "()\n"
 				for child in functions_found[func_name].child_blocks:
 					prototypes += _block_to_portugol(child, 1)
+				prototypes += _c("FIM FUNÇÃO\n", red)
 			"python":
 				prototypes += _c("def ", red) + _c(func_name, cya) + "():\n"
 				for child in functions_found[func_name].child_blocks:
@@ -191,6 +192,10 @@ static func extract_functions(blocks: Array[BlockData], functions_found: Diction
 		if block.type == block.Type.FUNCTION:
 			if block.name not in functions_found:
 				functions_found[block.name] = block
+		if block.child_blocks.size() > 0:
+			extract_functions(block.child_blocks, functions_found)
+		if block.else_blocks.size() > 0:
+			extract_functions(block.else_blocks, functions_found)
 
 static func _c_con(block:BlockData) -> String:
 	var cond2 = " " + str(block.condition[1]) if block.condition[1] != null else ""
