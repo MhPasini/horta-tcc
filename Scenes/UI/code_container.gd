@@ -5,6 +5,7 @@ const CODE_BLOCK = preload("res://Scenes/Blocks/code_block.tscn")
 const DROP_INDICATOR = preload("res://Scenes/Blocks/drop_indicator.tscn")
 var drop_indicator
 var func_container = false
+var deleting = false
 
 @onready var list = $List
 signal code_list_updated(container:CodeContainer)
@@ -12,8 +13,7 @@ signal code_list_updated(container:CodeContainer)
 func _ready():
 	drop_indicator = DROP_INDICATOR.instantiate()
 	list.add_child(drop_indicator)
-	#list.child_entered_tree.connect(_on_list_changed)
-	list.child_exiting_tree.connect(_on_list_changed)
+	list.child_order_changed.connect(_on_list_changed)
 	drop_indicator.hide()
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
@@ -63,6 +63,9 @@ func get_code_blocks() -> Array:
 func remove_func_group() -> void:
 	var group_name = get_parent().get_groups().pop_back()
 	get_tree().call_group(group_name, "queue_free")
+	var index = Globals.func_list.find(group_name)
+	if index != -1:
+		Globals.func_list.remove_at(index)
 
 func show_drop_indicator(drop_position: Vector2) -> void:
 	var drop_index = _get_drop_index(drop_position)
@@ -102,7 +105,8 @@ func _notification(what: int) -> void:
 func emit_update_signal() -> void:
 	code_list_updated.emit(self)
 
-func _on_list_changed(_node) -> void:
-	if list.get_child_count() <= 2 and func_container:
+func _on_list_changed() -> void:
+	if list.get_child_count() <= 1 and func_container and not deleting:
 		print("Container deleted: ", self.name)
+		deleting = true
 		remove_func_group()

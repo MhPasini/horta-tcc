@@ -1,0 +1,334 @@
+Visão geral da progressão
+
+Tier A — Introdução (Fases 1–4): familiarizar com mover e sequência simples.
+
+Tier B — Movimento & Sequência (5–8): introduzir navegação relativa (próximo/anterior) e objetivos com múltiplos passos.
+
+Tier C — Plantio e Estados (9–12): trabalhar estado do canteiro (semente → planta → maduro; seco/úmido).
+
+Tier D — Laços (13–16): introduzir loop_for e while para repetição.
+
+Tier E — Condicionais (17–20): uso de if_else baseado no estado do canteiro.
+
+Tier F — Combinações & Funções (21–26): juntar laços + condicionais, introduzir rotina/função (opcional).
+
+Tier G — Desafios Avançados / Otimização (27–30): fases de eficiência, obstáculos, limites de blocos e sandbox final.
+
+Fases detalhadas
+
+Tier A — Introdução
+
+Fase 1 — Olá, robô
+
+Objetivo: mover o robô do início até um canteiro alvo.
+
+Blocos liberados: mover_origem, mover_para_xy.
+
+Conceito alvo: sequência/ordem de comandos.
+
+Dica: a ordem importa — mover antes de interagir.
+
+Solução mínima:
+
+mover_origem
+mover_para_xy(1,2)
+
+
+Fase 2 — Plantio simples
+
+Objetivo: plantar 1 cenoura no canteiro X.
+
+Blocos liberados: mover_origem, mover_para_xy, plantar(cenoura).
+
+Conceito alvo: sequência + efeito de ação no ambiente.
+
+Solução mínima:
+
+mover_origem
+mover_para_xy(0,1)
+plantar(cenoura)
+
+
+Fase 3 — Ir e voltar
+
+Objetivo: plantar em um canteiro e retornar à origem.
+
+Blocos liberados: mover_origem, mover_para_xy, plantar(cenoura).
+
+Conceito alvo: sequência e objetivo composto.
+
+Solução mínima:
+
+mover_origem
+mover_para_xy(2,0)
+plantar(cebola)
+mover_origem
+
+
+Fase 4 — Introdução à falha
+
+Objetivo: tentar colher num canteiro vazio — mostrar feedback de erro.
+
+Blocos liberados: mover_para_xy, colher.
+
+Conceito alvo: entender feedback de falha / validação.
+
+Solução mínima (esperada pelo jogador): perceber que colher sem planta não funciona.
+
+Tier B — Movimento & Sequência relativa
+
+Fase 5 — Caminhar pela linha
+
+Objetivo: mover do início até o final de uma linha (usar movimentos relativos).
+
+Blocos liberados: mover_origem, mover_proximo.
+
+Conceito alvo: movimentos relativos repetidos (noções de iteração manual).
+
+Solução mínima: (arrastar mover_proximo repetidamente)
+
+mover_origem
+mover_proximo
+mover_proximo
+mover_proximo
+
+
+Fase 6 — Plantar em 3 canteiros da mesma linha
+
+Objetivo: plantar cenouras em 3 canteiros consecutivos.
+
+Blocos liberados: mover_origem, mover_proximo, plantar(cenoura).
+
+Conceito alvo: sequência repetida — prepara para loops.
+
+Solução mínima: repetir mover_proximo + plantar três vezes manualmente.
+
+Fase 7 — Voltar (mover_anterior)
+
+Objetivo: percorrer 3 canteiros, plantar, e voltar ao início.
+
+Blocos liberados: mover_proximo, mover_anterior, plantar.
+
+Conceito alvo: navegação bidirecional.
+
+Fase 8 — Caminho até coordenada
+
+Objetivo: mover até (linha,coluna) específica usando mover_para_xy.
+
+Blocos liberados: mover_para_xy, mover_proximo — comparar ambas estratégias.
+
+Conceito alvo: escolher abordagem (direto vs passo a passo).
+
+Tier C — Plantio, Crescimento e Estados
+
+Fase 9 — Regar uma planta
+
+Objetivo: plantar e regar para que cresça.
+
+Blocos liberados: plantar, regar.
+
+Conceito alvo: efeito de estado (vazio → semente → planta).
+
+Solução mínima:
+
+mover_para_xy(1,1)
+plantar(cenoura)
+regar()
+
+
+Fase 10 — Crescer com múltiplas regas
+
+Objetivo: plantar e dar N regas para amadurecer.
+
+Blocos liberados: plantar, regar, (possível loop_for desabilitado inicialmente).
+
+Conceito alvo: contagem de ações repetidas (preparação para laço).
+
+Fase 11 — Regar canteiros secos
+
+Objetivo: regar 3 canteiros marcados como “seco”.
+
+Blocos liberados: mover_proximo, regar, mover_origem.
+
+Conceito alvo: aplicar ação em série; prepara condicionais.
+
+Fase 12 — Colher quando maduro
+
+Objetivo: plantar, esperar o crescimento (simulação discreta) e colher quando maduro.
+
+Blocos liberados: plantar, regar, colher.
+
+Conceito alvo: temporização/estado e verificação de sucesso ao final.
+
+Tier D — Introdução a Laços (loop_for e while)
+
+Fase 13 — Repetir: loop_for básico
+
+Objetivo: usar loop_for(3) para plantar em 3 canteiros.
+
+Blocos liberados: loop_for(n), mover_proximo, plantar.
+
+Conceito alvo: economia de código com loop_for.
+
+Solução mínima:
+
+mover_origem
+loop_for(3):
+  plantar(cenoura)
+  mover_proximo
+
+
+Fase 14 — Repetir rega por X vezes
+
+Objetivo: regar o mesmo canteiro 5 vezes com loop_for(5).
+
+Conceito alvo: contador fixo.
+
+Fase 15 — while com condição simples
+
+Objetivo: regar um canteiro até que não esteja seco (while(canteiro_seco) regar()).
+
+Blocos liberados: while(cond), regar, condição canteiro_seco.
+
+Conceito alvo: laço baseado em condição dinâmica.
+
+Fase 16 — Loop + movimento
+
+Objetivo: percorrer uma linha regando todos os canteiros até o final usando while(not fim_de_linha).
+
+Conceito alvo: combinar controle de fluxo e movimento.
+
+Tier E — Condicionais (if_else)
+
+Fase 17 — If simples: regar se seco
+
+Objetivo: para um canteiro específico: if (seco) regar.
+
+Blocos liberados: if_else, regar, condição canteiro_seco.
+
+Conceito alvo: decisão baseada em estado.
+
+Solução mínima:
+
+mover_para_xy(0,2)
+if_else(canteiro_seco):
+  regar()
+
+
+Fase 18 — If/Else com ação alternativa
+
+Objetivo: se maduro colher, senão regar.
+
+Blocos liberados: if_else, colher, regar, condição vegetal_maduro.
+
+Conceito alvo: caminhos alternativos.
+
+Fase 19 — Condicional dentro de loop
+
+Objetivo: percorrer 5 canteiros e colher apenas os maduros.
+
+Blocos liberados: loop_for, mover_proximo, if_else, colher.
+
+Conceito alvo: combinar iteração e decisão.
+
+Solução mínima:
+
+mover_origem
+loop_for(5):
+  if_else(vegetal_maduro):
+	colher()
+  mover_proximo
+
+
+Fase 20 — Enquanto: regar somente enquanto seco
+
+Objetivo: para cada canteiro em uma linha, while (canteiro_seco) regar() (e avançar).
+
+Conceito alvo: comportamento responsivo.
+
+Tier F — Funções / Procedimentos & Combinações
+
+O PDF menciona funções; seus blocos listados não tinham um bloco def explícito, mas recomendo incluir um bloco de função/procedimento opcional aqui (ex.: rotina_plantar_regar) — se não quiser, estas fases podem forçar reuso via copiar/colar.
+
+Fase 21 — Criar uma rotina “plantar_e_regar” (opcional)
+
+Objetivo: criar uma função que planta e rega e chamá-la 3 vezes.
+
+Blocos liberados: bloco função (opcional), loop_for.
+
+Conceito alvo: abstração e reutilização.
+
+Fase 22 — Otimização com função
+
+Objetivo: usar a função para reduzir número de blocos e resolver o objetivo.
+
+Métrica: comparar número de blocos/usos com solução sem função.
+
+Fase 23 — Mistura: loop + if_else + função
+
+Objetivo: percorrer a horta; se canteiro vazio chamar plantar_e_regar(), se maduro colher.
+
+Conceito alvo: fluxo realista e design de rotina.
+
+Fase 24 — Limite de ações (gestão)
+
+Objetivo: com um recurso limitado (ex.: água = 5), maximizar colheitas.
+
+Blocos liberados: todos.
+
+Conceito alvo: pensar em otimização/condicionais e priorização.
+
+Fase 25 — Matrizes e coordenadas
+
+Objetivo: usar mover_para_xy(i,j) em loops aninhados para varrer a horta (linha x coluna).
+
+Conceito alvo: estrutura de dados (matriz) e iteração aninhada.
+
+Solução mínima:
+
+for linha in [0..N]:
+  for coluna in [0..M]:
+	mover_para_xy(linha,coluna)
+	if_else(vegetal_maduro): colher()
+
+Tier G — Desafios Avançados / Otimização / Sandbox
+
+Fase 26 — Obstáculos no caminho
+
+Objetivo: navegar driblando blocos vazios que impedem movimento; solução exige mover_proximo/mover_anterior estrategicamente.
+
+Conceito alvo: planejamento de caminho.
+
+Fase 27 — Tempo e concorrência
+
+Objetivo: algumas plantas crescem mais rápido; colher antes que estraguem (introduz noções de prioridade).
+
+Conceito alvo: temporização, trade-offs.
+
+Fase 28 — Desafio de eficiência
+
+Objetivo: cumprir objetivo com menos de X blocos ou em menos de T passos.
+
+Métrica: estrelas ou medalhas por eficiência.
+
+Fase 29 — Problema aberto (puzzle combinado)
+
+Objetivo: múltiplos objetivos (plantar 6 cenouras, colher 3 tomates maduros e regar todos os canteiros secos), uso livre de todos os blocos.
+
+Conceito alvo: síntese de todos os conceitos.
+
+Fase 30 — Sandbox / Avaliação Final
+
+Objetivo: criar um programa que automatize a horta para um turno inteiro (meta definida: produzir X itens). Player pode usar funções, loops e condicionais.
+
+Conceito alvo: avaliação de proficiência e criatividade.
+
+Avaliação e feedback
+
+Para cada fase recomendo avaliar por três eixos:
+
+Correto / Completo — alcançou os objetivos da fase? (sim/não)
+
+Eficiência — número de blocos ou passos usados (comparar com solução ideal).
+
+Uso de conceitos — foram usados os blocos esperados (ex.: loop_for quando apropriado; if_else etc.)?

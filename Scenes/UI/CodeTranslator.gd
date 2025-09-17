@@ -29,9 +29,7 @@ static func to_python(program: Array[BlockData]) -> String:
 	return code
 
 static func to_c(program: Array[BlockData]) -> String:
-	var code = "#include <stdio.h>\n"
-	code += "#include <stdlib.h>\n\n"
-	code += "// Tradução para C\n"
+	var code = "// Tradução para C\n"
 	code += generate_function_prototypes(program, "c")
 	code += _c("void", red) + _c(" main", cya) +"() {\n"
 	for block in program:

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddhip8c6gsyfr"]
+
+[ext_resource type="Script" uid="uid://bp4ujg61rx28m" path="res://Scenes/UI/objective.gd" id="1_4btpq"]
+[ext_resource type="Texture2D" uid="uid://bbihctswowu5x" path="res://UI/check_f.png" id="1_qa0hg"]
+[ext_resource type="FontVariation" uid="uid://blsb1kuml66jh" path="res://Fonts/tiny_variation.tres" id="2_4btpq"]
+[ext_resource type="Texture2D" uid="uid://bryrj4jeh5n4j" path="res://UI/check_t.png" id="3_8n4fu"]
+
+[node name="Objective" type="HBoxContainer"]
+script = ExtResource("1_4btpq")
+check_icons = Array[CompressedTexture2D]([ExtResource("1_qa0hg"), ExtResource("3_8n4fu")])
+
+[node name="Check" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+texture = ExtResource("1_qa0hg")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4btpq")
+text = "Mover o robô para pos. x, y"
+
+[node name="ProgressLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4btpq")
+text = "(0/3)"

@@ -97,10 +97,9 @@ func clear_program() -> void:
 
 func _on_create_new_function(block:CodeBlock) -> void:
 	var new_tab = code_tab.instantiate()
-	var tab_count = $CodePanel/CodeTabs.get_child_count()
 	var old_container = block.parent_container
 	var list_index = block.get_index()
-	var tab_name = "F%d" % tab_count
+	var tab_name = get_valid_name()
 	new_tab.name = tab_name
 	$CodePanel/CodeTabs.add_child(new_tab)
 	var container = new_tab.get_child(0) as CodeContainer
@@ -128,6 +127,17 @@ func _check_condition(condition:Array) -> bool:
 	else:
 		print("Condição não encontrada: ", condition)
 		return false
+
+func get_valid_name() -> String:
+	var counter = 1
+	var valid_name = ""
+	while true:
+		valid_name = "F%d" % counter
+		if not Globals.func_list.has(valid_name):
+			break
+		counter += 1
+	Globals.func_list.append(valid_name)
+	return valid_name
 
 func _update_info_text(new_info:String) -> void:
 	info_text.text = new_info

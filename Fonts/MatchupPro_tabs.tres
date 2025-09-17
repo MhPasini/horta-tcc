@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://by0ta8qasx0nw"]
+
+[ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="1_fo55c"]
+
+[resource]
+base_font = ExtResource("1_fo55c")
+spacing_top = -3
+spacing_bottom = -1
