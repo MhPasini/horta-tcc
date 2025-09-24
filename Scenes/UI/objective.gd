@@ -39,7 +39,7 @@ func complete_step(step) -> void:
 	step.completed = true
 	if step.progress_step:
 		progress += 1
-	print(step.type," ", step.target, " completed")
-	if step.last_step:
+	print(step.type, " ", step.target, " completed")
+	if steps.all(func(element): return element.completed):
 		print("objective completed")
 		set_completed()

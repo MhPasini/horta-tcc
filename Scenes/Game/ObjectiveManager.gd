@@ -22,33 +22,33 @@ func clear_data() -> void:
 func _robot_moved_to(new_position: Vector2i):
 	print("moved_to: ", new_position)
 	curr_pos = new_position
-	check_objectives()
+	check_move_objectives()
 
 func _robot_moved_next():
 	print("moved_dir: next")
 	last_move_dir = "next"
-	check_objectives()
+	check_move_objectives()
 
 func _robot_moved_previous():
-	print("moved_dir:previous")
+	print("moved_dir: previous")
 	last_move_dir = "previous"
-	check_objectives()
+	check_move_objectives()
 
 func _robot_planted_at(cell:Vector2i, crop:String):
 	curr_pos = cell
 	last_crop = crop
-	check_objectives()
+	check_plant_objectives()
 
 func _robot_water_at(cell:Vector2i):
 	curr_pos = cell
-	check_objectives()
+	check_water_objectives()
 
 func _robot_harvest_at(cell:Vector2i, crop:String):
 	curr_pos = cell
 	last_crop = crop
-	check_objectives()
+	check_harvest_objectives()
 
-func check_objectives():
+func check_move_objectives():
 	for objective in objectives_list:
 		if objective.completed:
 			continue
@@ -62,20 +62,75 @@ func check_objectives():
 						break
 				"move_dir":
 					if last_move_dir == step.target:
+						last_move_dir = ""
 						objective.complete_step(step)
 						break
-				"plant_at":
-					if last_crop == step.target_crop and curr_pos == step.target:
-						objective.complete_step(step)
-						break
+				_:
+					pass
+
+func check_water_objectives() -> void:
+	for objective in objectives_list:
+		if objective.completed:
+			continue
+		for step in objective.steps:
+			if step.completed:
+				continue
+			match step.type:
 				"water_at":
-					if curr_pos == step.target:
+					var t = step.target
+					if t is Vector2i:
+						if curr_pos == t:
+							objective.complete_step(step)
+							break
+					else:
 						objective.complete_step(step)
 						break
+				_:
+					pass
+
+func check_plant_objectives() -> void:
+	for objective in objectives_list:
+		if objective.completed:
+			continue
+		for step in objective.steps:
+			if step.completed:
+				continue
+			match step.type:
+				"plant_at":
+					if (last_crop == step.target_crop or step.target_crop == "any"):
+						var t = step.target
+						if t is Vector2i:
+							if curr_pos == t:
+								last_crop = ""
+								objective.complete_step(step)
+								break
+						else:
+							last_crop = ""
+							objective.complete_step(step)
+							break
+				_:
+					pass
+
+func check_harvest_objectives() -> void:
+	for objective in objectives_list:
+		if objective.completed:
+			continue
+		for step in objective.steps:
+			if step.completed:
+				continue
+			match step.type:
 				"harvest_at":
-					if curr_pos == step.target and last_crop == step.target_crop:
-						objective.complete_step(step)
-						break
+					if (last_crop == step.target_crop or step.target_crop == "any"):
+						var t = step.target
+						if t is Vector2i:
+							if curr_pos == t:
+								last_crop = ""
+								objective.complete_step(step)
+								break
+						else:
+							last_crop = ""
+							objective.complete_step(step)
+							break
 				_:
 					pass
 

@@ -14,6 +14,7 @@ func  _ready() -> void:
 	if thread.is_alive():
 		return
 	thread.start(_place_farm_slots)
+	Events.update_grid.connect(_on_update_grid)
 
 func _place_farm_slots() -> void:
 	for x in size.x:
@@ -26,6 +27,12 @@ func _place_farm_slots() -> void:
 			call_deferred("add_child", slot)
 	call_deferred("_thread_done")
 
+func reset_grid() -> void:
+	for x in size.x:
+		for y in size.y:
+			var slot = grid.get_cell_value(Vector2i(x, y)) as FarmSlot
+			slot.reset_crop()
+
 func plant_crop_at(cell: Vector2i, seed_type: int) -> LogResult:
 	var slot = grid.get_cell_value(cell) as FarmSlot
 	return slot.plant_crop(seed_type) as LogResult
@@ -37,6 +44,12 @@ func water_crop_at(cell: Vector2i) -> LogResult:
 func harvest_crop_at(cell: Vector2i) -> LogResult:
 	var slot = grid.get_cell_value(cell) as FarmSlot
 	return slot.harvest_crop() as LogResult
+
+func _on_update_grid(cell:Vector2i, vars:Array) -> void:
+	var slot = grid.get_cell_value(cell) as FarmSlot
+	slot.curr_crop = vars[0]
+	slot.grow_level = vars[1]
+	slot.water_level = vars[2]
 
 func _thread_done():
 	thread.wait_to_finish()

@@ -14,16 +14,20 @@ func _ready():
 	#robot.send_stat_update()
 	Events.request_translation.connect(_on_translation_requested)
 	Events.level_completed.connect(_on_level_completed)
+	#$UI/CommandPanel/LvlControl/NextBtn.hide()
 
 func _on_reset_btn_pressed() -> void:
 	robot.reset_vars()
+	farm.reset_grid()
 	$UI/ObjectivesPanel.reset_lvl()
 	if is_instance_valid(active_translation):
 		active_translation.queue_free()
 
 func _on_next_btn_pressed() -> void:
 	robot.reset_vars()
+	farm.reset_grid()
 	$UI/ObjectivesPanel.load_next_lvl()
+	#$UI/CommandPanel/LvlControl/NextBtn.hide()
 
 func _on_level_completed(ID:int) -> void:
 	Globals.levels_completed[ID] = true

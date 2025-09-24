@@ -38,7 +38,6 @@ var is_empty : bool = false
 
 func _ready():
 	set_initial_values()
-	set_process(false)
 
 func _process(delta):
 	grow_crop(delta)
@@ -49,6 +48,7 @@ func set_initial_values() -> void:
 	curr_dirt_state = DIRT_STATE.Dry
 	water_indicator.hide()
 	growth_indicator.hide()
+	set_process(false)
 
 func plant_crop(seed_type:int) -> LogResult:
 	var result = LogResult.new()
@@ -148,5 +148,4 @@ func _set_grow_lvl(value: float) -> void:
 		is_grown = true
 	elif grow_level >= 5.0:
 		curr_crop_state = CROP_STATE.Sprout
-
 #endregion
