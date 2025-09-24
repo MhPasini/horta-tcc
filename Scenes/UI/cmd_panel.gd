@@ -51,7 +51,7 @@ func _execute(block:BlockData) -> bool:
 			else :
 				_ok = await robot.call(block.name)
 			#robot.send_stat_update()
-			print("Cmd %s: " % block.name, _ok)
+			#print("Cmd %s: " % block.name, _ok)
 		block.Type.LOOP:
 			for i in range(block.loop_count):
 				for child in block.child_blocks:

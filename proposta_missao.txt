@@ -18,7 +18,7 @@ Fases detalhadas
 
 Tier A — Introdução
 
-Fase 1 — Olá, robô
+Fase 1 — Movimentando o robô
 
 Objetivo: mover o robô do início até um canteiro alvo.
 

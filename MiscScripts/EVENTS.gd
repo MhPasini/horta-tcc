@@ -20,6 +20,14 @@ signal add_crop(crop:String)
 signal water_crop
 signal harvest_crop
 signal task_completed
+# OBJECTIVES SIGNALS #
+signal robot_moved_to(cell:Vector2i)
+signal robot_moved_next
+signal robot_moved_previous
+signal robot_planted_at(cell:Vector2i, crop:String)
+signal robot_water_at(cell:Vector2i)
+signal robot_harvest_at(cell:Vector2i, crop:String)
+
 #endregion
 
 #region CMD SIGNALS
@@ -32,4 +40,5 @@ signal stop_execution
 #endregion
 
 signal console_message(msg: String)
+signal level_completed(lvl_ID: int)
 #signal update_stat_text(stats:Array)

@@ -18,6 +18,16 @@ var storage : Dictionary = {
 }
 var stats : Array
 # [pos x, pos y, inv_left, inv_max, slot_seed, is_empty, is_dry, is_grown]
+const CROP_DATA = {
+	CROPS.None:
+		'Vazio',
+	CROPS.Carrot:
+		'Cenoura',
+	CROPS.Onion:
+		'Cebola',
+	CROPS.Radish:
+		'Rabanete'
+}
 
 @export var offset : Vector2 = Vector2()
 @export var move_speed : float = 50.0
@@ -66,6 +76,8 @@ func move_to(cell:Vector2i) -> bool:
 		outside_grid = true
 		send_log_message("%s fora da área delimitada, voltando para base!" % cell, Globals.MSG_TYPE.warning)
 	await Events.task_completed
+	if !outside_grid:
+		Events.robot_moved_to.emit(grid_pos)
 	return true
 
 func move_to_origin() -> bool:
@@ -78,6 +90,7 @@ func move_to_next() -> bool:
 		result = await move_to_origin()
 	else :
 		result = await move_to(get_next_cell())
+		Events.robot_moved_next.emit()
 	return result
 
 func move_to_previous() -> bool:
@@ -86,6 +99,7 @@ func move_to_previous() -> bool:
 		result = await move_to_origin()
 	else :
 		result = await move_to(get_previous_cell())
+		Events.robot_moved_previous.emit()
 	return result
 
 #region PLANT FUNCTIONS 
@@ -101,6 +115,7 @@ func plant_crop(seed_type:int) -> bool:
 		else:
 			#await plant animation
 			send_log_message(result.msg, result.type)
+			Events.robot_planted_at.emit(grid_pos, CROP_DATA[seed_type])
 	else:
 		send_log_message("Fora da área delimitada, ação cancelada!", Globals.MSG_TYPE.error)
 		#await error animation
@@ -114,6 +129,7 @@ func water_crop() -> bool:
 			pass
 		#await watering animation
 		send_log_message(result.msg, result.type)
+		Events.robot_water_at.emit(grid_pos)
 	else:
 		send_log_message("Fora da área delimitada, ação cancelada!", Globals.MSG_TYPE.error)
 		#await error animation
@@ -197,6 +213,7 @@ func pos_y_diferente(y:int = 0) -> bool:
 #endregion
 
 func add_crop(crop:String) -> void:
+	Events.robot_harvest_at.emit(grid_pos, crop)
 	if get_storage_left() > 0:
 		storage[crop] += 1
 
@@ -247,6 +264,12 @@ func get_seed_type() -> String:
 
 func send_log_message(msg:String, type:String = Globals.MSG_TYPE.normal) -> void:
 	Events.console_message.emit(type + msg)
+
+func reset_vars() -> void:
+	storage  = {"Cenoura": 0, "Cebola": 0, "Rabanete": 0,}
+	position = rest_position
+	grid_pos = Vector2i.ZERO
+	outside_grid = true
 
 #func send_stat_update() -> void:
 	#stats = [

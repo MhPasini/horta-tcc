@@ -13,11 +13,25 @@ func _ready():
 	robot.farm = farm
 	#robot.send_stat_update()
 	Events.request_translation.connect(_on_translation_requested)
+	Events.level_completed.connect(_on_level_completed)
 
-func _on_reset_btn_pressed():
-	get_tree().reload_current_scene()
+func _on_reset_btn_pressed() -> void:
+	robot.reset_vars()
+	$UI/ObjectivesPanel.reset_lvl()
+	if is_instance_valid(active_translation):
+		active_translation.queue_free()
 
-func _on_translation_btn_pressed():
+func _on_next_btn_pressed() -> void:
+	robot.reset_vars()
+	$UI/ObjectivesPanel.load_next_lvl()
+
+func _on_level_completed(ID:int) -> void:
+	Globals.levels_completed[ID] = true
+	$UI/CommandPanel/LvlControl/NextBtn.show()
+	if ID == Globals.levels_completed.size():
+		$UI/CommandPanel/LvlControl/NextBtn.disabled = true
+
+func _on_translation_btn_pressed() -> void:
 	Globals.cmd_panel.update_program()
 	Events.request_translation.emit("portugol")
 

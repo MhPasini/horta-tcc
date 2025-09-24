@@ -18,6 +18,7 @@ config/icon="uid://7uwi47cxmttd"
 
 Events="*res://MiscScripts/EVENTS.gd"
 Globals="*res://MiscScripts/Globals.gd"
+ObjectiveManager="*res://Scenes/Game/ObjectiveManager.gd"
 
 [debug]
 

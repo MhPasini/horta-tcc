@@ -22,9 +22,13 @@ var robot_ref : RobotClass
 var active_code_tab : int = 0
 var cmd_panel
 var func_list = []
+var levels_completed : Array[bool]
 
 func _ready():
 	set_mouse_cursors()
+	var objData = ObjectiveData.new()
+	levels_completed.resize(objData.DATA.size())
+	print(levels_completed)
 
 func set_mouse_cursors() -> void:
 	Input.set_custom_mouse_cursor(load("res://UI/Cursors/hand_open.png"), Input.CURSOR_POINTING_HAND, Vector2(6, 6))
