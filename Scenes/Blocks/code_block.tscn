@@ -187,6 +187,23 @@ popup/item_1/id = 1
 popup/item_2/text = "Rabanete"
 popup/item_2/id = 2
 
+[node name="WaitTime" type="LineEdit" parent="MarginContainer/Methods"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_placeholder_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_constants/minimum_character_width = 2
+theme_override_fonts/font = ExtResource("3_oc8c7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_2dql6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2dql6")
+placeholder_text = "1.0"
+alignment = 1
+max_length = 4
+expand_to_text_length = true
+emoji_menu_enabled = false
+virtual_keyboard_type = 3
+
 [node name="IfElse" type="VBoxContainer" parent="MarginContainer"]
 visible = false
 layout_mode = 2
@@ -554,6 +571,7 @@ theme_override_constants/separation = 1
 [connection signal="text_changed" from="MarginContainer/Methods/Coords/X" to="." method="_on_x_text_changed"]
 [connection signal="text_changed" from="MarginContainer/Methods/Coords/Y" to="." method="_on_y_text_changed"]
 [connection signal="item_selected" from="MarginContainer/Methods/SeedSelection" to="." method="_on_seed_selection_item_selected"]
+[connection signal="text_changed" from="MarginContainer/Methods/WaitTime" to="." method="_on_wait_time_text_changed"]
 [connection signal="item_selected" from="MarginContainer/IfElse/args/Condition" to="." method="_on_if_condition_item_selected"]
 [connection signal="item_selected" from="MarginContainer/IfElse/args/Condition2" to="." method="_on_if_condition_2_item_selected"]
 [connection signal="toggled" from="MarginContainer/IfElse/Else/ElseBtn" to="." method="_on_else_btn_toggled"]

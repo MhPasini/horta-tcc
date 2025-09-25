@@ -43,6 +43,8 @@ func _build_method() -> void:
 		%SeedSelection.show()
 		%SeedSelection.select(block_data.plant_seed)
 		%SeedSelection.item_selected.emit(block_data.plant_seed)
+	elif method_name == "wait_for":
+		%WaitTime.show()
 
 func _build_for_loop() -> void:
 	for_loop.show()
@@ -158,15 +160,20 @@ func _on_child_list_updated(container:CodeContainer) -> void:
 func _on_else_list_updated(container:CodeContainer) -> void:
 	block_data.else_blocks = container.get_code_blocks()
 
-func _on_x_text_changed(new_text):
+func _on_x_text_changed(new_text:String):
 	if not new_text.is_valid_int():
 		x.text = str(new_text.to_int())
 	block_data.pos.x = new_text.to_int()
 
-func _on_y_text_changed(new_text):
+func _on_y_text_changed(new_text:String):
 	if not new_text.is_valid_int():
 		y.text = str(new_text.to_int())
 	block_data.pos.y = new_text.to_int()
+
+func _on_wait_time_text_changed(new_text:String):
+	if not new_text.is_valid_float():
+		%WaitTime.text = str(new_text.to_float())
+	block_data.wait_time = new_text.to_float()
 
 func _get_drag_data(_at_position: Vector2):
 	var preview = BlockPreview.new(block_data.block_text, block_data.color)

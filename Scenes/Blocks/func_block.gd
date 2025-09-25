@@ -14,7 +14,7 @@ func _get_drag_data(_at_position: Vector2):
 	return data
 
 func _on_mouse_entered() -> void:
-	Events.update_info_text.emit(BlockInfo.CODE_DATA[10]["Info"])
+	Events.update_info_text.emit(BlockInfo.CODE_DATA[BlockInfo.FUNCAO]["Info"])
 
 func set_label(new:String) -> void:
 	label.text = new

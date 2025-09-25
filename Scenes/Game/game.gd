@@ -28,12 +28,12 @@ func _on_next_btn_pressed() -> void:
 	farm.reset_grid()
 	$UI/ObjectivesPanel.load_next_lvl()
 	#$UI/CommandPanel/LvlControl/NextBtn.hide()
+	if $UI/ObjectivesPanel.current_lvl >= (Globals.levels_completed.size() - 1):
+		$UI/CommandPanel/LvlControl/NextBtn.disabled = true
 
 func _on_level_completed(ID:int) -> void:
 	Globals.levels_completed[ID] = true
 	$UI/CommandPanel/LvlControl/NextBtn.show()
-	if ID == Globals.levels_completed.size():
-		$UI/CommandPanel/LvlControl/NextBtn.disabled = true
 
 func _on_translation_btn_pressed() -> void:
 	Globals.cmd_panel.update_program()

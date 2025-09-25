@@ -9,6 +9,7 @@ enum {
 	PLANTAR,
 	REGAR,
 	COLHER,
+	ESPERAR,
 	SE_SENAO,
 	PARA_FACA,
 	ENQUANTO,
@@ -57,6 +58,12 @@ const CODE_DATA = {
 	"Info": "Função para colher a planta do canteiro atual",
 	"BlockText": "Colher",
 	"Param": ""
+	},
+	ESPERAR: {
+	"Name": "wait_for",
+	"Info": "Função que pausa a execução por um tempo definido",
+	"BlockText": "Esperar",
+	"Param": "Tempo: float"
 	},
 	SE_SENAO:{
 		"Name": "if_else",

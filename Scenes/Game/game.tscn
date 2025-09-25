@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=62 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bwwm5yuwrc2tf" path="res://Scenes/Farm/farm_grid.tscn" id="7_8e3kh"]
 [ext_resource type="PackedScene" uid="uid://bswelfcys8bfe" path="res://Scenes/Robot/robot.tscn" id="8_56qi8"]
 [ext_resource type="FontFile" uid="uid://3ytuodnv4vag" path="res://Fonts/ThaleahFat.ttf" id="10_8e3kh"]
+[ext_resource type="Texture2D" uid="uid://dlcee44f2tkgk" path="res://Textures/crops/carrot_f.png" id="10_56bk2"]
 [ext_resource type="Script" uid="uid://b5n8ycdnagaug" path="res://Scenes/UI/outputConsole.gd" id="11_56qi8"]
 [ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="12_2vowc"]
 [ext_resource type="StyleBox" uid="uid://jaiges0r4i5m" path="res://UI/Styles/solid_background_panel_noBorder.tres" id="13_pa3qg"]
@@ -513,6 +514,31 @@ autowrap_mode = 1
 position = Vector2(240, 180)
 offset = Vector2(0, -13)
 
+[node name="Storage" type="Node2D" parent="."]
+position = Vector2(271, 142)
+
+[node name="Carrots" type="Sprite2D" parent="Storage"]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("10_56bk2")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="Label" type="Label" parent="Storage/Carrots"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -25.6
+offset_top = -13.6
+offset_right = -20.6
+offset_bottom = -7.6
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("14_7pdpw")
+text = "0"
+horizontal_alignment = 2
+
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
 metadata/_edit_lock_ = true
@@ -923,6 +949,27 @@ grow_vertical = 2
 text = "Colher"
 label_settings = SubResource("LabelSettings_3gqeb")
 
+[node name="Esperar" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+self_modulate = Color(0.831373, 0.470588, 0.588235, 1)
+custom_minimum_size = Vector2(56, 16)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
+script = ExtResource("20_2lc0x")
+blockID = 7
+blockColor = Color(0.831373, 0.470588, 0.588235, 1)
+
+[node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/Esperar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Esperar"
+label_settings = SubResource("LabelSettings_3gqeb")
+
 [node name="IfElse" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
 self_modulate = Color(0.831373, 0.6, 0.47451, 1)
 custom_minimum_size = Vector2(56, 16)
@@ -930,7 +977,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
 script = ExtResource("20_2lc0x")
-blockID = 7
+blockID = 8
 blockColor = Color(0.831373, 0.6, 0.47451, 1)
 
 [node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/IfElse"]
@@ -951,7 +998,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
 script = ExtResource("20_2lc0x")
-blockID = 8
+blockID = 9
 blockColor = Color(0.831373, 0.6, 0.47451, 1)
 
 [node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/ForLoop"]
@@ -972,7 +1019,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2lc0x")
 script = ExtResource("20_2lc0x")
-blockID = 9
+blockID = 10
 blockColor = Color(0.831373, 0.6, 0.47451, 1)
 
 [node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks/While"]

@@ -95,6 +95,7 @@ func harvest_crop() -> LogResult:
 func reset_crop() -> void:
 	curr_crop = CROPS.None
 	grow_level = 0.0
+	water_level = 0.0
 	is_grown = false
 	growth_indicator.hide()
 
@@ -148,4 +149,6 @@ func _set_grow_lvl(value: float) -> void:
 		is_grown = true
 	elif grow_level >= 5.0:
 		curr_crop_state = CROP_STATE.Sprout
+	else:
+		curr_crop_state = CROP_STATE.Seed
 #endregion

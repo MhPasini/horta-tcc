@@ -13,6 +13,7 @@ enum Type {
 @export var name : String = ""
 @export var condition : Array = ["", null]
 @export var condition_text : String = ""
+@export var wait_time : float = 1.0
 @export var loop_count : int = 1
 @export var child_blocks : Array[BlockData] = []
 @export var else_blocks : Array[BlockData] = []

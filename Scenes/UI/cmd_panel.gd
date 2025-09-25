@@ -44,12 +44,15 @@ func _execute(block:BlockData) -> bool:
 	if stop_requested: return false
 	match block.type:
 		block.Type.METHOD:
-			if block.name == "move_to":
-				_ok = await robot.call(block.name, block.pos)
-			elif block.name == "plant_crop":
-				_ok = await robot.call(block.name, block.plant_seed)
-			else :
-				_ok = await robot.call(block.name)
+			match block.name:
+				"move_to":
+					_ok = await robot.call(block.name, block.pos)
+				"plant_crop":
+					_ok = await robot.call(block.name, block.plant_seed)
+				"wait_for":
+					_ok = await robot.call(block.name, block.wait_time)
+				_ :
+					_ok = await robot.call(block.name)
 			#robot.send_stat_update()
 			#print("Cmd %s: " % block.name, _ok)
 		block.Type.LOOP:

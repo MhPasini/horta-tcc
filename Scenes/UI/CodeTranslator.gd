@@ -200,10 +200,13 @@ static func _c_con(block:BlockData) -> String:
 	return cond2
 
 static func _method_param(block:BlockData) -> String:
-	if block.name == "move_to":
-		return "%s" % str(block.pos)
-	elif block.name == "plant_crop":
-		return "("+_c('"%s"'%block.seed_name,ylw)+")"
+	match block.name:
+		"move_to":
+			return "%s" % str(block.pos)
+		"plant_crop":
+			return "("+_c('"%s"'%block.seed_name,ylw)+")"
+		"wait_for":
+			return "("+_c('%s'%block.wait_time,grn)+")"
 	return "()"
 
 static func _get_param_type(type:int) -> String:

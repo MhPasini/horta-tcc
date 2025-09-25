@@ -31,7 +31,7 @@ const CROP_DATA = {
 
 @export var offset : Vector2 = Vector2()
 @export var move_speed : float = 50.0
-@export var storage_cap: int = 20
+@export var storage_cap: int = 500
 
 func _ready():
 	Globals.robot_ref = self
@@ -101,6 +101,10 @@ func move_to_previous() -> bool:
 		result = await move_to(get_previous_cell())
 		Events.robot_moved_previous.emit()
 	return result
+
+func wait_for(time:float) -> bool:
+	await create_tween().tween_interval(time).finished
+	return true
 
 #region PLANT FUNCTIONS 
 func plant_crop(seed_type:int) -> bool:
