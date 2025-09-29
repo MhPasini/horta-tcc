@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=3 uid="uid://boc3646156bch"]
+
+[ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="1_xmhve"]
+[ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="2_xmhve"]
+
+[sub_resource type="GDScript" id="GDScript_xmhve"]
+resource_name = "QuestTip"
+script/source = "extends Control
+
+var tip_text : String = \"\"
+var tween : Tween
+@onready var label = $PanelContainer/Label
+
+func _ready():
+	Globals.tip_panel = self
+	label.text = tip_text
+	tween = create_tween()
+	await tween.tween_interval(8.0).finished
+	delete_self()
+
+func delete_self() -> void:
+	Globals.tip_panel = null
+	queue_free()
+
+func _on_close_btn_pressed():
+	delete_self()
+
+func _on_panel_container_mouse_entered():
+	tween.pause()
+
+func _on_panel_container_mouse_exited():
+	if tween != null:
+		tween.play()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xmhve"]
+content_margin_left = 4.0
+content_margin_top = 8.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mqenr"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oc10c"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s60sr"]
+
+[node name="QuestTip" type="Control"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 22.0
+offset_top = -20.0
+offset_right = 222.0
+offset_bottom = 20.0
+grow_vertical = 2
+script = SubResource("GDScript_xmhve")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xmhve")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_fonts/font = ExtResource("1_xmhve")
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Control" type="Control" parent="PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CloseBtn" type="Button" parent="PanelContainer/Control"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -7.0
+offset_top = -11.0
+offset_right = 7.0
+offset_bottom = 3.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mqenr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oc10c")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s60sr")
+icon = ExtResource("2_xmhve")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer" to="." method="_on_panel_container_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/Control/CloseBtn" to="." method="_on_close_btn_pressed"]

@@ -2,7 +2,7 @@ extends Node2D
 class_name RobotClass
 
 enum STATE {Idle, Moving, Working}
-enum CROPS {None, Carrot, Onion, Radish}
+enum CROPS {None, Carrot, Onion, Radish, Potato, Turnip}
 
 var farm : FarmGrid
 var state : STATE
@@ -15,6 +15,8 @@ var storage : Dictionary = {
 	"Cenoura": 0,
 	"Cebola": 0,
 	"Rabanete": 0,
+	"Batata": 0,
+	"Nabo": 0,
 }
 var stats : Array
 # [pos x, pos y, inv_left, inv_max, slot_seed, is_empty, is_dry, is_grown]
@@ -26,12 +28,16 @@ const CROP_DATA = {
 	CROPS.Onion:
 		'Cebola',
 	CROPS.Radish:
-		'Rabanete'
+		'Rabanete',
+	CROPS.Potato:
+		'Batata',
+	CROPS.Turnip:
+		'Nabo'
 }
 
 @export var offset : Vector2 = Vector2()
 @export var move_speed : float = 50.0
-@export var storage_cap: int = 500
+@export var storage_cap: int = 50
 
 func _ready():
 	Globals.robot_ref = self
@@ -217,9 +223,10 @@ func pos_y_diferente(y:int = 0) -> bool:
 #endregion
 
 func add_crop(crop:String) -> void:
-	Events.robot_harvest_at.emit(grid_pos, crop)
 	if get_storage_left() > 0:
 		storage[crop] += 1
+	Events.robot_harvest_at.emit(grid_pos, crop)
+	Events.update_storage.emit(storage)
 
 func check_position() -> void:
 	if position == target_position:
@@ -228,7 +235,7 @@ func check_position() -> void:
 		Events.task_completed.emit()
 
 func get_storage_left() -> int:
-	var storage_left = storage_cap - get_storage()
+	var storage_left = 10 #storage_cap - get_storage()
 	storage_full = (storage_left <= 0)
 	return storage_left
 

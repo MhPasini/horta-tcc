@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=74 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -12,10 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://dlcee44f2tkgk" path="res://Textures/crops/carrot_f.png" id="10_56bk2"]
 [ext_resource type="Script" uid="uid://b5n8ycdnagaug" path="res://Scenes/UI/outputConsole.gd" id="11_56qi8"]
 [ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="12_2vowc"]
+[ext_resource type="Texture2D" uid="uid://bkmuyh8ueap6e" path="res://Textures/crops/onion_f.png" id="12_56h2t"]
+[ext_resource type="Texture2D" uid="uid://bojhto115g1g1" path="res://Textures/crops/radish_f.png" id="13_lcvqc"]
 [ext_resource type="StyleBox" uid="uid://jaiges0r4i5m" path="res://UI/Styles/solid_background_panel_noBorder.tres" id="13_pa3qg"]
 [ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="13_yox4t"]
 [ext_resource type="FontVariation" uid="uid://blsb1kuml66jh" path="res://Fonts/tiny_variation.tres" id="14_7pdpw"]
 [ext_resource type="Texture2D" uid="uid://btvwmeufvxd22" path="res://Textures/color palette.png" id="14_lemb1"]
+[ext_resource type="Texture2D" uid="uid://do5xoruu214yu" path="res://Textures/crops/potato_f.png" id="14_p6run"]
+[ext_resource type="Texture2D" uid="uid://bfkhcin8sx38" path="res://Textures/crops/turnip_f.png" id="15_jebrn"]
 [ext_resource type="StyleBox" uid="uid://btd4k0yqt5gr3" path="res://UI/Styles/Panel_front.tres" id="16_lemb1"]
 [ext_resource type="StyleBox" uid="uid://dfx58hsumrpqr" path="res://UI/Styles/solid_background_panel.tres" id="17_2lc0x"]
 [ext_resource type="Texture2D" uid="uid://b6hl4dns81us8" path="res://UI/dotted_box.png" id="18_a6ftd"]
@@ -26,13 +30,16 @@
 [ext_resource type="PackedScene" uid="uid://cq8i5p40p7o7r" path="res://Scenes/UI/code_tab.tscn" id="23_d3jd4"]
 [ext_resource type="Texture2D" uid="uid://c5100p3x3k23x" path="res://UI/Info-icon.png" id="23_gqd4u"]
 [ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="24_3gqeb"]
+[ext_resource type="Texture2D" uid="uid://j6a4acmb3b8r" path="res://UI/options_normal.png" id="24_jebrn"]
+[ext_resource type="Texture2D" uid="uid://dj2br10twu8wf" path="res://UI/options.png" id="25_qjf7v"]
 [ext_resource type="Texture2D" uid="uid://theh7wyq5xk4" path="res://UI/pause.png" id="26_gqd4u"]
 [ext_resource type="Texture2D" uid="uid://cc2m1ux3flonw" path="res://UI/remove_icon_2.png" id="28_1l3pd"]
 [ext_resource type="Script" uid="uid://dty1ecuabcddq" path="res://Scenes/UI/objectives_panel.gd" id="28_56bk2"]
 [ext_resource type="PackedScene" uid="uid://ddhip8c6gsyfr" path="res://Scenes/UI/objective.tscn" id="28_d3jd4"]
 [ext_resource type="Script" uid="uid://bvtbtorqf117e" path="res://addons/eranot.resizable/resizable.gd" id="29_d3jd4"]
+[ext_resource type="Texture2D" uid="uid://bouqb6cp5w3mk" path="res://UI/expression_confused.png" id="35_lcvqc"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_th41f"]
 resource_name = "GrassTiles"
 texture = ExtResource("2_7jvlm")
 0:0/0 = 0
@@ -96,7 +103,7 @@ texture = ExtResource("2_7jvlm")
 3:2/0/terrains_peering_bit/top_right_corner = 0
 4:2/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrm1d"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jpnbm"]
 texture = ExtResource("3_qtymf")
 0:0/0 = 0
 0:0/0/terrain_set = 1
@@ -169,10 +176,10 @@ terrain_set_0/terrain_0/color = Color(0.501961, 1, 0.25098, 1)
 terrain_set_1/mode = 1
 terrain_set_1/terrain_0/name = "Dirt"
 terrain_set_1/terrain_0/color = Color(0.501961, 0.345098, 0.639216, 1)
-sources/0 = SubResource("TileSetAtlasSource_qxrlw")
-sources/1 = SubResource("TileSetAtlasSource_wrm1d")
+sources/0 = SubResource("TileSetAtlasSource_th41f")
+sources/1 = SubResource("TileSetAtlasSource_jpnbm")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1phco"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fxv8i"]
 texture = ExtResource("4_ypmwd")
 0:0/next_alternative_id = 10
 0:0/0 = 0
@@ -201,7 +208,7 @@ texture = ExtResource("4_ypmwd")
 4:3/0 = 0
 5:3/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nb51f"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_26aa6"]
 texture = ExtResource("5_oejk7")
 0:0/0 = 0
 1:0/0 = 0
@@ -222,7 +229,7 @@ texture = ExtResource("5_oejk7")
 4:2/0 = 0
 5:2/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nnt18"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4gqoa"]
 texture = ExtResource("6_upfqs")
 0:0/0 = 0
 1:0/0 = 0
@@ -250,14 +257,41 @@ texture = ExtResource("6_upfqs")
 3:5/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ewbju"]
-sources/0 = SubResource("TileSetAtlasSource_1phco")
-sources/1 = SubResource("TileSetAtlasSource_nb51f")
-sources/3 = SubResource("TileSetAtlasSource_nnt18")
+sources/0 = SubResource("TileSetAtlasSource_fxv8i")
+sources/1 = SubResource("TileSetAtlasSource_26aa6")
+sources/3 = SubResource("TileSetAtlasSource_4gqoa")
 
 [sub_resource type="FontVariation" id="FontVariation_d3jd4"]
 base_font = ExtResource("12_2vowc")
 spacing_glyph = 20
 spacing_bottom = -1
+
+[sub_resource type="GDScript" id="GDScript_56h2t"]
+resource_name = "Storage"
+script/source = "extends Node2D
+
+@onready var carrot_label = $Carrots/CarrotLabel
+@onready var onion_label = $Onions/OnionLabel
+@onready var radish_label = $Radish/RadishLabel
+@onready var potato_label = $Potato/PotatoLabel
+@onready var turnip_label = $Turnip/TurnipLabel
+
+var labels : Dictionary = {}
+
+func _ready() -> void:
+	labels = {
+		\"Cenoura\": carrot_label,
+		\"Cebola\": onion_label,
+		\"Rabanete\": radish_label,
+		\"Batata\": potato_label,
+		\"Nabo\": turnip_label,
+	}
+	Events.update_storage.connect(_on_update_storage)
+
+func _on_update_storage(storage:Dictionary) -> void:
+	for element in storage:
+		labels[element].text = str(storage[element])
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_h4fw4"]
 font = ExtResource("12_2vowc")
@@ -355,38 +389,6 @@ border_width_bottom = 1
 font = ExtResource("13_yox4t")
 font_color = Color(0.341176, 0.341176, 0.341176, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7pdpw"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gqd4u"]
-content_margin_left = 3.0
-content_margin_top = 3.0
-content_margin_right = 3.0
-content_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1l3pd"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3jd4"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_56bk2"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6k7u1"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gqd4u"]
 texture = ExtResource("18_a6ftd")
 texture_margin_left = 4.0
@@ -464,6 +466,58 @@ func _notification(what: int) -> void:
 		hide()
 "
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7pdpw"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gqd4u"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1l3pd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3jd4"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_56bk2"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6k7u1"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lcvqc"]
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p6run"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jebrn"]
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qjf7v"]
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
 [node name="Game" type="Node"]
 script = ExtResource("1_huoen")
 
@@ -515,7 +569,8 @@ position = Vector2(240, 180)
 offset = Vector2(0, -13)
 
 [node name="Storage" type="Node2D" parent="."]
-position = Vector2(271, 142)
+position = Vector2(309, 132)
+script = SubResource("GDScript_56h2t")
 
 [node name="Carrots" type="Sprite2D" parent="Storage"]
 scale = Vector2(1.25, 1.25)
@@ -523,19 +578,113 @@ texture = ExtResource("10_56bk2")
 region_enabled = true
 region_rect = Rect2(1, 16, 15, 16)
 
-[node name="Label" type="Label" parent="Storage/Carrots"]
+[node name="CarrotLabel" type="Label" parent="Storage/Carrots"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -25.6
-offset_top = -13.6
-offset_right = -20.6
-offset_bottom = -7.6
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("14_7pdpw")
+theme_override_fonts/font = ExtResource("20_gqd4u")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Onions" type="Sprite2D" parent="Storage"]
+position = Vector2(0, 22)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("12_56h2t")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="OnionLabel" type="Label" parent="Storage/Onions"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("20_gqd4u")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Radish" type="Sprite2D" parent="Storage"]
+position = Vector2(0, 44)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("13_lcvqc")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="RadishLabel" type="Label" parent="Storage/Radish"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("20_gqd4u")
+text = "0"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Potato" type="Sprite2D" parent="Storage"]
+position = Vector2(0, 66)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("14_p6run")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="PotatoLabel" type="Label" parent="Storage/Potato"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("20_gqd4u")
+text = "0"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Turnip" type="Sprite2D" parent="Storage"]
+position = Vector2(0, 88)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("15_jebrn")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="TurnipLabel" type="Label" parent="Storage/Turnip"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("20_gqd4u")
 text = "0"
 horizontal_alignment = 2
 
@@ -647,6 +796,21 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("17_2lc0x")
 script = ExtResource("19_4ti5a")
 
+[node name="OptionsBtn" type="TextureButton" parent="UI/CommandPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -24.0
+offset_bottom = 23.0
+grow_horizontal = 0
+focus_mode = 0
+texture_normal = ExtResource("24_jebrn")
+texture_pressed = ExtResource("25_qjf7v")
+texture_hover = ExtResource("25_qjf7v")
+ignore_texture_size = true
+stretch_mode = 3
+
 [node name="Label" type="Label" parent="UI/CommandPanel"]
 layout_mode = 1
 anchors_preset = 5
@@ -745,6 +909,7 @@ bbcode_enabled = true
 text = "Descrição dos blocos"
 scroll_following = true
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="UI/CommandPanel/InfoPanel"]
 layout_mode = 1
@@ -1033,59 +1198,6 @@ grow_vertical = 2
 text = "ENQUANTO"
 label_settings = SubResource("LabelSettings_3gqeb")
 
-[node name="BtnsArea" type="HBoxContainer" parent="UI/CommandPanel"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -35.0
-offset_right = -11.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 0
-alignment = 1
-
-[node name="Play" type="Button" parent="UI/CommandPanel/BtnsArea"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-theme_override_styles/hover = SubResource("StyleBoxEmpty_7pdpw")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_gqd4u")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1l3pd")
-icon = ExtResource("18_lemb1")
-flat = true
-icon_alignment = 1
-expand_icon = true
-
-[node name="Stop" type="Button" parent="UI/CommandPanel/BtnsArea"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-theme_override_styles/hover = SubResource("StyleBoxEmpty_7pdpw")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_gqd4u")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1l3pd")
-icon = ExtResource("26_gqd4u")
-flat = true
-icon_alignment = 1
-expand_icon = true
-
-[node name="Clear" type="Button" parent="UI/CommandPanel/BtnsArea"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-theme_override_styles/hover = SubResource("StyleBoxEmpty_d3jd4")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_56bk2")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6k7u1")
-icon = ExtResource("24_3gqeb")
-flat = true
-icon_alignment = 1
-expand_icon = true
-
 [node name="RemoveArea" type="Panel" parent="UI/CommandPanel"]
 self_modulate = Color(0.85098, 0.588235, 0.356863, 0.992157)
 layout_mode = 1
@@ -1173,29 +1285,6 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.270588)
 
-[node name="Resizable" type="Control" parent="UI/CommandPanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("29_d3jd4")
-mode = 1
-border_width = 4
-min_size = Vector2(180, 0)
-max_size = Vector2(340, 0)
-clamp_to_viewport = true
-active_handles = 4
-metadata/_custom_type_script = "uid://bvtbtorqf117e"
-
 [node name="LvlControl" type="VBoxContainer" parent="UI/CommandPanel"]
 layout_mode = 0
 offset_left = -138.0
@@ -1221,7 +1310,84 @@ theme_override_colors/font_pressed_color = Color(1, 0.647059, 0, 1)
 theme_override_fonts/font = ExtResource("14_7pdpw")
 text = "Próximo Lvl"
 
+[node name="BtnsArea" type="HBoxContainer" parent="UI/CommandPanel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -35.0
+offset_right = -11.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Play" type="Button" parent="UI/CommandPanel/BtnsArea"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7pdpw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gqd4u")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1l3pd")
+icon = ExtResource("18_lemb1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Stop" type="Button" parent="UI/CommandPanel/BtnsArea"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7pdpw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gqd4u")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1l3pd")
+icon = ExtResource("26_gqd4u")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Clear" type="Button" parent="UI/CommandPanel/BtnsArea"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d3jd4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_56bk2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6k7u1")
+icon = ExtResource("24_3gqeb")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Resizable" type="Control" parent="UI/CommandPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("29_d3jd4")
+mode = 1
+border_width = 4
+min_size = Vector2(180, 0)
+max_size = Vector2(340, 0)
+clamp_to_viewport = true
+active_handles = 4
+metadata/_custom_type_script = "uid://bvtbtorqf117e"
+
 [node name="ObjectivesPanel" type="PanelContainer" parent="UI"]
+z_index = -2
 custom_minimum_size = Vector2(40, 40)
 offset_left = 4.0
 offset_top = 4.0
@@ -1247,6 +1413,33 @@ layout_mode = 2
 
 [node name="Label" parent="UI/ObjectivesPanel/VFlow/List/Objective" index="1"]
 text = "Mover até o canteiro (2, 3) e plantar 1 cenoura"
+
+[node name="Objective2" parent="UI/ObjectivesPanel/VFlow/List" instance=ExtResource("28_d3jd4")]
+layout_mode = 2
+
+[node name="Label" parent="UI/ObjectivesPanel/VFlow/List/Objective2" index="1"]
+text = "Mover até o canteiro (2, 3) e plantar 1 cenoura"
+
+[node name="Control" type="Control" parent="UI/ObjectivesPanel"]
+layout_mode = 2
+
+[node name="QuestTipBtn" type="Button" parent="UI/ObjectivesPanel/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 6.0
+offset_right = 20.0
+offset_bottom = 17.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_lcvqc")
+theme_override_styles/hover = SubResource("StyleBoxTexture_p6run")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jebrn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_qjf7v")
+icon = ExtResource("35_lcvqc")
+icon_alignment = 1
+expand_icon = true
 
 [node name="TranslationBtn" type="Button" parent="UI"]
 anchors_preset = 7
@@ -1293,12 +1486,15 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="UI/Output/ClearBtn" to="UI/Output" method="_on_clear_btn_pressed"]
+[connection signal="pressed" from="UI/CommandPanel/OptionsBtn" to="." method="_on_options_btn_pressed"]
 [connection signal="tab_changed" from="UI/CommandPanel/CodePanel/CodeTabs" to="UI/CommandPanel" method="_on_code_tabs_tab_changed"]
+[connection signal="pressed" from="UI/CommandPanel/LvlControl/ResetBtn" to="." method="_on_reset_btn_pressed"]
+[connection signal="pressed" from="UI/CommandPanel/LvlControl/NextBtn" to="." method="_on_next_btn_pressed"]
 [connection signal="pressed" from="UI/CommandPanel/BtnsArea/Play" to="UI/CommandPanel" method="_on_play_pressed"]
 [connection signal="pressed" from="UI/CommandPanel/BtnsArea/Stop" to="UI/CommandPanel" method="_on_stop_pressed"]
 [connection signal="pressed" from="UI/CommandPanel/BtnsArea/Clear" to="UI/CommandPanel" method="_on_clear_pressed"]
-[connection signal="pressed" from="UI/CommandPanel/LvlControl/ResetBtn" to="." method="_on_reset_btn_pressed"]
-[connection signal="pressed" from="UI/CommandPanel/LvlControl/NextBtn" to="." method="_on_next_btn_pressed"]
+[connection signal="pressed" from="UI/ObjectivesPanel/Control/QuestTipBtn" to="UI/ObjectivesPanel" method="_on_quest_tip_btn_pressed"]
 [connection signal="pressed" from="UI/TranslationBtn" to="." method="_on_translation_btn_pressed"]
 
 [editable path="UI/ObjectivesPanel/VFlow/List/Objective"]
+[editable path="UI/ObjectivesPanel/VFlow/List/Objective2"]

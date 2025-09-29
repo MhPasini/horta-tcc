@@ -2,11 +2,11 @@ ok* Criar mais atividades para o robô. (Esperar, ?)
 
 Criar as animações de coletar, ragar, plantar, erro, aviso, etc
 
-Criar painel de vegetais coletados.
+ok* Criar painel de vegetais coletados.
 
 ok* Criar o painel de missões/objetivos, (pelo menos 1 para explicar cada função de comando). 
 
-Sistema de dicas para solução (tente usar o bloco x, atenção na ordem dos comandos, tente usar uma função)
+ok* Sistema de dicas para solução (tente usar o bloco x, atenção na ordem dos comandos, tente usar uma função)
 
 ok* Criar sistema para conferir os objetivos e reset para a etapa atual.
 

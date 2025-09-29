@@ -20,6 +20,7 @@ signal add_crop(crop:String)
 signal water_crop
 signal harvest_crop
 signal task_completed
+signal update_storage(storage:Dictionary)
 # OBJECTIVES SIGNALS #
 signal robot_moved_to(cell:Vector2i)
 signal robot_moved_next

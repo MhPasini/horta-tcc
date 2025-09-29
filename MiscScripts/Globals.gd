@@ -9,6 +9,8 @@ const MSG_TYPE = {
 const carrot_sprite : Texture = preload("res://Textures/crops/carrot.png")
 const onion_sprite : Texture = preload("res://Textures/crops/onion.png")
 const radish_sprite : Texture = preload("res://Textures/crops/radish.png")
+const potato_sprite : Texture = preload("res://Textures/crops/potato.png")
+const turnip_sprite : Texture = preload("res://Textures/crops/turnip.png")
 
 #Colors
 const block_font_color = Color("575757")
@@ -21,6 +23,7 @@ const block_font_color = Color("575757")
 var robot_ref : RobotClass
 var active_code_tab : int = 0
 var cmd_panel
+var tip_panel = null
 var func_list = []
 var levels_completed : Array[bool]
 

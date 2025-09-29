@@ -1,10 +1,12 @@
 extends PanelContainer
 
 const objective_node = preload("res://Scenes/UI/objective.tscn")
+const questTipPanel = preload("res://Scenes/UI/quest_tip.tscn")
 
 var objectives : Array[Objective] = []
 var objData : ObjectiveData
 var current_lvl : int
+var tip_text : String = ""
 
 @onready var lvl_info = $VFlow/LvlInfo
 @onready var list = $VFlow/List
@@ -36,6 +38,7 @@ func load_objectives(ID:int) -> void:
 		objectives.append(obj)
 	ObjectiveManager.objectives_list = objectives
 	load_grid_state(objective_data)
+	tip_text = objective_data.tip
 
 func load_grid_state(objective_data) -> void:
 	if not objective_data.grid_state.is_empty():
@@ -59,3 +62,9 @@ func reset_lvl() -> void:
 	ObjectiveManager.clear_data()
 	objData = ObjectiveData.new()
 	load_objectives(current_lvl)
+
+func _on_quest_tip_btn_pressed():
+	if not is_instance_valid(Globals.tip_panel):
+		var tip_p = questTipPanel.instantiate()
+		tip_p.tip_text = tip_text
+		get_parent().add_child(tip_p)

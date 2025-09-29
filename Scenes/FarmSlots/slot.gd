@@ -3,7 +3,7 @@ class_name FarmSlot
 
 enum DIRT_STATE {Dry, Wet}
 enum CROP_STATE {Seed, Sprout, Grown}
-enum CROPS {None, Carrot, Onion, Radish}
+enum CROPS {None, Carrot, Onion, Radish, Potato, Turnip}
 
 #@export var carrot_sprite : Texture = preload("res://Textures/crops/carrot.png")
 #@export var onion_sprite : Texture = preload("res://Textures/crops/onion.png")
@@ -17,7 +17,11 @@ const CROP_DATA = {
 	CROPS.Onion:
 		['Cebola', Globals.onion_sprite, 10.0, 0.5],
 	CROPS.Radish:
-		['Rabanete', Globals.radish_sprite, 20.0, 0.75]
+		['Rabanete', Globals.radish_sprite, 20.0, 0.75],
+	CROPS.Potato:
+		['Batata', Globals.potato_sprite, 10.0, 2.0],
+	CROPS.Turnip:
+		['Nabo', Globals.turnip_sprite, 15.0, 1.00]
 }
 
 var grid_pos : Vector2i

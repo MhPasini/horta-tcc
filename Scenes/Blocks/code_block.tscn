@@ -179,13 +179,17 @@ theme_override_icons/arrow = SubResource("PlaceholderTexture2D_h5wt2")
 selected = 0
 fit_to_longest_item = false
 allow_reselect = true
-item_count = 3
+item_count = 5
 popup/item_0/text = "Cenoura"
 popup/item_0/id = 0
 popup/item_1/text = "Cebola"
 popup/item_1/id = 1
 popup/item_2/text = "Rabanete"
 popup/item_2/id = 2
+popup/item_3/text = "Batata"
+popup/item_3/id = 3
+popup/item_4/text = "Nabo"
+popup/item_4/id = 4
 
 [node name="WaitTime" type="LineEdit" parent="MarginContainer/Methods"]
 unique_name_in_owner = true

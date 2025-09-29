@@ -4,6 +4,7 @@ extends Node
 @onready var robot : RobotClass = $Robot
 @onready var farm : FarmGrid = $FarmGrid
 @export var translationScreen = preload("res://Scenes/UI/translation_window.tscn")
+const OPTIONS = preload("res://Scenes/UI/options.tscn")
 
 var active_translation : Object = null
 
@@ -63,3 +64,7 @@ func _on_translation_requested(to:String = "portugol") -> void:
 
 func _on_screen_deletion() -> void:
 	active_translation = null
+
+func _on_options_btn_pressed():
+	var node = OPTIONS.instantiate()
+	$UI.add_child(node)

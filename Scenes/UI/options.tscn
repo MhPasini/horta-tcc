@@ -1,0 +1,169 @@
+[gd_scene load_steps=11 format=3 uid="uid://b10dwyug0hjs1"]
+
+[ext_resource type="Script" uid="uid://b0yx6ul34gip" path="res://Scenes/UI/options.gd" id="1_j6lap"]
+[ext_resource type="FontVariation" uid="uid://by0ta8qasx0nw" path="res://Fonts/MatchupPro_tabs.tres" id="2_35y0k"]
+[ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="3_0s3wi"]
+[ext_resource type="Texture2D" uid="uid://c4hhqh8ei3lok" path="res://UI/confirm.png" id="4_0s3wi"]
+[ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="5_jme0m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_th41f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjf7v"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qamcq"]
+content_margin_left = 1.0
+content_margin_top = 3.0
+content_margin_right = 1.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lb2cc"]
+content_margin_left = 2.0
+content_margin_top = 4.0
+content_margin_right = 2.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1prx2"]
+
+[node name="Options" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_th41f")
+script = ExtResource("1_j6lap")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -113.0
+offset_right = 80.0
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qjf7v")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.0
+offset_top = 11.0
+offset_right = 39.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_colors/font_shadow_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("2_35y0k")
+theme_override_font_sizes/font_size = 32
+text = "Opções"
+uppercase = true
+
+[node name="Btns" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 46.0
+offset_right = 60.0
+offset_bottom = 196.0
+grow_horizontal = 2
+
+[node name="Continue" type="Button" parent="Panel/Btns"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_0s3wi")
+text = "Continuar"
+
+[node name="LvlSelector" type="Button" parent="Panel/Btns"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_0s3wi")
+text = "Selecionar Nível"
+
+[node name="Menu" type="Button" parent="Panel/Btns"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_0s3wi")
+text = "Menu Inicial"
+
+[node name="Sounds" type="HBoxContainer" parent="Panel/Btns"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Btns/Sounds"]
+layout_mode = 2
+
+[node name="CloseApp" type="Button" parent="Panel/Btns"]
+layout_mode = 2
+size_flags_vertical = 10
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_0s3wi")
+text = "Encerrar App"
+
+[node name="HBox" type="HBoxContainer" parent="Panel/Btns/CloseApp"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Confirm" type="Button" parent="Panel/Btns/CloseApp/HBox"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/icon_max_width = 16
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qamcq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lb2cc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1prx2")
+icon = ExtResource("4_0s3wi")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Cancel" type="Button" parent="Panel/Btns/CloseApp/HBox"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/icon_max_width = 16
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qamcq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lb2cc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1prx2")
+icon = ExtResource("5_jme0m")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="Panel/Btns/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Panel/Btns/LvlSelector" to="." method="_on_lvl_selector_pressed"]
+[connection signal="pressed" from="Panel/Btns/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Panel/Btns/CloseApp" to="." method="_on_close_app_pressed"]
+[connection signal="pressed" from="Panel/Btns/CloseApp/HBox/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="pressed" from="Panel/Btns/CloseApp/HBox/Cancel" to="." method="_on_cancel_pressed"]
