@@ -20,8 +20,7 @@ func _on_lvl_selector_pressed():
 	pass # Replace with function body.
 
 func _on_menu_pressed():
-	#scene transition -> start menu
-	pass # Replace with function body.
+	SceneTransition.change_to_scene("menu", "Diamond")
 
 func _on_sfx_button_toggled(toggled_on):
 	Globals.sfx_on = toggled_on

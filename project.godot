@@ -11,7 +11,9 @@ config_version=5
 [application]
 
 config/name="Horta-TCC"
+run/main_scene="uid://cqxp3da6l0iei"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/show_image=false
 config/icon="uid://7uwi47cxmttd"
 
 [autoload]
@@ -19,6 +21,7 @@ config/icon="uid://7uwi47cxmttd"
 Events="*res://MiscScripts/EVENTS.gd"
 Globals="*res://MiscScripts/Globals.gd"
 ObjectiveManager="*res://Scenes/Game/ObjectiveManager.gd"
+SceneTransition="*res://Scenes/SceneTransition/scene_transition.tscn"
 
 [debug]
 

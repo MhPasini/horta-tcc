@@ -12,10 +12,9 @@ func _ready():
 	robot.position = start_position
 	robot.rest_position = start_position
 	robot.farm = farm
-	#robot.send_stat_update()
+	check_level_range()
 	Events.request_translation.connect(_on_translation_requested)
 	Events.level_completed.connect(_on_level_completed)
-	#$UI/CommandPanel/LvlControl/NextBtn.hide()
 
 func _on_reset_btn_pressed() -> void:
 	robot.reset_vars()
@@ -28,13 +27,22 @@ func _on_next_btn_pressed() -> void:
 	robot.reset_vars()
 	farm.reset_grid()
 	$UI/ObjectivesPanel.load_next_lvl()
-	#$UI/CommandPanel/LvlControl/NextBtn.hide()
-	if $UI/ObjectivesPanel.current_lvl >= (Globals.levels_completed.size() - 1):
-		$UI/CommandPanel/LvlControl/NextBtn.disabled = true
+	if Globals.level_selected >= (Globals.levels_completed.size() - 1):
+		$UI/CommandPanel/LvlControl/NextBtn.hide()
+	else:
+		$UI/CommandPanel/LvlControl/NextBtn.show()
+
+func _on_prev_btn_pressed():
+	robot.reset_vars()
+	farm.reset_grid()
+	$UI/ObjectivesPanel.load_prev_lvl()
+	if Globals.level_selected == 0:
+		$UI/CommandPanel/LvlControl/PrevBtn.hide()
+	else:
+		$UI/CommandPanel/LvlControl/PrevBtn.show()
 
 func _on_level_completed(ID:int) -> void:
 	Globals.levels_completed[ID] = true
-	$UI/CommandPanel/LvlControl/NextBtn.show()
 
 func _on_translation_btn_pressed() -> void:
 	Globals.cmd_panel.update_program()
@@ -68,3 +76,13 @@ func _on_screen_deletion() -> void:
 func _on_options_btn_pressed():
 	var node = OPTIONS.instantiate()
 	$UI.add_child(node)
+
+func check_level_range() -> void:
+	if Globals.level_selected == 0:
+		$UI/CommandPanel/LvlControl/PrevBtn.hide()
+	else:
+		$UI/CommandPanel/LvlControl/PrevBtn.show()
+	if Globals.level_selected >= (Globals.levels_completed.size() - 1):
+		$UI/CommandPanel/LvlControl/NextBtn.hide()
+	else:
+		$UI/CommandPanel/LvlControl/NextBtn.show()

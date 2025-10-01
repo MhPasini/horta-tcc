@@ -15,7 +15,7 @@ func _ready():
 	clear_list()
 	ObjectiveManager.clear_data()
 	objData = ObjectiveData.new()
-	load_objectives(0)
+	load_objectives(Globals.level_selected)
 
 func clear_list() -> void:
 	for obj in list.get_children():
@@ -24,6 +24,7 @@ func clear_list() -> void:
 
 func load_objectives(ID:int) -> void:
 	current_lvl = ID
+	Globals.level_selected = ID
 	var objective_data = objData.DATA[ID]
 	lvl_info.text = objective_data.title
 	for objective in objective_data.objectives:
@@ -51,6 +52,12 @@ func load_next_lvl() -> void:
 	ObjectiveManager.clear_data()
 	objData = ObjectiveData.new()
 	load_objectives(current_lvl + 1)
+
+func load_prev_lvl() -> void:
+	clear_list()
+	ObjectiveManager.clear_data()
+	objData = ObjectiveData.new()
+	load_objectives(current_lvl - 1)
 
 func _on_objective_completed():
 	if objectives.all(func(element): return element.completed):

@@ -31,6 +31,9 @@ var levels_completed : Array[bool]
 var bgm_on : bool = true : set = _set_bgm
 var sfx_on : bool = true : set = _set_sfx
 
+#GAME VARS
+var level_selected : int = 0
+
 func _ready():
 	set_mouse_cursors()
 	var objData = ObjectiveData.new()

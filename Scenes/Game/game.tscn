@@ -1310,6 +1310,15 @@ theme_override_colors/font_pressed_color = Color(1, 0.647059, 0, 1)
 theme_override_fonts/font = ExtResource("14_7pdpw")
 text = "Próximo Lvl"
 
+[node name="PrevBtn" type="Button" parent="UI/CommandPanel/LvlControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(1, 0.79869, 0.560991, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.647059, 0, 1)
+theme_override_fonts/font = ExtResource("14_7pdpw")
+text = "Voltar Lvl"
+
 [node name="BtnsArea" type="HBoxContainer" parent="UI/CommandPanel"]
 layout_mode = 1
 anchors_preset = 12
@@ -1490,6 +1499,7 @@ metadata/_edit_lock_ = true
 [connection signal="tab_changed" from="UI/CommandPanel/CodePanel/CodeTabs" to="UI/CommandPanel" method="_on_code_tabs_tab_changed"]
 [connection signal="pressed" from="UI/CommandPanel/LvlControl/ResetBtn" to="." method="_on_reset_btn_pressed"]
 [connection signal="pressed" from="UI/CommandPanel/LvlControl/NextBtn" to="." method="_on_next_btn_pressed"]
+[connection signal="pressed" from="UI/CommandPanel/LvlControl/PrevBtn" to="." method="_on_prev_btn_pressed"]
 [connection signal="pressed" from="UI/CommandPanel/BtnsArea/Play" to="UI/CommandPanel" method="_on_play_pressed"]
 [connection signal="pressed" from="UI/CommandPanel/BtnsArea/Stop" to="UI/CommandPanel" method="_on_stop_pressed"]
 [connection signal="pressed" from="UI/CommandPanel/BtnsArea/Clear" to="UI/CommandPanel" method="_on_clear_pressed"]
