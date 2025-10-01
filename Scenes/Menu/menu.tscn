@@ -1,10 +1,51 @@
-[gd_scene load_steps=13 format=4 uid="uid://d10u2xwth0yky"]
+[gd_scene load_steps=29 format=4 uid="uid://d10u2xwth0yky"]
 
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="1_8inha"]
+[ext_resource type="Script" uid="uid://b2qwl72u6tsrj" path="res://Scenes/Menu/menu.gd" id="1_i081d"]
+[ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="2_m6csd"]
 [ext_resource type="Texture2D" uid="uid://iq03yt0omy57" path="res://Textures/dirt.png" id="2_n2mnh"]
+[ext_resource type="FontVariation" uid="uid://by0ta8qasx0nw" path="res://Fonts/MatchupPro_tabs.tres" id="3_qok0p"]
 [ext_resource type="Texture2D" uid="uid://cl1wgniv3ka0i" path="res://Textures/Flower.png" id="3_x5f3s"]
+[ext_resource type="Texture2D" uid="uid://c4hhqh8ei3lok" path="res://UI/confirm.png" id="4_hgg7c"]
 [ext_resource type="Texture2D" uid="uid://cghd2yelq3wso" path="res://Textures/Grass.png" id="4_uwxxs"]
+[ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="5_3fcxt"]
 [ext_resource type="Texture2D" uid="uid://b88tlputq7qf5" path="res://Textures/tufts and lumps.png" id="5_qwfkq"]
+[ext_resource type="Texture2D" uid="uid://0bxs5cvra1ce" path="res://UI/Speaker.png" id="6_qok0p"]
+[ext_resource type="Texture2D" uid="uid://cemsumfpggg5e" path="res://UI/music.png" id="7_hgg7c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2ioa"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wxa3f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0401g"]
+content_margin_left = 2.0
+content_margin_top = 5.0
+content_margin_right = 2.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnqkc"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3fcxt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u2ioa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wv7rd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k0qon"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jqvb7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i081d"]
 resource_name = "GrassTiles"
@@ -229,14 +270,165 @@ sources/1 = SubResource("TileSetAtlasSource_3fcxt")
 sources/3 = SubResource("TileSetAtlasSource_u2ioa")
 
 [node name="Menu" type="Node"]
+script = ExtResource("1_i081d")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Title" type="Label" parent="UI"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 294.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_m6csd")
+theme_override_font_sizes/font_size = 48
+text = "Título"
+uppercase = true
+
+[node name="Panel" type="Panel" parent="UI"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -71.0
+offset_right = -40.0
+offset_bottom = 73.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u2ioa")
+
+[node name="Label" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -39.0
+offset_top = 11.0
+offset_right = 39.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_colors/font_shadow_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("3_qok0p")
+theme_override_font_sizes/font_size = 32
+text = "Menu"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Btns" type="VBoxContainer" parent="UI/Panel"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = 45.0
+offset_right = 60.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="UI/Panel/Btns"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("2_m6csd")
+text = "Jogar"
+
+[node name="LvlSelector" type="Button" parent="UI/Panel/Btns"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("2_m6csd")
+text = "Selecionar Nível"
+
+[node name="CloseApp" type="Button" parent="UI/Panel/Btns"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+size_flags_vertical = 10
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("2_m6csd")
+text = "SAIR"
+
+[node name="HBox" type="HBoxContainer" parent="UI/Panel/Btns/CloseApp"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+alignment = 1
+
+[node name="Confirm" type="Button" parent="UI/Panel/Btns/CloseApp/HBox"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/icon_max_width = 16
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wxa3f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0401g")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lnqkc")
+icon = ExtResource("4_hgg7c")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Cancel" type="Button" parent="UI/Panel/Btns/CloseApp/HBox"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/icon_max_width = 16
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wxa3f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0401g")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lnqkc")
+icon = ExtResource("5_3fcxt")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Sounds" type="HBoxContainer" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -122.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 34.0
+grow_horizontal = 0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="SFXButton" type="CheckButton" parent="UI/Sounds"]
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3fcxt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u2ioa")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wv7rd")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_k0qon")
+disabled = true
+icon = ExtResource("6_qok0p")
+
+[node name="BGMButton" type="CheckButton" parent="UI/Sounds"]
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jqvb7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u2ioa")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wv7rd")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_k0qon")
+disabled = true
+icon = ExtResource("7_hgg7c")
 
 [node name="Backgroud" type="Node2D" parent="."]
 z_index = -10
@@ -256,3 +448,11 @@ metadata/_edit_lock_ = true
 tile_map_data = PackedByteArray("AAD+/xMAAQACAAAAAAD//wUAAQABAAEAAAD//w4AAQACAAEAAAADABIAAQADAAEAAAAIABMAAQACAAEAAAALAAMAAQACAAEAAAAOAAAAAQAAAAEAAAAPABIAAQADAAIAAAAQAAEAAQACAAIAAAAQAA4AAQACAAAAAAASAP7/AwACAAMAAAASAP//AQAAAAEAAAATAAgAAQADAAEAAAAUAAoAAQABAAIAAAAVAAkAAQAAAAIAAAAWAAEAAQADAAIAAAAWAAUAAQABAAIAAAAXAAMAAQADAAEAAAAXAAgAAQADAAIAAAAYAP//AAAEAAEAAAAYAAYAAQAAAAIAAAAYABEAAQADAAEAAAAZAP//AQABAAIAAAAZAAIAAQABAAIAAAAZAA8AAQABAAIAAAAbAAMAAQACAAIAAAAbAA0AAQACAAAAAAAcAP7/AQAAAAAAAAAdAAIAAQAAAAEAAAAdAAYAAQABAAIAAAAeAP//AQADAAEAAAAeAAoAAQAAAAIAAAAfAA0AAQAAAAIAAAAfABIAAQADAAEAAAAgAAEAAQAAAAIAAAAgAAsAAQADAAEAAAAgAA8AAQAAAAIAAAAhAP//AQABAAIAAAAhAAUAAQACAAEAAAATAA4AAwAAAAIAAAD+/wgAAwACAAMAAAAAAAYAAwACAAIAAAAEAAMAAwABAAIAAAAHABQAAwACAAIAAAAIAP7/AwABAAMAAAAKABQAAwABAAIAAAANAP//AwADAAIAAAAPAP7/AwACAAIAAAAQABEAAwABAAIAAAARAAIAAwABAAIAAAARAA4AAwACAAIAAAATAAIAAwAAAAMAAAAVABQAAwAAAAIAAAAWABIAAwACAAMAAAAXAAwAAAAFAAAAAAAYAAEAAwACAAMAAAAZAAcAAwABAAMAAAAcAAQAAwACAAMAAAAcAA4AAwACAAIAAAAcABEAAwACAAMAAAAdAAkAAwAAAAIAAAAeAAEAAwACAAIAAAAeABEAAwABAAMAAAAgAAkAAwACAAMAAAAgABMAAwACAAMAAAAhAAQAAwACAAIAAAAhAAsAAwAAAAIAAAARAAoAAAAAAAEAAAAYAAsAAAAEAAAAAAAcAAkAAAACAAAAAAAdAAwAAAADAAMAAAATAAUAAAAAAAAAAAANAAQAAAAFAAAAAAANAAsAAAADAAMAAAAeAAYAAAAEAAIAAAAOAAgAAwABAAIAAAAQAAcAAwACAAIAAAAQAAwAAwAAAAIAAAARAAUAAwAAAAIAAAAMAAEAAwABAAIAAAAUABAAAQABAAEAAAA=")
 tile_set = SubResource("TileSet_wxa3f")
 metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="UI/Panel/Btns/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="UI/Panel/Btns/LvlSelector" to="." method="_on_lvl_selector_pressed"]
+[connection signal="pressed" from="UI/Panel/Btns/CloseApp" to="." method="_on_close_app_pressed"]
+[connection signal="pressed" from="UI/Panel/Btns/CloseApp/HBox/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="pressed" from="UI/Panel/Btns/CloseApp/HBox/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="toggled" from="UI/Sounds/SFXButton" to="." method="_on_sfx_button_toggled"]
+[connection signal="toggled" from="UI/Sounds/BGMButton" to="." method="_on_bgm_button_toggled"]

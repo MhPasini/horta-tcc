@@ -12,8 +12,12 @@ ok* Criar sistema para conferir os objetivos e reset para a etapa atual.
 
 Criar sistema de icentivo/eficiência (completar com 4 ou menos blocos, etc)
 
-Criar menu inicial com seletor de missão, modo livre e salvamento de progresso.
-
 Adicionar SFX e BGM.
 
 Adicionar menu de configurações (Volume, Idioma?, ?)
+
+Criar menu inicial
+
+Criar seletor de missão, modo livre e salvamento de progresso.
+
+Cria

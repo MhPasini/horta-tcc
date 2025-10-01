@@ -27,11 +27,23 @@ var tip_panel = null
 var func_list = []
 var levels_completed : Array[bool]
 
+#CONFIG VARS
+var bgm_on : bool = true : set = _set_bgm
+var sfx_on : bool = true : set = _set_sfx
+
 func _ready():
 	set_mouse_cursors()
 	var objData = ObjectiveData.new()
 	levels_completed.resize(objData.DATA.size())
 	print(levels_completed)
+
+func _set_bgm(v:bool) -> void:
+	bgm_on = v
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("BGM"), !bgm_on)
+
+func _set_sfx(v:bool) -> void:
+	sfx_on = v
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), !sfx_on)
 
 func set_mouse_cursors() -> void:
 	Input.set_custom_mouse_cursor(load("res://UI/Cursors/hand_open.png"), Input.CURSOR_POINTING_HAND, Vector2(6, 6))
