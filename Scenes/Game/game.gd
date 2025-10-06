@@ -27,19 +27,13 @@ func _on_next_btn_pressed() -> void:
 	robot.reset_vars()
 	farm.reset_grid()
 	$UI/ObjectivesPanel.load_next_lvl()
-	if Globals.level_selected >= (Globals.levels_completed.size() - 1):
-		$UI/CommandPanel/LvlControl/NextBtn.hide()
-	else:
-		$UI/CommandPanel/LvlControl/NextBtn.show()
+	check_level_range()
 
 func _on_prev_btn_pressed():
 	robot.reset_vars()
 	farm.reset_grid()
 	$UI/ObjectivesPanel.load_prev_lvl()
-	if Globals.level_selected == 0:
-		$UI/CommandPanel/LvlControl/PrevBtn.hide()
-	else:
-		$UI/CommandPanel/LvlControl/PrevBtn.show()
+	check_level_range()
 
 func _on_level_completed(ID:int) -> void:
 	Globals.levels_completed[ID] = true

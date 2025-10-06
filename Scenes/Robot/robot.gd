@@ -277,7 +277,8 @@ func send_log_message(msg:String, type:String = Globals.MSG_TYPE.normal) -> void
 	Events.console_message.emit(type + msg)
 
 func reset_vars() -> void:
-	storage  = {"Cenoura": 0, "Cebola": 0, "Rabanete": 0,}
+	for key in storage:
+		storage[key] =  0
 	position = rest_position
 	grid_pos = Vector2i.ZERO
 	outside_grid = true
