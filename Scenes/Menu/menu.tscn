@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://d10u2xwth0yky"]
+[gd_scene load_steps=43 format=4 uid="uid://d10u2xwth0yky"]
 
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="1_8inha"]
 [ext_resource type="Script" uid="uid://b2qwl72u6tsrj" path="res://Scenes/Menu/menu.gd" id="1_i081d"]
@@ -15,6 +15,11 @@
 [ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="8_hgg7c"]
 [ext_resource type="Texture2D" uid="uid://n7jugvbb10uj" path="res://Textures/Robot/drone_shadow.png" id="14_u2ioa"]
 [ext_resource type="Texture2D" uid="uid://buesw6espyu6l" path="res://Textures/Robot/mine_drone_idle_new.png" id="15_wxa3f"]
+[ext_resource type="Texture2D" uid="uid://cpkbhe3521uv5" path="res://Textures/Farmer/farmer-sheet.png" id="16_wxa3f"]
+
+[sub_resource type="FontVariation" id="FontVariation_0401g"]
+base_font = ExtResource("2_m6csd")
+spacing_top = -10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2ioa"]
 content_margin_left = 4.0
@@ -349,23 +354,56 @@ func _thread_done():
 	place_vegetables(vegetables)
 "
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpnbm"]
+atlas = ExtResource("16_wxa3f")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxv8i"]
+atlas = ExtResource("16_wxa3f")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26aa6"]
+atlas = ExtResource("16_wxa3f")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lnqkc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpnbm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxv8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26aa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxv8i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
 [node name="Menu" type="Node"]
 script = ExtResource("1_i081d")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Title" type="Label" parent="UI"]
-offset_left = 30.0
-offset_top = 30.0
-offset_right = 294.0
-offset_bottom = 68.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 284.0
+offset_bottom = 79.0
 theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_fonts/font = ExtResource("2_m6csd")
+theme_override_fonts/font = SubResource("FontVariation_0401g")
 theme_override_font_sizes/font_size = 48
-text = "Título"
+text = "Colheita
+Programada"
 uppercase = true
 
 [node name="Panel" type="Panel" parent="UI"]
@@ -584,6 +622,19 @@ frame_progress = 0.635951
 [node name="FarmGrid" type="Node" parent="."]
 script = SubResource("GDScript_hgg7c")
 vegetables = Array[Vector2i]([Vector2i(1, 50), Vector2i(2, 50), Vector2i(3, 50), Vector2i(4, 50), Vector2i(5, 50), Vector2i(1, 50)])
+
+[node name="Farmer" type="AnimatedSprite2D" parent="."]
+position = Vector2(404, 210)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_lnqkc")
+autoplay = "default"
+flip_h = true
+
+[node name="DroneShadow" type="Sprite2D" parent="Farmer"]
+show_behind_parent = true
+position = Vector2(0, 22)
+scale = Vector2(3, 3)
+texture = ExtResource("14_u2ioa")
 
 [connection signal="pressed" from="UI/Panel/Btns/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="UI/Panel/Btns/LvlSelector" to="." method="_on_lvl_selector_pressed"]

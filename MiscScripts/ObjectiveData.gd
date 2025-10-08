@@ -158,7 +158,7 @@ var DATA = [
 			{"type": "plant_at", "target": "any", "target_crop": "any", "completed": false, "progress_step": false},
 			{"type": "water_at", "target": "any", "completed": false, "progress_step": true},
 		]}],
-		"tip": "Funções ajudam a evitar código repetitivo.",
+		"tip": "Para criar uma função, arraste um bloco em cima da área f().",
 		"grid_state": {}
 	},
 	{

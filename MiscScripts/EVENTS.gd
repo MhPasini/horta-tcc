@@ -35,7 +35,7 @@ signal robot_harvest_at(cell:Vector2i, crop:String)
 signal update_info_text(info:String)
 signal new_translation(translation:String)
 signal request_translation(to:String)
-signal create_new_function(block:CodeBlock)
+signal create_new_function(data)
 signal code_tab_changed(tab:int)
 signal stop_execution
 #endregion

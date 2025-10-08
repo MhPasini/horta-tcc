@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=81 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -10,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://bswelfcys8bfe" path="res://Scenes/Robot/robot.tscn" id="8_56qi8"]
 [ext_resource type="FontFile" uid="uid://3ytuodnv4vag" path="res://Fonts/ThaleahFat.ttf" id="10_8e3kh"]
 [ext_resource type="Texture2D" uid="uid://dlcee44f2tkgk" path="res://Textures/crops/carrot_f.png" id="10_56bk2"]
+[ext_resource type="Texture2D" uid="uid://cpkbhe3521uv5" path="res://Textures/Farmer/farmer-sheet.png" id="10_th41f"]
 [ext_resource type="Script" uid="uid://b5n8ycdnagaug" path="res://Scenes/UI/outputConsole.gd" id="11_56qi8"]
+[ext_resource type="Texture2D" uid="uid://n7jugvbb10uj" path="res://Textures/Robot/drone_shadow.png" id="11_jpnbm"]
 [ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="12_2vowc"]
 [ext_resource type="Texture2D" uid="uid://bkmuyh8ueap6e" path="res://Textures/crops/onion_f.png" id="12_56h2t"]
 [ext_resource type="Texture2D" uid="uid://bojhto115g1g1" path="res://Textures/crops/radish_f.png" id="13_lcvqc"]
@@ -266,6 +268,49 @@ base_font = ExtResource("12_2vowc")
 spacing_glyph = 20
 spacing_bottom = -1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpnbm"]
+atlas = ExtResource("10_th41f")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxv8i"]
+atlas = ExtResource("10_th41f")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26aa6"]
+atlas = ExtResource("10_th41f")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4gqoa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpnbm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxv8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26aa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxv8i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_th41f"]
+resource_name = "Farmer"
+script/source = "extends AnimatedSprite2D
+
+func _notification(what):
+	if what == NOTIFICATION_DRAG_BEGIN:
+		self.play()
+	elif what == NOTIFICATION_DRAG_END:
+		self.pause()
+"
+
 [sub_resource type="GDScript" id="GDScript_56h2t"]
 resource_name = "Storage"
 script/source = "extends Node2D
@@ -441,13 +486,13 @@ func _ready():
 	hide()
 
 func _can_drop_data(_at_position, data:Variant):
-	if data is CodeBlock:
+	if data is CodeBlock or data is BlockData:
 		return true
 	else :
 		return false
 
 func _drop_data(_at_position, data:Variant):
-	if data is CodeBlock:
+	if data is CodeBlock or data is BlockData:
 		Events.create_new_function.emit(data)
 
 func _on_mouse_entered() -> void:
@@ -461,6 +506,9 @@ func _notification(what: int) -> void:
 		var data = get_viewport().gui_get_drag_data()
 		if data is CodeBlock:
 			if data.block_data.type != BlockData.Type.FUNCTION:
+				show()
+		elif data is BlockData:
+			if data.type != BlockData.Type.FUNCTION:
 				show()
 	if what == NOTIFICATION_DRAG_END and visible:
 		hide()
@@ -567,6 +615,20 @@ autowrap_mode = 1
 [node name="Robot" parent="." instance=ExtResource("8_56qi8")]
 position = Vector2(240, 180)
 offset = Vector2(0, -13)
+
+[node name="Farmer" type="AnimatedSprite2D" parent="."]
+position = Vector2(414, 310)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_4gqoa")
+frame_progress = 0.188653
+flip_h = true
+script = SubResource("GDScript_th41f")
+
+[node name="DroneShadow" type="Sprite2D" parent="Farmer"]
+show_behind_parent = true
+position = Vector2(0, 22)
+scale = Vector2(3, 3)
+texture = ExtResource("11_jpnbm")
 
 [node name="Storage" type="Node2D" parent="."]
 position = Vector2(309, 132)

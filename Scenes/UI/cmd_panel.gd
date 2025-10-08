@@ -98,20 +98,29 @@ func clear_program() -> void:
 	code_container.clear_code_blocks()
 	$Tooltip.show()
 
-func _on_create_new_function(block:CodeBlock) -> void:
+func _on_create_new_function(block) -> void:
 	var new_tab = code_tab.instantiate()
-	var old_container = block.parent_container
-	var list_index = block.get_index()
 	var tab_name = get_valid_name()
 	new_tab.name = tab_name
 	$CodePanel/CodeTabs.add_child(new_tab)
 	var container = new_tab.get_child(0) as CodeContainer
-	container.add_code_block(block)
 	container.func_container = true
 	new_tab.add_to_group(tab_name)
-	var f_data = BlockData.function(block.block_data, tab_name)
-	f_data.func_container = container
-	old_container.create_code_block(f_data, list_index)
+	var f_data : BlockData
+	if block is CodeBlock:
+		var old_container = block.parent_container
+		var list_index = block.get_index()
+		container.add_code_block(block)
+		f_data = BlockData.function(block.block_data, tab_name)
+		f_data.func_container = container
+		old_container.create_code_block(f_data, list_index)
+	elif block is BlockData:
+		f_data = BlockData.function(block, tab_name)
+		f_data.func_container = container
+		container.create_code_block(block)
+	create_side_func_block(f_data, tab_name)
+
+func create_side_func_block(f_data:BlockData, tab_name: String) -> void:
 	var f_sb = func_side_block.instantiate()
 	f_sb.data = f_data
 	f_sb.add_to_group(tab_name)
