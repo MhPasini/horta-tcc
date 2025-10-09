@@ -1,7 +1,5 @@
 *ok* Criar mais atividades para o robô. (Esperar, ?)
 
-Criar as animações de coletar, ragar, plantar, erro, aviso, etc
-
 *ok* Criar painel de vegetais coletados.
 
 *ok* Criar o painel de missões/objetivos, (pelo menos 1 para explicar cada função de comando). 
@@ -10,20 +8,20 @@ Criar as animações de coletar, ragar, plantar, erro, aviso, etc
 
 *ok* Criar sistema para conferir os objetivos e reset para a etapa atual.
 
-Criar sistema de icentivo/eficiência (completar com 4 ou menos blocos, etc)
-
-Adicionar SFX e BGM.
-
-Adicionar menu de configurações (Volume, Idioma?, ?)
-
 *ok* Criar menu inicial ~~ 
 
 *ok* Criar splash screen ~~ falta título e ícone
 
 *ok* Criar sistema de trocar as telas
 
-Criar seletor de missão
+*ok* Criar seletor de missão
 
-Sistema de salvar/carregar progresso.
+*ok* Sistema de salvar/carregar progresso.
 
-Cria
+Criar as animações de coletar, ragar, plantar, erro, aviso, etc
+
+Adicionar SFX e BGM.
+
+Adicionar menu de configurações (Volume, Idioma?, ?)
+...
+Criar sistema de icentivo/eficiência (completar com 4 ou menos blocos, etc)

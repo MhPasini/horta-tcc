@@ -14,39 +14,34 @@ const turnip_sprite : Texture = preload("res://Textures/crops/turnip.png")
 
 #Colors
 const block_font_color = Color("575757")
-#const method_color = Color("9ec9d9")
-#const loop_color = Color("9ec9d9")
-#const while_color = Color("9ec9d9")
-#const if_color = Color("9ec9d9")
-#const function_color = Color("9ec9d9")
-
-var robot_ref : RobotClass
-var active_code_tab : int = 0
-var cmd_panel
-var tip_panel = null
-var func_list = []
-var levels_completed : Array[bool]
 
 #CONFIG VARS
 var bgm_on : bool = true : set = _set_bgm
 var sfx_on : bool = true : set = _set_sfx
 
 #GAME VARS
+var robot_ref : RobotClass
+var cmd_panel
+var func_list = []
+var tip_panel = null
+var active_code_tab : int = 0
+var levels_completed : Array[bool]
 var level_selected : int = 0
 
 func _ready():
 	set_mouse_cursors()
 	var objData = ObjectiveData.new()
 	levels_completed.resize(objData.DATA.size())
-	print(levels_completed)
 
 func _set_bgm(v:bool) -> void:
 	bgm_on = v
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("BGM"), !bgm_on)
+	DataManager.save_data()
 
 func _set_sfx(v:bool) -> void:
 	sfx_on = v
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), !sfx_on)
+	DataManager.save_data()
 
 func set_mouse_cursors() -> void:
 	Input.set_custom_mouse_cursor(load("res://UI/Cursors/hand_open.png"), Input.CURSOR_POINTING_HAND, Vector2(6, 6))

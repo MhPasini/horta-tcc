@@ -15,7 +15,7 @@
 [ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="8_hgg7c"]
 [ext_resource type="Texture2D" uid="uid://n7jugvbb10uj" path="res://Textures/Robot/drone_shadow.png" id="14_u2ioa"]
 [ext_resource type="Texture2D" uid="uid://buesw6espyu6l" path="res://Textures/Robot/mine_drone_idle_new.png" id="15_wxa3f"]
-[ext_resource type="Texture2D" uid="uid://cpkbhe3521uv5" path="res://Textures/Farmer/farmer-sheet.png" id="16_wxa3f"]
+[ext_resource type="Texture2D" uid="uid://dggksmuq4wog0" path="res://Textures/Farmer/farmer-sheet.png" id="16_wxa3f"]
 
 [sub_resource type="FontVariation" id="FontVariation_0401g"]
 base_font = ExtResource("2_m6csd")
@@ -549,6 +549,7 @@ disabled = true
 icon = ExtResource("7_hgg7c")
 
 [node name="Info1" type="Label" parent="UI"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -561,6 +562,7 @@ theme_override_fonts/font = ExtResource("8_hgg7c")
 text = "TCC - Sistemas de Informação - UDESC (CEPLAN)"
 
 [node name="Info2" type="Label" parent="UI"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -573,6 +575,7 @@ theme_override_fonts/font = ExtResource("8_hgg7c")
 text = "Discente: Matheus H. W. Pasini"
 
 [node name="Info3" type="Label" parent="UI"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -628,6 +631,7 @@ position = Vector2(404, 210)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_lnqkc")
 autoplay = "default"
+frame = 3
 flip_h = true
 
 [node name="DroneShadow" type="Sprite2D" parent="Farmer"]

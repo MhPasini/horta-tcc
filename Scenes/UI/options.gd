@@ -1,5 +1,7 @@
 extends Panel
 
+const lv_selector = preload("res://Scenes/LvlSelector/lvl_selector.tscn")
+
 var in_menu :bool = false
 
 func _ready():
@@ -9,15 +11,16 @@ func _ready():
 		$Panel/Btns/CloseApp.hide()
 
 func _on_gui_input(event):
-	if event is InputEventMouseButton:
-		if event.is_pressed():
+	if event is InputEvent:
+		if event.is_action_pressed("click"):
 			queue_free()
 
 func _on_continue_pressed():
 	queue_free()
 
 func _on_lvl_selector_pressed():
-	pass # Replace with function body.
+	var s = lv_selector.instantiate()
+	self.add_sibling(s)
 
 func _on_menu_pressed():
 	SceneTransition.change_to_scene("menu", "Diamond")

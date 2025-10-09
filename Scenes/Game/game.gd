@@ -37,6 +37,7 @@ func _on_prev_btn_pressed():
 
 func _on_level_completed(ID:int) -> void:
 	Globals.levels_completed[ID] = true
+	DataManager.save_data()
 
 func _on_translation_btn_pressed() -> void:
 	Globals.cmd_panel.update_program()

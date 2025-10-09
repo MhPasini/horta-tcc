@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bswelfcys8bfe" path="res://Scenes/Robot/robot.tscn" id="8_56qi8"]
 [ext_resource type="FontFile" uid="uid://3ytuodnv4vag" path="res://Fonts/ThaleahFat.ttf" id="10_8e3kh"]
 [ext_resource type="Texture2D" uid="uid://dlcee44f2tkgk" path="res://Textures/crops/carrot_f.png" id="10_56bk2"]
-[ext_resource type="Texture2D" uid="uid://cpkbhe3521uv5" path="res://Textures/Farmer/farmer-sheet.png" id="10_th41f"]
+[ext_resource type="Texture2D" uid="uid://dggksmuq4wog0" path="res://Textures/Farmer/farmer-sheet.png" id="10_th41f"]
 [ext_resource type="Script" uid="uid://b5n8ycdnagaug" path="res://Scenes/UI/outputConsole.gd" id="11_56qi8"]
 [ext_resource type="Texture2D" uid="uid://n7jugvbb10uj" path="res://Textures/Robot/drone_shadow.png" id="11_jpnbm"]
 [ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="12_2vowc"]

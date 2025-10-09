@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://8dd8tga20j10"]
+
+[ext_resource type="FontVariation" uid="uid://dsb2mliclnrev" path="res://Fonts/ThaleahFat_tabs.tres" id="1_2ob3c"]
+[ext_resource type="Texture2D" uid="uid://bbihctswowu5x" path="res://UI/check_f.png" id="2_4sxq4"]
+[ext_resource type="Script" uid="uid://ea54khfb2x8j" path="res://Scenes/LvlSelector/lv_btn.gd" id="2_u3wm3"]
+[ext_resource type="Texture2D" uid="uid://u04jllr8hiqn" path="res://UI/check_t_green.png" id="4_u3wm3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_puals"]
+bg_color = Color(0, 0, 0, 0.35)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.619608, 0.788235, 0.85098, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ag5d"]
+bg_color = Color(0, 0, 0, 0.35)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.509804, 0.701961, 0.847059, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjfqq"]
+bg_color = Color(0, 0, 0, 0.35)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+anti_aliasing = false
+
+[node name="LvBtn" type="Button"]
+custom_minimum_size = Vector2(40, 40)
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("1_2ob3c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_puals")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8ag5d")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mjfqq")
+toggle_mode = true
+text = "Lv.1"
+script = ExtResource("2_u3wm3")
+check_icons = Array[CompressedTexture2D]([ExtResource("2_4sxq4"), ExtResource("4_u3wm3")])
+
+[node name="Check" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_4sxq4")
+expand_mode = 2
+stretch_mode = 5

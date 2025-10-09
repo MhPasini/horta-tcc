@@ -1,0 +1,207 @@
+[gd_scene load_steps=10 format=3 uid="uid://b05tbypwhvvaw"]
+
+[ext_resource type="StyleBox" uid="uid://jaiges0r4i5m" path="res://UI/Styles/solid_background_panel_noBorder.tres" id="1_sqsay"]
+[ext_resource type="FontFile" uid="uid://ciomtf2n18hg1" path="res://Fonts/MatchupPro.ttf" id="2_0xyct"]
+[ext_resource type="StyleBox" uid="uid://btd4k0yqt5gr3" path="res://UI/Styles/Panel_front.tres" id="3_lsxff"]
+[ext_resource type="StyleBox" uid="uid://dfx58hsumrpqr" path="res://UI/Styles/solid_background_panel.tres" id="4_lsxff"]
+[ext_resource type="FontVariation" uid="uid://by0ta8qasx0nw" path="res://Fonts/MatchupPro_tabs.tres" id="5_7t0bt"]
+[ext_resource type="FontVariation" uid="uid://blsb1kuml66jh" path="res://Fonts/tiny_variation.tres" id="8_q3l1k"]
+
+[sub_resource type="GDScript" id="GDScript_yr5tq"]
+resource_name = "LevelSelector"
+script/source = "extends Control
+
+const lv_btn = preload(\"res://Scenes/LvlSelector/lv_btn.tscn\")
+
+@onready var info = $Panel/InfoPanel/Info
+@onready var grid_container = $Panel/BtnPanel/ScrollContainer/GridContainer
+
+var btns : Array[LvBtn] = []
+
+func _ready():
+	add_lv_btns()
+	await get_tree().process_frame
+	info.text = btns[Globals.level_selected].info_text
+
+func add_lv_btns() -> void:
+	var lv_count = Globals.levels_completed.size()
+	var lv_data = ObjectiveData.new()
+	for lv in lv_count:
+		var btn = lv_btn.instantiate()
+		btn.id = lv
+		btn.lvl_text = \"Lv.%d\" % (lv + 1)
+		btn.info_text = lv_data.DATA[lv].title
+		grid_container.add_child(btn)
+		btn.set_completed(Globals.levels_completed[lv])
+		btn.pressed.connect(_on_btn_pressed.bind(btn))
+	btns.append_array(grid_container.get_children())
+
+func _on_btn_pressed(btn:LvBtn) -> void:
+	info.text = btn.info_text
+	Globals.level_selected = btn.id
+	unpress_btns(btn)
+
+func unpress_btns(except:LvBtn) -> void:
+	for btn in btns:
+		if btn == except:
+			continue
+		btn.set_pressed_no_signal(false)
+
+func _on_gui_input(event) -> void:
+	if event is InputEvent:
+		if event.is_action_pressed(\"click\"):
+			queue_free()
+
+func _on_play_pressed():
+	SceneTransition.change_to_scene(\"game\", \"Diamond\")
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_7t0bt"]
+font = ExtResource("2_0xyct")
+font_color = Color(0.937255, 0.807843, 0.537255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sc5x"]
+bg_color = Color(0.341176, 0.341176, 0.341176, 1)
+border_width_right = 1
+border_width_bottom = 5
+border_color = Color(0.278431, 0.282353, 0.282353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_right = 2.0
+anti_aliasing = false
+
+[node name="LvlSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_yr5tq")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(276, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -80.0
+offset_right = 138.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_sqsay")
+
+[node name="PanelLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 2.0
+offset_right = 109.0
+offset_bottom = 15.0
+text = "Selecionar nível"
+label_settings = SubResource("LabelSettings_7t0bt")
+uppercase = true
+
+[node name="BtnPanel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 17.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_lsxff")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/BtnPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="Panel/BtnPanel/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 6
+
+[node name="PlayPanel" type="Panel" parent="Panel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -16.0
+offset_bottom = 28.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("4_lsxff")
+
+[node name="Play" type="Button" parent="Panel/PlayPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.5
+offset_top = -3.0
+offset_right = 24.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_fonts/font = ExtResource("5_7t0bt")
+text = "Iniciar"
+flat = true
+
+[node name="InfoPanel" type="Panel" parent="Panel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+offset_right = 191.0
+offset_bottom = 28.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5sc5x")
+
+[node name="Info" type="Label" parent="Panel/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 17.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_q3l1k")
+text = "Lv.1 Movimentando o Robô"
+vertical_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="Panel/PlayPanel/Play" to="." method="_on_play_pressed"]

@@ -19,6 +19,7 @@ config/icon="uid://7uwi47cxmttd"
 [autoload]
 
 Events="*res://MiscScripts/EVENTS.gd"
+DataManager="*res://MiscScripts/DataManager.gd"
 Globals="*res://MiscScripts/Globals.gd"
 ObjectiveManager="*res://Scenes/Game/ObjectiveManager.gd"
 SceneTransition="*res://Scenes/SceneTransition/scene_transition.tscn"
@@ -40,6 +41,24 @@ mouse_cursor/custom_image="uid://c4on8bwo3yq4r"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/eranot.resizable/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://MiscScripts/": "yellow",
+"res://Scenes/": "orange",
+"res://Sounds&Music/": "pink",
+"res://Textures/": "blue",
+"res://UI/": "purple"
+}
+
+[input]
+
+click={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
 
 [rendering]
 
