@@ -6,14 +6,16 @@ class_name FarmGrid
 @export var slot_scene: PackedScene = preload("res://Scenes/FarmSlots/slot.tscn") 
 
 var grid : Grid = Grid.new()
-var thread = Thread.new()
+#var thread = Thread.new()
 
 func  _ready() -> void:
 	grid.size = size
 	grid.offset = gridOffset
-	if thread.is_alive():
-		return
-	thread.start(_place_farm_slots)
+	#if thread.is_alive():
+		#return
+	#thread.start(_place_farm_slots)
+	_place_farm_slots()
+	await get_tree().process_frame
 	Events.update_grid.connect(_on_update_grid)
 
 func _place_farm_slots() -> void:
@@ -25,7 +27,7 @@ func _place_farm_slots() -> void:
 			slot.grid_pos = cell
 			grid.update_cell(cell, slot)
 			call_deferred("add_child", slot)
-	call_deferred("_thread_done")
+	#call_deferred("_thread_done")
 
 func reset_grid() -> void:
 	for x in size.x:
@@ -51,5 +53,5 @@ func _on_update_grid(cell:Vector2i, vars:Array) -> void:
 	slot.grow_level = vars[1]
 	slot.water_level = vars[2]
 
-func _thread_done():
-	thread.wait_to_finish()
+#func _thread_done():
+	#thread.wait_to_finish()

@@ -9,6 +9,8 @@ func _ready():
 	$Panel/Btns/Sounds/BGMButton.set_pressed_no_signal(Globals.bgm_on)
 	if in_menu:
 		$Panel/Btns/CloseApp.hide()
+	if OS.has_feature("web"):
+		$Panel/Btns/CloseApp.hide()
 
 func _on_gui_input(event):
 	if event is InputEvent:

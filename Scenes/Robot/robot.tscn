@@ -2,34 +2,34 @@
 
 [ext_resource type="Texture2D" uid="uid://n7jugvbb10uj" path="res://Textures/Robot/drone_shadow.png" id="1_ahakn"]
 [ext_resource type="Script" uid="uid://c5po33upvsuox" path="res://Scenes/Robot/robot.gd" id="1_fr5qm"]
-[ext_resource type="Texture2D" uid="uid://buesw6espyu6l" path="res://Textures/Robot/mine_drone_idle_new.png" id="2_fr5qm"]
+[ext_resource type="Texture2D" uid="uid://dm4ptoo0i1uw3" path="res://Textures/Robot/drone_idle.png" id="3_fr5qm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1phco"]
-atlas = ExtResource("2_fr5qm")
+[sub_resource type="AtlasTexture" id="AtlasTexture_mestj"]
+atlas = ExtResource("3_fr5qm")
 region = Rect2(0, 0, 17, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nb51f"]
-atlas = ExtResource("2_fr5qm")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i0v6"]
+atlas = ExtResource("3_fr5qm")
 region = Rect2(17, 0, 17, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nnt18"]
-atlas = ExtResource("2_fr5qm")
+[sub_resource type="AtlasTexture" id="AtlasTexture_630i5"]
+atlas = ExtResource("3_fr5qm")
 region = Rect2(34, 0, 17, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ewbju"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1phco")
+"texture": SubResource("AtlasTexture_mestj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nb51f")
+"texture": SubResource("AtlasTexture_3i0v6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nnt18")
+"texture": SubResource("AtlasTexture_630i5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nb51f")
+"texture": SubResource("AtlasTexture_3i0v6")
 }],
 "loop": true,
 "name": &"Idle",
@@ -50,4 +50,5 @@ scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_ewbju")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.635951
+frame = 2
+frame_progress = 0.842277

@@ -9,7 +9,8 @@ func _ready():
 	$UI/Panel/Btns/CloseApp/HBox.hide()
 	sfx_button.set_pressed_no_signal(Globals.sfx_on)
 	bgm_button.set_pressed_no_signal(Globals.bgm_on)
-	print(Globals.levels_completed)
+	if OS.has_feature("web"):
+		$UI/Panel/Btns/CloseApp.hide()
 
 func _on_play_pressed():
 	Globals.level_selected = 0

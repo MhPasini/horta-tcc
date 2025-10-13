@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://d10u2xwth0yky"]
+[gd_scene load_steps=44 format=4 uid="uid://d10u2xwth0yky"]
 
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="1_8inha"]
 [ext_resource type="Script" uid="uid://b2qwl72u6tsrj" path="res://Scenes/Menu/menu.gd" id="1_i081d"]
@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cemsumfpggg5e" path="res://UI/music.png" id="7_hgg7c"]
 [ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="8_hgg7c"]
 [ext_resource type="Texture2D" uid="uid://n7jugvbb10uj" path="res://Textures/Robot/drone_shadow.png" id="14_u2ioa"]
-[ext_resource type="Texture2D" uid="uid://buesw6espyu6l" path="res://Textures/Robot/mine_drone_idle_new.png" id="15_wxa3f"]
+[ext_resource type="Texture2D" uid="uid://dm4ptoo0i1uw3" path="res://Textures/Robot/drone_idle.png" id="15_wxa3f"]
 [ext_resource type="Texture2D" uid="uid://dggksmuq4wog0" path="res://Textures/Farmer/farmer-sheet.png" id="16_wxa3f"]
 
 [sub_resource type="FontVariation" id="FontVariation_0401g"]
@@ -277,32 +277,36 @@ sources/0 = SubResource("TileSetAtlasSource_hgg7c")
 sources/1 = SubResource("TileSetAtlasSource_3fcxt")
 sources/3 = SubResource("TileSetAtlasSource_u2ioa")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1phco"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0401g"]
 atlas = ExtResource("15_wxa3f")
 region = Rect2(0, 0, 17, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nb51f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnqkc"]
 atlas = ExtResource("15_wxa3f")
 region = Rect2(17, 0, 17, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nnt18"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv7rd"]
 atlas = ExtResource("15_wxa3f")
 region = Rect2(34, 0, 17, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i0v6"]
+atlas = ExtResource("15_wxa3f")
+region = Rect2(17, 0, 17, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ewbju"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1phco")
+"texture": SubResource("AtlasTexture_0401g")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nb51f")
+"texture": SubResource("AtlasTexture_lnqkc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nnt18")
+"texture": SubResource("AtlasTexture_wv7rd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nb51f")
+"texture": SubResource("AtlasTexture_3i0v6")
 }],
 "loop": true,
 "name": &"Idle",
@@ -319,14 +323,17 @@ script/source = "extends Node
 @export var slot_scene: PackedScene = preload(\"res://Scenes/FarmSlots/slot.tscn\") 
 
 var grid : Grid = Grid.new()
-var thread = Thread.new()
+#var thread = Thread.new()
 
 func  _ready() -> void:
 	grid.size = size
 	grid.offset = gridOffset
-	if thread.is_alive():
-		return
-	thread.start(_place_farm_slots)
+	#if thread.is_alive():
+		#return
+	#thread.start(_place_farm_slots)
+	_place_farm_slots()
+	await get_tree().process_frame
+	place_vegetables(vegetables)
 
 func _place_farm_slots() -> void:
 	for x in size.x:
@@ -337,7 +344,7 @@ func _place_farm_slots() -> void:
 			slot.grid_pos = cell
 			grid.update_cell(cell, slot)
 			call_deferred(\"add_child\", slot)
-	call_deferred(\"_thread_done\")
+	#call_deferred(\"_thread_done\")
 
 func place_vegetables(vars:Array[Vector2i]) -> void:
 	for x in size.x:
@@ -349,9 +356,9 @@ func place_vegetables(vars:Array[Vector2i]) -> void:
 				slot.grow_level = vars[y].y
 				slot.growth_indicator.hide()
 
-func _thread_done():
-	thread.wait_to_finish()
-	place_vegetables(vegetables)
+#func _thread_done():
+	#thread.wait_to_finish()
+	#place_vegetables(vegetables)
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jpnbm"]
@@ -620,7 +627,8 @@ scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_ewbju")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.635951
+frame = 2
+frame_progress = 0.771816
 
 [node name="FarmGrid" type="Node" parent="."]
 script = SubResource("GDScript_hgg7c")
