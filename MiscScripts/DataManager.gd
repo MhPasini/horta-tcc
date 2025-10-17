@@ -6,7 +6,8 @@ func save_data() -> void:
 	var data = {
 		"bgm_on": Globals.bgm_on,
 		"sfx_on": Globals.sfx_on,
-		"completed_levels": Globals.levels_completed
+		"tutorial_on": Globals.tutorial_on,
+		"completed_levels": Globals.levels_completed,
 	}
 	var file = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
 	file.store_var(data)
@@ -19,5 +20,6 @@ func load_data() -> void:
 	var data = file.get_var()
 	Globals.bgm_on = data.get("bgm_on", true)
 	Globals.sfx_on = data.get("sfx_on", true)
+	Globals.tutorial_on = data.get("tutorial_on", true)
 	Globals.levels_completed = data.get("completed_levels")
 	file.close()

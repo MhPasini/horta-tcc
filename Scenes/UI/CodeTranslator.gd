@@ -57,7 +57,7 @@ static func _block_to_portugol(block:BlockData, indent_level: int = 0) -> String
 		block.Type.WHILE:
 			code += (
 				indent + _c("ENQUANTO ", pnk) + 
-				block.condition_text + _c_con(block) + 
+				block.condition_text + _c_con(block) +
 				_c(" FAÇA\n", pnk)
 				)
 			for child in block.child_blocks:
@@ -196,7 +196,11 @@ static func extract_functions(blocks: Array[BlockData], functions_found: Diction
 			extract_functions(block.else_blocks, functions_found)
 
 static func _c_con(block:BlockData) -> String:
-	var cond2 = " " + str(block.condition[1]) if block.condition[1] != null else ""
+	var cond2 = ""
+	if block.condition[1] != null:
+		cond2 = " " + str(block.condition[1])
+	else :
+		cond2 = " == " + str(block.condition[2])
 	return cond2
 
 static func _method_param(block:BlockData) -> String:

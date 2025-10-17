@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=3 uid="uid://dffnhjdios2w4"]
+
+[ext_resource type="FontVariation" uid="uid://by0ta8qasx0nw" path="res://Fonts/MatchupPro_tabs.tres" id="2_bmqle"]
+
+[sub_resource type="GDScript" id="GDScript_svrv0"]
+resource_name = "LvCompletedPopup"
+script/source = "extends Control
+
+var tween_time = 0.8
+
+func _ready():
+	var t = create_tween()
+	scale = Vector2.ONE * 0.2
+	t.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	t.tween_property(self, \"scale\", Vector2.ONE, tween_time)
+	await t.finished
+	terminate_self(1.6)
+
+func terminate_self(time_s:float) -> void:
+	await create_tween().tween_interval(time_s).finished
+	
+	var t = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	t.tween_property(self, \"scale\", Vector2.ZERO, 0.4)
+	await t.finished
+
+	queue_free()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1q5ck"]
+bg_color = Color(0, 0, 0, 0.735)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.937255, 0.807843, 0.537255, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+anti_aliasing = false
+
+[node name="LvlCompleted" type="Control"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 20)
+script = SubResource("GDScript_svrv0")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -98.0
+offset_top = -20.0
+offset_right = 98.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1q5ck")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_fonts/font = ExtResource("2_bmqle")
+theme_override_font_sizes/font_size = 32
+text = "Nível Concluído!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer" to="." method="_on_panel_container_mouse_exited"]

@@ -18,6 +18,12 @@
 
 *ok* Sistema de salvar/carregar progresso.
 
+Criar tutorial
+
+Adicionar pop-up com instruções de cada missão
+
+*ok* Adicionar pop-up quando concluir nível
+
 Criar as animações de coletar, ragar, plantar, erro, aviso, etc
 
 Adicionar SFX e BGM.

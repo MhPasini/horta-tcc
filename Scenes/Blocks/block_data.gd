@@ -11,7 +11,7 @@ enum Type {
 
 @export var type : Type = Type.METHOD
 @export var name : String = ""
-@export var condition : Array = ["", null]
+@export var condition : Array = ["", null, true]
 @export var condition_text : String = ""
 @export var wait_time : float = 1.0
 @export var loop_count : int = 1

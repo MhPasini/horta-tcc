@@ -292,6 +292,38 @@ popup/item_4/id = 4
 popup/item_5/text = "!="
 popup/item_5/id = 5
 
+[node name="equal" type="Label" parent="MarginContainer/IfElse/args"]
+visible = false
+layout_mode = 2
+text = "=="
+label_settings = SubResource("LabelSettings_2dql6")
+
+[node name="Condition3" type="OptionButton" parent="MarginContainer/IfElse/args"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme = SubResource("Theme_h5wt2")
+theme_override_colors/font_hover_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_fonts/font = ExtResource("3_oc8c7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g76dd")
+theme_override_constants/arrow_margin = 2
+theme_override_constants/modulate_arrow = 0
+theme_override_icons/arrow = SubResource("PlaceholderTexture2D_g76dd")
+icon_alignment = 2
+selected = 0
+fit_to_longest_item = false
+allow_reselect = true
+item_count = 2
+popup/item_0/text = "True"
+popup/item_0/id = 0
+popup/item_1/text = "False"
+popup/item_1/id = 1
+
 [node name="val" type="LineEdit" parent="MarginContainer/IfElse/args"]
 visible = false
 layout_mode = 2
@@ -464,6 +496,38 @@ popup/item_4/id = 4
 popup/item_5/text = "!="
 popup/item_5/id = 5
 
+[node name="equal" type="Label" parent="MarginContainer/While/args"]
+visible = false
+layout_mode = 2
+text = "=="
+label_settings = SubResource("LabelSettings_2dql6")
+
+[node name="Condition3" type="OptionButton" parent="MarginContainer/While/args"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme = SubResource("Theme_h5wt2")
+theme_override_colors/font_hover_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
+theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
+theme_override_fonts/font = ExtResource("3_oc8c7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tbiee")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g76dd")
+theme_override_constants/arrow_margin = 2
+theme_override_constants/modulate_arrow = 0
+theme_override_icons/arrow = SubResource("PlaceholderTexture2D_g76dd")
+icon_alignment = 2
+selected = 0
+fit_to_longest_item = false
+allow_reselect = true
+item_count = 2
+popup/item_0/text = "True"
+popup/item_0/id = 0
+popup/item_1/text = "False"
+popup/item_1/id = 1
+
 [node name="val" type="LineEdit" parent="MarginContainer/While/args"]
 visible = false
 layout_mode = 2
@@ -578,6 +642,8 @@ theme_override_constants/separation = 1
 [connection signal="text_changed" from="MarginContainer/Methods/WaitTime" to="." method="_on_wait_time_text_changed"]
 [connection signal="item_selected" from="MarginContainer/IfElse/args/Condition" to="." method="_on_if_condition_item_selected"]
 [connection signal="item_selected" from="MarginContainer/IfElse/args/Condition2" to="." method="_on_if_condition_2_item_selected"]
+[connection signal="item_selected" from="MarginContainer/IfElse/args/Condition3" to="." method="_on_if_condition_3_item_selected"]
 [connection signal="toggled" from="MarginContainer/IfElse/Else/ElseBtn" to="." method="_on_else_btn_toggled"]
 [connection signal="item_selected" from="MarginContainer/While/args/Condition" to="." method="_on_while_condition_item_selected"]
 [connection signal="item_selected" from="MarginContainer/While/args/Condition2" to="." method="_on_while_condition_2_item_selected"]
+[connection signal="item_selected" from="MarginContainer/While/args/Condition3" to="." method="_on_while_condition_3_item_selected"]

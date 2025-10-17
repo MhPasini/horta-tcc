@@ -4,7 +4,9 @@ extends Node
 @onready var robot : RobotClass = $Robot
 @onready var farm : FarmGrid = $FarmGrid
 @export var translationScreen = preload("res://Scenes/UI/translation_window.tscn")
+
 const OPTIONS = preload("res://Scenes/UI/options.tscn")
+const COMPLETED_POPUP = preload("res://Scenes/UI/lvl_completed.tscn")
 
 var active_translation : Object = null
 
@@ -38,6 +40,8 @@ func _on_prev_btn_pressed():
 func _on_level_completed(ID:int) -> void:
 	Globals.levels_completed[ID] = true
 	DataManager.save_data()
+	var node = COMPLETED_POPUP.instantiate()
+	$UI.add_child(node)
 
 func _on_translation_btn_pressed() -> void:
 	Globals.cmd_panel.update_program()

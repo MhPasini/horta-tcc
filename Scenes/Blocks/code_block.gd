@@ -96,6 +96,8 @@ func _on_LineEdit_text_changed(new_text: String, line_edit: LineEdit):
 func _on_if_condition_item_selected(index):
 	var text = $MarginContainer/IfElse/args/Condition.get_item_text(index)
 	$MarginContainer/IfElse/args/Condition2.visible = (index in [4, 5])
+	$MarginContainer/IfElse/args/Condition3.visible = (index in [0, 1, 2])
+	$MarginContainer/IfElse/args/equal.visible = (index in [0, 1, 2])
 	val_if.visible = (index in [4, 5])
 	if index in [4, 5]:
 		var cond_aux = $MarginContainer/IfElse/args/Condition2.get_selected_id()
@@ -108,6 +110,8 @@ func _on_if_condition_item_selected(index):
 func _on_while_condition_item_selected(index):
 	var text = $MarginContainer/While/args/Condition.get_item_text(index)
 	$MarginContainer/While/args/Condition2.visible = (index in [4, 5])
+	$MarginContainer/While/args/Condition3.visible = (index in [0, 1, 2])
+	$MarginContainer/While/args/equal.visible = (index in [0, 1, 2])
 	val_while.visible = (index in [4, 5])
 	if index in [4, 5]:
 		var cond_aux = $MarginContainer/While/args/Condition2.get_selected_id()
@@ -123,21 +127,27 @@ func _create_new_condition(text, aux) -> String:
 		0:
 			new_condition += "_igual"
 			block_data.block_text = text + " =="
+			block_data.condition_text = text + " =="
 		1:
 			new_condition += "_maior_igual"
 			block_data.block_text = text + " >="
+			block_data.condition_text = text + " >="
 		2:
 			new_condition += "_menor_igual"
 			block_data.block_text = text + " <="
+			block_data.condition_text = text + " <="
 		3:
 			new_condition += "_maior"
 			block_data.block_text = text + " >"
+			block_data.condition_text = text + " >"
 		4:
 			new_condition += "_menor"
 			block_data.block_text = text + " <"
+			block_data.condition_text = text + " <"
 		5:
 			new_condition += "_diferente"
 			block_data.block_text = text + " !="
+			block_data.condition_text = text + " !="
 	return new_condition
 
 func _on_seed_selection_item_selected(index):
@@ -149,10 +159,18 @@ func _on_if_condition_2_item_selected(index):
 	var text = $MarginContainer/IfElse/args/Condition.get_item_text(id)
 	block_data.condition[0] = _create_new_condition(text, index)
 
+func _on_if_condition_3_item_selected(index):
+	var value = true if index == 0 else false
+	block_data.condition[2] = value
+
 func _on_while_condition_2_item_selected(index):
 	var id = $MarginContainer/While/args/Condition.get_selected_id()
 	var text = $MarginContainer/While/args/Condition.get_item_text(id)
 	block_data.condition[0] = _create_new_condition(text, index)
+
+func _on_while_condition_3_item_selected(index):
+	var value = true if index == 0 else false
+	block_data.condition[2] = value
 
 func _on_child_list_updated(container:CodeContainer) -> void:
 	block_data.child_blocks = container.get_code_blocks()

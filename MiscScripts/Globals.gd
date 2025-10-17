@@ -18,6 +18,7 @@ const block_font_color = Color("575757")
 #CONFIG VARS
 var bgm_on : bool = true : set = _set_bgm
 var sfx_on : bool = true : set = _set_sfx
+var tutorial_on : bool = true : set = _set_tutorial_on
 
 #GAME VARS
 var robot_ref : RobotClass
@@ -41,6 +42,10 @@ func _set_bgm(v:bool) -> void:
 func _set_sfx(v:bool) -> void:
 	sfx_on = v
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), !sfx_on)
+	DataManager.save_data()
+
+func _set_tutorial_on(v:bool) -> void:
+	tutorial_on = v
 	DataManager.save_data()
 
 func set_mouse_cursors() -> void:

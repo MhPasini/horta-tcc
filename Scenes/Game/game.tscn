@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=4 uid="uid://dc2877mst36g5"]
+[gd_scene load_steps=98 format=4 uid="uid://dc2877mst36g5"]
 
 [ext_resource type="Script" uid="uid://c5o3kxklnnlor" path="res://Scenes/Game/game.gd" id="1_huoen"]
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="2_7jvlm"]
@@ -40,6 +40,9 @@
 [ext_resource type="PackedScene" uid="uid://ddhip8c6gsyfr" path="res://Scenes/UI/objective.tscn" id="28_d3jd4"]
 [ext_resource type="Script" uid="uid://bvtbtorqf117e" path="res://addons/eranot.resizable/resizable.gd" id="29_d3jd4"]
 [ext_resource type="Texture2D" uid="uid://bouqb6cp5w3mk" path="res://UI/expression_confused.png" id="35_lcvqc"]
+[ext_resource type="Texture2D" uid="uid://ta0e6c8t27er" path="res://UI/arrow_left.png" id="40_fxv8i"]
+[ext_resource type="Texture2D" uid="uid://cf5icu3o2oyts" path="res://UI/arrow_right.png" id="41_26aa6"]
+[ext_resource type="Texture2D" uid="uid://c4hhqh8ei3lok" path="res://UI/confirm.png" id="42_26aa6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_th41f"]
 resource_name = "GrassTiles"
@@ -566,6 +569,197 @@ texture_margin_top = 1.0
 texture_margin_right = 1.0
 texture_margin_bottom = 1.0
 
+[sub_resource type="GDScript" id="GDScript_4gqoa"]
+resource_name = "Tutorial"
+script/source = "extends Control
+
+@onready var back = $Panel/VBoxContainer/HBox/Back
+@onready var next = $Panel/VBoxContainer/HBox/Next
+@onready var finish = $Panel/VBoxContainer/HBox/Finish
+@onready var close_btn = $Panel/Control/CloseBtn
+@onready var msg1_label = $Panel/VBoxContainer/Label
+@onready var msg2_label = $Panel/VBoxContainer/Label2
+@onready var outliner = $Outliner
+
+var step : int = 0 : set = _on_set_step
+var last_step : int
+
+func _ready():
+	last_step = tutorial_data.size() - 1
+	back.hide()
+	connect_btns()
+
+func connect_btns() -> void:
+	next.pressed.connect(_on_next_pressed)
+	back.pressed.connect(_on_back_pressed)
+	finish.pressed.connect(_on_finish_pressed)
+	close_btn.pressed.connect(_on_close_btn_pressed)
+
+func load_step() -> void:
+	msg1_label.text = \"\"
+	msg2_label.text = \"\"
+	# animate panel position
+	msg2_label.visible_ratio = 0.0
+	msg1_label.text = tutorial_data[step][0]
+	msg2_label.text = tutorial_data[step][1]
+	await animate_text()
+	animate_outliner()
+
+func animate_text() -> bool:
+	var t = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	t.tween_property(msg2_label,\"visible_ratio\", 1.0, 2.0)
+	await t.finished
+	return true
+
+func animate_outliner() -> void:
+	var step_data = outliner_control[step]
+	if step_data[2]:
+		outliner.show()
+		var t = create_tween().set_trans(Tween.TRANS_SINE)
+		t.set_parallel(true)
+		t.tween_property(outliner,\"size\", step_data[0], 1.0)
+		t.tween_property(outliner,\"position\", step_data[1], 1.0)
+	else :
+		outliner.hide()
+
+func _on_next_pressed() -> void:
+	step += 1
+
+func _on_back_pressed() -> void:
+	step -= 1
+
+func _on_set_step(v:int) -> void:
+	step = v
+	back.visible = (step != 0)
+	next.visible = (step != last_step)
+	finish.visible = (step == last_step)
+	load_step()
+
+func _on_close_btn_pressed() -> void:
+	queue_free()
+
+func _on_finish_pressed() -> void:
+	finish_tutorial()
+
+func finish_tutorial() -> void:
+	Globals.tutorial_on = false
+	queue_free()
+
+var tutorial_data = [
+	[\"Bem Vindo à Colheita Programada!\", \"Vamos aprender a programar um robô para cuidar da horta - plantar, regar e colher.\"], # msg1, msg2
+	[\"Introdução\", \"Vamos mostrar brevemente como tudo funciona...\"], # msg1, msg2
+	[\"Robô-ajudante\", \"Este é seu robô-ajudante, ele vai seguir seus comandos passo a passo\"], # msg1, msg2
+	[\"Instruções (1/3)\", \"Aqui está a lista de instruções disponíveis para controlar seu ajudante agrícola...\"], # msg1, msg2
+	[\"Instruções (2/3)\", \"Para programar o robô, é só clicar e arrastar as instruções para o painel ao lado.\"], # msg1, msg2
+	[\"Instruções (3/3)\", \"Este painel mostra uma breve descrição sobre o bloco de instrução selecionado.\"], # msg1, msg2
+	
+]
+
+var outliner_control = [
+	[Vector2.ZERO, Vector2.ZERO, false], # size, position, visibility
+	[Vector2.ZERO, Vector2.ZERO, false], # size, position, visibility
+	[Vector2.ZERO, Vector2.ZERO, true], # size, position, visibility
+	[Vector2.ZERO, Vector2.ZERO, true], # size, position, visibility
+	[Vector2.ZERO, Vector2.ZERO, true], # size, position, visibility
+	[Vector2.ZERO, Vector2.ZERO, true], # size, position, visibility
+	
+]
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7icik"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.0823529, 0.0823529, 0.74902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.423529, 0.321569, 0.67451, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+anti_aliasing = false
+
+[sub_resource type="FontVariation" id="FontVariation_26aa6"]
+base_font = ExtResource("13_yox4t")
+spacing_top = -5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kllvy"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5vdi"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j8rd5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tn4br"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rht7h"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bkdpl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_26aa6"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gqoa"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7icik"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26aa6"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_7icik"]
+resource_name = "Outline"
+script/source = "extends PanelContainer
+
+@export var color_a : Color
+@export var color_b : Color
+
+func _ready():
+	modulate = color_b
+	blink_color(1.0)
+
+func blink_color(interval:float) -> void:
+	var t = create_tween().set_loops()
+	t.set_ease(Tween.EASE_IN_OUT)
+	t.set_trans(Tween.TRANS_SINE)
+	t.tween_property(self, \"modulate\", color_a, interval)
+	t.tween_property(self, \"modulate\", color_b, interval)
+"
+
 [node name="Game" type="Node"]
 script = ExtResource("1_huoen")
 
@@ -840,7 +1034,7 @@ mouse_filter = 2
 script = ExtResource("29_d3jd4")
 mode = 1
 border_width = 4
-min_size = Vector2(0, 88)
+min_size = Vector2(0, 56)
 max_size = Vector2(0, 270)
 active_handles = 1
 metadata/_custom_type_script = "uid://bvtbtorqf117e"
@@ -1093,6 +1287,7 @@ text = "MoverAnt"
 label_settings = SubResource("LabelSettings_3gqeb")
 
 [node name="MoveOrig" type="Panel" parent="UI/CommandPanel/BlocksPanel/VBox/ScrollContainer/Blocks"]
+visible = false
 self_modulate = Color(0.619608, 0.788235, 0.85098, 1)
 custom_minimum_size = Vector2(56, 16)
 layout_mode = 2
@@ -1491,6 +1686,18 @@ layout_mode = 2
 [node name="Label" parent="UI/ObjectivesPanel/VFlow/List/Objective2" index="1"]
 text = "Mover até o canteiro (2, 3) e plantar 1 cenoura"
 
+[node name="Objective3" parent="UI/ObjectivesPanel/VFlow/List" instance=ExtResource("28_d3jd4")]
+layout_mode = 2
+
+[node name="Label" parent="UI/ObjectivesPanel/VFlow/List/Objective3" index="1"]
+text = "Mover até o canteiro (2, 3) e plantar 1 cenoura"
+
+[node name="Objective4" parent="UI/ObjectivesPanel/VFlow/List" instance=ExtResource("28_d3jd4")]
+layout_mode = 2
+
+[node name="Label" parent="UI/ObjectivesPanel/VFlow/List/Objective4" index="1"]
+text = "Mover até o canteiro (2, 3) e plantar 1 cenoura"
+
 [node name="Control" type="Control" parent="UI/ObjectivesPanel"]
 layout_mode = 2
 
@@ -1530,6 +1737,132 @@ theme_override_colors/font_hover_color = Color(1, 0.79869, 0.560991, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.647059, 0, 1)
 theme_override_fonts/font = ExtResource("14_7pdpw")
 text = "Traduzir"
+
+[node name="Tutorial" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_4gqoa")
+
+[node name="Panel" type="PanelContainer" parent="UI/Tutorial"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -32.0
+offset_right = -120.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7icik")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Tutorial/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="UI/Tutorial/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_colors/font_shadow_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("20_gqd4u")
+theme_override_font_sizes/font_size = 16
+text = "Bem Vindo à Colheita Programada!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="UI/Tutorial/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = SubResource("FontVariation_26aa6")
+text = "Vamos aprender a programar um robô para cuidar da horta - plantar, regar e colher."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBox" type="HBoxContainer" parent="UI/Tutorial/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="UI/Tutorial/Panel/VBoxContainer/HBox"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kllvy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h5vdi")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j8rd5")
+icon = ExtResource("40_fxv8i")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Next" type="Button" parent="UI/Tutorial/Panel/VBoxContainer/HBox"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tn4br")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rht7h")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bkdpl")
+icon = ExtResource("41_26aa6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Finish" type="Button" parent="UI/Tutorial/Panel/VBoxContainer/HBox"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tn4br")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rht7h")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bkdpl")
+icon = ExtResource("42_26aa6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Control" type="Control" parent="UI/Tutorial/Panel"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CloseBtn" type="Button" parent="UI/Tutorial/Panel/Control"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -2.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 2.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_26aa6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4gqoa")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7icik")
+icon = ExtResource("24_3gqeb")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Outliner" type="PanelContainer" parent="UI/Tutorial"]
+visible = false
+layout_mode = 1
+offset_right = 264.0
+offset_bottom = 73.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_26aa6")
+script = SubResource("GDScript_7icik")
+color_a = Color(0.552941, 0.407843, 0.756863, 1)
+color_b = Color(0.396078, 0.568627, 0.788235, 1)
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 180)
@@ -1571,3 +1904,5 @@ metadata/_edit_lock_ = true
 
 [editable path="UI/ObjectivesPanel/VFlow/List/Objective"]
 [editable path="UI/ObjectivesPanel/VFlow/List/Objective2"]
+[editable path="UI/ObjectivesPanel/VFlow/List/Objective3"]
+[editable path="UI/ObjectivesPanel/VFlow/List/Objective4"]

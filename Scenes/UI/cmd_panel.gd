@@ -135,7 +135,7 @@ func _check_condition(condition:Array) -> bool:
 		if condition[1] != null:
 			return robot.call(condition[0], condition[1])
 		else :
-			return robot.call(condition[0])
+			return robot.call(condition[0], condition[2])
 	else:
 		print("Condição não encontrada: ", condition)
 		return false

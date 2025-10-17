@@ -21,7 +21,7 @@ var DATA = [
 			"steps":[
 				{"type": "move_to", "target": Vector2i(0, 5), "completed": false, "progress_step": false}
 			]}],
-		"tip": "Utilize os blocos de movimento 'MoverOrigem', 'MoverProx', 'MoverAnt' e 'MoverPara'",
+		"tip": "Utilize os blocos de movimento 'MoverPara', 'MoverProx' e 'MoverAnt'",
 		"grid_state": {}
 	},
 	{
@@ -256,24 +256,3 @@ var DATA = [
 		"grid_state": {}
 	}
 ]
-
-#"move_to":
-	#if curr_pos == objective.target:
-		#complete_objective(objective)
-		#break
-#"move_dir":
-	#if last_move_dir == objective.target:
-		#complete_objective(objective)
-		#break
-#"plant_at":
-	#if last_crop == objective.target_crop and curr_pos == objective.target:
-		#complete_objective(objective)
-		#break
-#"water_at":
-	#if curr_pos == objective.target:
-		#complete_objective(objective)
-		#break
-#"harvest_at":
-	#if curr_pos == objective.target and last_crop == objective.target_crop:
-		#complete_objective(objective)
-		#break

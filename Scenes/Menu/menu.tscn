@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://d10u2xwth0yky"]
+[gd_scene load_steps=47 format=4 uid="uid://d10u2xwth0yky"]
 
 [ext_resource type="Texture2D" uid="uid://bprjsx4wnit6n" path="res://Textures/Grass_spring.png" id="1_8inha"]
 [ext_resource type="Script" uid="uid://b2qwl72u6tsrj" path="res://Scenes/Menu/menu.gd" id="1_i081d"]
@@ -8,8 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://cl1wgniv3ka0i" path="res://Textures/Flower.png" id="3_x5f3s"]
 [ext_resource type="Texture2D" uid="uid://c4hhqh8ei3lok" path="res://UI/confirm.png" id="4_hgg7c"]
 [ext_resource type="Texture2D" uid="uid://cghd2yelq3wso" path="res://Textures/Grass.png" id="4_uwxxs"]
+[ext_resource type="FontVariation" uid="uid://blsb1kuml66jh" path="res://Fonts/tiny_variation.tres" id="4_wv7rd"]
 [ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="5_3fcxt"]
+[ext_resource type="Texture2D" uid="uid://u04jllr8hiqn" path="res://UI/check_t_green.png" id="5_k0qon"]
 [ext_resource type="Texture2D" uid="uid://b88tlputq7qf5" path="res://Textures/tufts and lumps.png" id="5_qwfkq"]
+[ext_resource type="Texture2D" uid="uid://bbihctswowu5x" path="res://UI/check_f.png" id="6_jqvb7"]
 [ext_resource type="Texture2D" uid="uid://0bxs5cvra1ce" path="res://UI/Speaker.png" id="6_qok0p"]
 [ext_resource type="Texture2D" uid="uid://cemsumfpggg5e" path="res://UI/music.png" id="7_hgg7c"]
 [ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="8_hgg7c"]
@@ -419,9 +422,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -71.0
-offset_right = -40.0
+offset_left = -188.0
+offset_top = -57.0
+offset_right = -58.0
 offset_bottom = 73.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -433,12 +436,11 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -39.0
-offset_top = 11.0
+offset_top = -23.0
 offset_right = 39.0
-offset_bottom = 34.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
-theme_override_colors/font_shadow_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_qok0p")
 theme_override_font_sizes/font_size = 32
 text = "Menu"
@@ -453,9 +455,9 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -60.0
-offset_top = 45.0
+offset_top = 8.0
 offset_right = 60.0
-offset_bottom = -10.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -466,7 +468,7 @@ theme_override_colors/font_hover_color = Color(0.619608, 0.788235, 0.85098, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
 theme_override_fonts/font = ExtResource("2_m6csd")
-text = "Jogar"
+text = "Iniciar"
 
 [node name="LvlSelector" type="Button" parent="UI/Panel/Btns"]
 layout_mode = 2
@@ -476,6 +478,17 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.509804, 0.701961, 0.847059, 1)
 theme_override_fonts/font = ExtResource("2_m6csd")
 text = "Selecionar Nível"
+
+[node name="Tutorial" type="CheckBox" parent="UI/Panel/Btns"]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+theme_override_fonts/font = ExtResource("4_wv7rd")
+theme_override_icons/checked = ExtResource("5_k0qon")
+theme_override_icons/unchecked = ExtResource("6_jqvb7")
+button_pressed = true
+text = "TUTORIAL"
+icon_alignment = 2
 
 [node name="CloseApp" type="Button" parent="UI/Panel/Btns"]
 custom_minimum_size = Vector2(0, 22)
@@ -650,6 +663,7 @@ texture = ExtResource("14_u2ioa")
 
 [connection signal="pressed" from="UI/Panel/Btns/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="UI/Panel/Btns/LvlSelector" to="." method="_on_lvl_selector_pressed"]
+[connection signal="toggled" from="UI/Panel/Btns/Tutorial" to="." method="_on_tutorial_toggled"]
 [connection signal="pressed" from="UI/Panel/Btns/CloseApp" to="." method="_on_close_app_pressed"]
 [connection signal="pressed" from="UI/Panel/Btns/CloseApp/HBox/Confirm" to="." method="_on_confirm_pressed"]
 [connection signal="pressed" from="UI/Panel/Btns/CloseApp/HBox/Cancel" to="." method="_on_cancel_pressed"]

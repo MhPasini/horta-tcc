@@ -169,17 +169,17 @@ func harvest_crop() -> bool:
 #endregion
 
 #region CHECK CONDITIONS
-func lote_vazio() -> bool:
+func lote_vazio(v:bool) -> bool:
 	var slot = farm.grid.get_cell_value(grid_pos) as FarmSlot
-	return slot.is_empty
+	return (slot.is_empty == v)
 
-func lote_seco() -> bool:
+func lote_seco(v:bool) -> bool:
 	var slot = farm.grid.get_cell_value(grid_pos) as FarmSlot
-	return slot.is_dry
+	return (slot.is_dry == v)
 
-func planta_ok() -> bool:
+func planta_ok(v:bool) -> bool:
 	var slot = farm.grid.get_cell_value(grid_pos) as FarmSlot
-	return slot.is_grown
+	return (slot.is_grown == v)
 
 func robo_cheio() -> bool:
 	return storage_full
