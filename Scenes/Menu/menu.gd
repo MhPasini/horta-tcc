@@ -11,6 +11,7 @@ func _ready():
 	sfx_button.set_pressed_no_signal(Globals.sfx_on)
 	bgm_button.set_pressed_no_signal(Globals.bgm_on)
 	tutorial_check.set_pressed_no_signal(Globals.tutorial_on)
+	print("Tutorial: ", Globals.tutorial_on)
 	if OS.has_feature("web"):
 		$UI/Panel/Btns/CloseApp.hide()
 
@@ -42,3 +43,4 @@ func _on_bgm_button_toggled(toggled_on):
 
 func _on_tutorial_toggled(toggled_on):
 	Globals.tutorial_on = toggled_on
+	print("Tutorial: ", Globals.tutorial_on)

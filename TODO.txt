@@ -18,9 +18,9 @@
 
 *ok* Sistema de salvar/carregar progresso.
 
-Criar tutorial
+*ok* Criar tutorial
 
-Adicionar pop-up com instruções de cada missão
+*ok* Adicionar pop-up com instruções de cada missão
 
 *ok* Adicionar pop-up quando concluir nível
 

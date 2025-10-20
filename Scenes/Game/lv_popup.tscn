@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://chviypp4k64po"]
+
+[ext_resource type="StyleBox" uid="uid://btd4k0yqt5gr3" path="res://UI/Styles/Panel_front.tres" id="1_4kla3"]
+[ext_resource type="Script" uid="uid://vvqwpqse0yh7" path="res://Scenes/Game/lv_popup.gd" id="1_swd7u"]
+[ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="3_aet7n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5apg2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0.0823529, 0.0823529, 0.74902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.423529, 0.321569, 0.67451, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+anti_aliasing = false
+
+[sub_resource type="FontVariation" id="FontVariation_kihqc"]
+base_font = ExtResource("3_aet7n")
+spacing_top = -5
+
+[node name="LvPopup" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_4kla3")
+script = ExtResource("1_swd7u")
+
+[node name="P_b" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -12.5
+offset_right = 140.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5apg2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="P_b"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="P_b/VBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_colors/font_shadow_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = SubResource("FontVariation_kihqc")
+theme_override_font_sizes/font_size = 32
+text = "Nível 1: Movimentando o Robô"
+horizontal_alignment = 1
+autowrap_mode = 3

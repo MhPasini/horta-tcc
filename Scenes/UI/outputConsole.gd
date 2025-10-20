@@ -7,6 +7,7 @@ const MAX_LINES = 200
 func _ready():
 	clear_console()
 	Events.console_message.connect(add_console_message)
+	Globals.console = self
 
 func add_console_message(message: String) -> void:
 	console.append_text("> " + message + "\n")

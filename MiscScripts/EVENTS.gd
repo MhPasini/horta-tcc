@@ -43,4 +43,5 @@ signal stop_execution
 signal console_message(msg: String)
 signal level_completed(lvl_ID: int)
 signal update_grid(slot:Vector2i, vars:Array)
+signal tutorial_completed
 #signal update_stat_text(stats:Array)

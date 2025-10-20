@@ -2,6 +2,7 @@ extends PanelContainer
 
 const objective_node = preload("res://Scenes/UI/objective.tscn")
 const questTipPanel = preload("res://Scenes/UI/quest_tip.tscn")
+const lv_popup = preload("res://Scenes/Game/lv_popup.tscn")
 
 var objectives : Array[Objective] = []
 var objData : ObjectiveData
@@ -16,6 +17,8 @@ func _ready():
 	ObjectiveManager.clear_data()
 	objData = ObjectiveData.new()
 	load_objectives(Globals.level_selected)
+	Globals.objectives_panel = self
+	Events.tutorial_completed.connect(_on_tutorial_completed)
 
 func clear_list() -> void:
 	for obj in list.get_children():
@@ -40,6 +43,8 @@ func load_objectives(ID:int) -> void:
 	ObjectiveManager.objectives_list = objectives
 	load_grid_state(objective_data)
 	tip_text = objective_data.tip
+	if !Globals.tutorial_on:
+		show_popup(objective_data.title)
 
 func load_grid_state(objective_data) -> void:
 	if not objective_data.grid_state.is_empty():
@@ -64,6 +69,11 @@ func _on_objective_completed():
 		print("Level completed")
 		Events.level_completed.emit(current_lvl)
 
+func show_popup(lv_text:String) -> void:
+	var popup = lv_popup.instantiate()
+	popup.lb_text = lv_text
+	add_sibling.call_deferred(popup)
+
 func reset_lvl() -> void:
 	clear_list()
 	ObjectiveManager.clear_data()
@@ -75,3 +85,8 @@ func _on_quest_tip_btn_pressed():
 		var tip_p = questTipPanel.instantiate()
 		tip_p.tip_text = tip_text
 		get_parent().add_child(tip_p)
+
+func _on_tutorial_completed() -> void:
+	var objective_data = objData.DATA[current_lvl]
+	var lv_text = objective_data.title
+	show_popup(lv_text)

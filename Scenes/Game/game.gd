@@ -7,6 +7,7 @@ extends Node
 
 const OPTIONS = preload("res://Scenes/UI/options.tscn")
 const COMPLETED_POPUP = preload("res://Scenes/UI/lvl_completed.tscn")
+const TUTORIAL = preload("res://Scenes/Tutorial/tutorial.tscn")
 
 var active_translation : Object = null
 
@@ -14,9 +15,18 @@ func _ready():
 	robot.position = start_position
 	robot.rest_position = start_position
 	robot.farm = farm
-	check_level_range()
 	Events.request_translation.connect(_on_translation_requested)
 	Events.level_completed.connect(_on_level_completed)
+	Globals.translate_btn = $UI/TranslationBtn
+	check_level_range()
+	if Globals.tutorial_on and Globals.level_selected == 0:
+		var tutor = TUTORIAL.instantiate()
+		$UI.add_child(tutor)
+
+func _unhandled_key_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		var node = OPTIONS.instantiate()
+		$UI.add_child(node)
 
 func _on_reset_btn_pressed() -> void:
 	robot.reset_vars()

@@ -14,15 +14,21 @@ var state = IDLE
 enum {PLAYING, IDLE}
 
 func _ready():
-	robot = Globals.robot_ref
+	set_globals_references()
 	connect_signals()
 	set_play_pause_visibility(false)
-	Globals.cmd_panel = self
 
 func connect_signals() -> void:
 	Events.update_info_text.connect(_update_info_text)
 	Events.create_new_function.connect(_on_create_new_function)
 	code_container.code_list_updated.connect(_on_code_list_updated)
+
+func set_globals_references() -> void:
+	robot = Globals.robot_ref
+	Globals.cmd_panel = self
+	Globals.block_list = $BlocksPanel
+	Globals.block_info = $InfoPanel
+	Globals.cmd_btns = $BtnsArea
 
 func run_program() -> void:
 	var _ok : bool = true

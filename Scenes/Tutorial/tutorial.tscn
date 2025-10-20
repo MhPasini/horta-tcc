@@ -1,0 +1,354 @@
+[gd_scene load_steps=21 format=3 uid="uid://cnmke3xt01idf"]
+
+[ext_resource type="StyleBox" uid="uid://bs65ro66yh7vy" path="res://UI/Styles/tutorial_panel.tres" id="1_xpl50"]
+[ext_resource type="FontVariation" uid="uid://by0ta8qasx0nw" path="res://Fonts/MatchupPro_tabs.tres" id="2_n53el"]
+[ext_resource type="FontFile" uid="uid://cmvco7md03lx0" path="res://Fonts/TinyUnicode.ttf" id="3_nrevq"]
+[ext_resource type="Texture2D" uid="uid://ta0e6c8t27er" path="res://UI/arrow_left.png" id="4_n7yiw"]
+[ext_resource type="Texture2D" uid="uid://cf5icu3o2oyts" path="res://UI/arrow_right.png" id="5_tnu2s"]
+[ext_resource type="Texture2D" uid="uid://c4hhqh8ei3lok" path="res://UI/confirm.png" id="6_mr02u"]
+[ext_resource type="Texture2D" uid="uid://fot6k1pccqp5" path="res://UI/cancel.png" id="7_41rtk"]
+
+[sub_resource type="GDScript" id="GDScript_4gqoa"]
+resource_name = "Tutorial"
+script/source = "extends Control
+
+@onready var back = $P_a/P_b/VBoxContainer/HBox/Back
+@onready var next = $P_a/P_b/VBoxContainer/HBox/Next
+@onready var finish = $P_a/P_b/VBoxContainer/HBox/Finish
+@onready var close_btn = $P_a/P_b/Control/CloseBtn
+@onready var msg1_label = $P_a/P_b/VBoxContainer/Label
+@onready var msg2_label = $P_a/P_b/VBoxContainer/Label2
+@onready var outliner = $Outliner
+@onready var robot = Globals.robot_ref
+var robot_pos : Vector2
+var outliner_control
+
+var step : int = 0 : set = _on_set_step
+var last_step : int
+
+func _ready():
+	last_step = tutorial_data.size() - 1
+	back.hide()
+	outliner.hide()
+	outliner.outline.custom_minimum_size = Vector2.ZERO
+	robot_pos = node2d_to_screen(robot)
+	set_outliner_control()
+	connect_btns()
+
+func connect_btns() -> void:
+	next.pressed.connect(_on_next_pressed)
+	back.pressed.connect(_on_back_pressed)
+	finish.pressed.connect(_on_finish_pressed)
+	close_btn.pressed.connect(_on_close_btn_pressed)
+
+func node2d_to_screen(node: Node2D) -> Vector2:
+	var vp := node.get_viewport()
+	var canvas_xform := vp.get_canvas_transform()
+	return canvas_xform * node.global_position
+
+func load_step() -> void:
+	msg1_label.text = \"\"
+	msg2_label.text = \"\"
+	# animate panel position
+	msg2_label.visible_ratio = 0.0
+	msg1_label.text = tutorial_data[step][0]
+	msg2_label.text = tutorial_data[step][1]
+	animate_text()
+	animate_outliner()
+
+func animate_text() -> void:
+	var t = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	t.tween_property(msg2_label,\"visible_ratio\", 1.0, 2.0)
+
+func animate_outliner() -> void:
+	var step_data = outliner_control[step]
+	if step_data[2]:
+		outliner.show()
+		outliner.use_top_left = step_data[3]
+		var t = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		t.set_parallel(true)
+		t.tween_method(outliner.change_rect, outliner.outline.custom_minimum_size, step_data[0], 1.0)
+		t.tween_property(outliner, \"size\", step_data[0], 1.0)
+		t.tween_property(outliner, \"position\", step_data[1], 1.0)
+	else :
+		outliner.hide()
+
+func _on_next_pressed() -> void:
+	step += 1
+
+func _on_back_pressed() -> void:
+	step -= 1
+
+func _on_set_step(v:int) -> void:
+	step = v
+	back.visible = (step != 0)
+	next.visible = (step != last_step)
+	finish.visible = (step == last_step)
+	load_step()
+
+func _on_close_btn_pressed() -> void:
+	queue_free()
+
+func _on_finish_pressed() -> void:
+	finish_tutorial()
+
+func finish_tutorial() -> void:
+	Globals.tutorial_on = false
+	Events.tutorial_completed.emit()
+	queue_free()
+
+var tutorial_data = [
+	[\"Bem Vindo à Colheita Programada!\", \"Vamos aprender a programar um robô para cuidar da horta - plantar, regar e colher.\"], # msg1, msg2
+	[\"Introdução\", \"Vamos mostrar brevemente como tudo funciona...\"], # msg1, msg2
+	[\"Robô-ajudante\", \"Este é seu robô-ajudante, ele vai seguir seus comandos passo a passo...\"], # msg1, msg2
+	[\"Instruções (1/3)\", \"Aqui está a lista de instruções disponíveis para controlar seu ajudante agrícola...\"], # msg1, msg2
+	[\"Instruções (2/3)\", \"Para programar o robô, é só clicar e arrastar as instruções para o painel ao lado.\"], # msg1, msg2
+	[\"Instruções (3/3)\", \"Este painel mostra uma breve descrição sobre o bloco de instrução selecionado.\"], # msg1, msg2
+	[\"Código (1/3)\", \"O painel de comandos é o cérebro do robô...\"], # msg1, msg2
+	[\"Código (2/3)\", \"... todas as instruções programadas aqui são seguidas sequêncialmente.\"], # msg1, msg2
+	[\"Código (3/3)\", \"Aqui estão os botões para controlar a execução do código ou limpar o painel.\"], # msg1, msg2
+	[\"Tradução\", \"Clicando em traduzir, todo seu código é traduzido em texto e apresentado em uma nova janela.\"], # msg1, msg2
+	[\"Tradução\", \"A tradução do código está disponível em Portugol, Python ou C\"], # msg1, msg2
+	[\"Saída do Console\", \"Para cada ação do robô, uma menssagem é colocada aqui.\"], # msg1, msg2
+	[\"Objetivos (1/2)\", \"Aqui está a lista de objetivos para completar o nível atual...\"], # msg1, msg2
+	[\"Objetivos (2/2)\", \"... cada nível trará novos conceitos, logo você estará automatizando toda a horta!\"], # msg1, msg2
+	[\"Começe a Programar\", \"Por enquanto é isso, tente completar alguns níveis, ou crie seus próprios objetivos.\"], # msg1, msg2
+	
+]
+
+func set_outliner_control() -> void:
+	outliner_control = [
+	[Vector2.ZERO, Vector2.ZERO, false, false], # size, position, visibility, top_left
+	[Vector2.ZERO, Vector2.ZERO, false, false], # size, position, visibility, top_left
+	[Vector2(52, 60), robot_pos - Vector2(0, 13), true, true], # size, position, visibility, top_left
+	[Vector2(84, 205), Globals.block_list.get_screen_position() - Vector2(5, 5), true, false], # size, position, visibility, top_left
+	[Vector2(84, 205), Globals.block_list.get_screen_position() - Vector2(5, 5), true, false], # size, position, visibility, top_left
+	[Vector2(156, 70), Globals.block_info.get_screen_position(), true, false], # size, position, visibility, top_left
+	[Vector2(180, 320), Globals.cmd_panel.get_screen_position(), true, false], # size, position, visibility, top_left
+	[Vector2(180, 320), Globals.cmd_panel.get_screen_position(), true, false], # size, position, visibility, top_left
+	[Globals.cmd_btns.size, Globals.cmd_btns.get_screen_position(), true, false], # size, position, visibility, top_left
+	[Globals.translate_btn.size, Globals.translate_btn.get_screen_position(), true, false], # size, position, visibility, top_left
+	[Globals.translate_btn.size, Globals.translate_btn.get_screen_position(), true, false], # size, position, visibility, top_left
+	[Globals.console.size, Globals.console.get_screen_position(), true, false], # size, position, visibility, top_left
+	[Globals.objectives_panel.size, Globals.objectives_panel.get_screen_position(), true, false], # size, position, visibility, top_left
+	[Globals.objectives_panel.size, Globals.objectives_panel.get_screen_position(), true, false], # size, position, visibility, top_left
+	[Vector2.ZERO, Vector2.ZERO, false, false], # size, position, visibility, top_left
+	
+]
+"
+
+[sub_resource type="FontVariation" id="FontVariation_26aa6"]
+base_font = ExtResource("3_nrevq")
+spacing_top = -5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kllvy"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5vdi"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j8rd5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tn4br"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rht7h"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bkdpl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_26aa6"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gqoa"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7icik"]
+
+[sub_resource type="GDScript" id="GDScript_7icik"]
+resource_name = "Outliner"
+script/source = "extends Control
+
+@export var color_a : Color
+@export var color_b : Color
+@onready var outline = $Outline
+
+func _ready():
+	outline.modulate = color_b
+	position = Vector2.ZERO
+	outline.custom_minimum_size = Vector2.ZERO
+	blink_color(1.0)
+
+func blink_color(interval:float) -> void:
+	var t = create_tween().set_loops()
+	t.set_ease(Tween.EASE_IN_OUT)
+	t.set_trans(Tween.TRANS_SINE)
+	t.tween_property(outline, \"modulate\", color_a, interval)
+	t.tween_property(outline, \"modulate\", color_b, interval)
+
+func change_rect(rect_size:Vector2) -> void:
+	outline.custom_minimum_size = rect_size
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26aa6"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_4gqoa")
+
+[node name="P_a" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -55.0
+offset_right = -120.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P_b" type="PanelContainer" parent="P_a"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_xpl50")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="P_a/P_b"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="P_a/P_b/VBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.807843, 0.537255, 1)
+theme_override_colors/font_shadow_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = ExtResource("2_n53el")
+theme_override_font_sizes/font_size = 16
+text = "Bem Vindo à Colheita Programada!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="P_a/P_b/VBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.341176, 0.341176, 0.341176, 1)
+theme_override_fonts/font = SubResource("FontVariation_26aa6")
+text = "Vamos aprender a programar um robô para cuidar da horta - plantar, regar e colher."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBox" type="HBoxContainer" parent="P_a/P_b/VBoxContainer"]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="P_a/P_b/VBoxContainer/HBox"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kllvy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h5vdi")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j8rd5")
+icon = ExtResource("4_n7yiw")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Next" type="Button" parent="P_a/P_b/VBoxContainer/HBox"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tn4br")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rht7h")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bkdpl")
+icon = ExtResource("5_tnu2s")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Finish" type="Button" parent="P_a/P_b/VBoxContainer/HBox"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tn4br")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rht7h")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bkdpl")
+icon = ExtResource("6_mr02u")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Control" type="Control" parent="P_a/P_b"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CloseBtn" type="Button" parent="P_a/P_b/Control"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -2.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 2.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxEmpty_26aa6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4gqoa")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7icik")
+icon = ExtResource("7_41rtk")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Outliner" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 325.0
+offset_right = 640.0
+offset_bottom = 355.0
+mouse_filter = 2
+script = SubResource("GDScript_7icik")
+color_a = Color(0.713726, 0.521569, 0.819608, 1)
+color_b = Color(1, 0.363597, 0.370431, 1)
+
+[node name="Outline" type="PanelContainer" parent="Outliner"]
+custom_minimum_size = Vector2(182, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_26aa6")

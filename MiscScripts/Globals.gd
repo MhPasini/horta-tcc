@@ -21,13 +21,23 @@ var sfx_on : bool = true : set = _set_sfx
 var tutorial_on : bool = true : set = _set_tutorial_on
 
 #GAME VARS
-var robot_ref : RobotClass
-var cmd_panel
 var func_list = []
 var tip_panel = null
 var active_code_tab : int = 0
 var levels_completed : Array[bool]
 var level_selected : int = 0
+
+#Objects References
+var robot_ref : RobotClass
+var cmd_panel : Control
+var console: Control
+var block_list: Control
+var block_info: Control
+var cmd_btns: Control
+var objectives_panel: Control
+var translate_btn: Control
+var farm_grid
+
 
 func _ready():
 	set_mouse_cursors()
