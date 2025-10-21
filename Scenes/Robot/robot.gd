@@ -4,6 +4,9 @@ class_name RobotClass
 enum STATE {Idle, Moving, Working}
 enum CROPS {None, Carrot, Onion, Radish, Potato, Turnip}
 
+const water_anim = preload("res://Scenes/Animations/water_anim.tscn")
+const harvest_anim = preload("res://Scenes/Animations/harvest_anim.tscn")
+
 var farm : FarmGrid
 var state : STATE
 var grid_pos : Vector2i
@@ -114,7 +117,7 @@ func wait_for(time:float) -> bool:
 
 #region PLANT FUNCTIONS 
 func plant_crop(seed_type:int) -> bool:
-	await create_tween().tween_interval(.5).finished
+	await create_tween().tween_interval(.2).finished
 	if not outside_grid:
 		var result : LogResult = farm.plant_crop_at(grid_pos, seed_type)
 		if result.type == Globals.MSG_TYPE.error:
@@ -123,9 +126,9 @@ func plant_crop(seed_type:int) -> bool:
 			#await error animation
 			return false
 		else:
-			#await plant animation
 			send_log_message(result.msg, result.type)
 			Events.robot_planted_at.emit(grid_pos, CROP_DATA[seed_type])
+			await create_tween().tween_interval(0.8).finished
 	else:
 		send_log_message("Fora da área delimitada, ação cancelada!", Globals.MSG_TYPE.error)
 		#await error animation
@@ -137,7 +140,9 @@ func water_crop() -> bool:
 		var result : LogResult = farm.water_crop_at(grid_pos)
 		if result.type == Globals.MSG_TYPE.warning:
 			pass
-		#await watering animation
+		var anim = water_anim.instantiate()
+		add_child(anim)
+		await create_tween().tween_interval(1.1).finished
 		send_log_message(result.msg, result.type)
 		Events.robot_water_at.emit(grid_pos)
 	else:
@@ -155,7 +160,9 @@ func harvest_crop() -> bool:
 			#se der um aviso, mostrar alguma dica ou informação sobre o aviso
 			pass
 		else : # vegetal maduro coletado
-			#await collect animation
+			var anim = harvest_anim.instantiate()
+			add_child(anim)
+			await create_tween().tween_interval(1.1).finished
 			if storage_left <= 0:
 				result.msg = "A planta no canteiro %s foi removida, mas não havia espaço para a carregar!" % grid_pos
 				result.type = Globals.MSG_TYPE.warning

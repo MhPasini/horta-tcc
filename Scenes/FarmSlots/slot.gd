@@ -24,6 +24,8 @@ const CROP_DATA = {
 		['Nabo', Globals.turnip_sprite, 15.0, 1.00]
 }
 
+const plant_anim = preload("res://Scenes/Animations/plant_anim.tscn")
+
 var grid_pos : Vector2i
 var curr_crop : int = CROPS.None : set = _set_curr_crop
 var curr_crop_state : int = CROP_STATE.Seed : set = _set_crop_state
@@ -61,7 +63,8 @@ func plant_crop(seed_type:int) -> LogResult:
 		curr_crop_state = CROP_STATE.Seed
 		result.msg = "Semente de %s plantada no canteiro: %s." % [get_crop_name(), grid_pos]
 		result.type = Globals.MSG_TYPE.normal
-		#TODO animação de plantar a semente
+		var anim = plant_anim.instantiate()
+		add_child(anim)
 	else:
 		result.msg = "Já existe uma planta no canteiro %s, ação abortada!"% grid_pos
 		result.type = Globals.MSG_TYPE.error
