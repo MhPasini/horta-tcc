@@ -52,6 +52,10 @@ folder_colors={
 "res://UI/": "purple"
 }
 
+[gui]
+
+theme/custom_font="uid://cmvco7md03lx0"
+
 [input]
 
 click={

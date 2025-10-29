@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://u04jllr8hiqn" path="res://UI/check_t_green.png" id="3_8n4fu"]
 
 [node name="Objective" type="HBoxContainer"]
+mouse_filter = 2
 script = ExtResource("1_4btpq")
 check_icons = Array[CompressedTexture2D]([ExtResource("1_qa0hg"), ExtResource("3_8n4fu")])
 

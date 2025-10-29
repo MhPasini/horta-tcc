@@ -311,33 +311,6 @@ func _notification(what):
 		self.pause()
 "
 
-[sub_resource type="GDScript" id="GDScript_56h2t"]
-resource_name = "Storage"
-script/source = "extends Node2D
-
-@onready var carrot_label = $Carrots/CarrotLabel
-@onready var onion_label = $Onions/OnionLabel
-@onready var radish_label = $Radish/RadishLabel
-@onready var potato_label = $Potato/PotatoLabel
-@onready var turnip_label = $Turnip/TurnipLabel
-
-var labels : Dictionary = {}
-
-func _ready() -> void:
-	labels = {
-		\"Cenoura\": carrot_label,
-		\"Cebola\": onion_label,
-		\"Rabanete\": radish_label,
-		\"Batata\": potato_label,
-		\"Nabo\": turnip_label,
-	}
-	Events.update_storage.connect(_on_update_storage)
-
-func _on_update_storage(storage:Dictionary) -> void:
-	for element in storage:
-		labels[element].text = str(storage[element])
-"
-
 [sub_resource type="LabelSettings" id="LabelSettings_h4fw4"]
 font = ExtResource("12_2vowc")
 font_color = Color(0.937255, 0.807843, 0.537255, 1)
@@ -546,6 +519,36 @@ content_margin_top = 2.0
 content_margin_right = 2.0
 content_margin_bottom = 2.0
 
+[sub_resource type="GDScript" id="GDScript_56h2t"]
+resource_name = "Storage"
+script/source = "extends Node2D
+
+@onready var carrot_label = $Carrots/CarrotLabel
+@onready var onion_label = $Onions/OnionLabel
+@onready var radish_label = $Radish/RadishLabel
+@onready var potato_label = $Potato/PotatoLabel
+@onready var turnip_label = $Turnip/TurnipLabel
+
+var labels : Dictionary = {}
+
+func _ready() -> void:
+	labels = {
+		\"Cenoura\": carrot_label,
+		\"Cebola\": onion_label,
+		\"Rabanete\": radish_label,
+		\"Batata\": potato_label,
+		\"Nabo\": turnip_label,
+	}
+	Events.update_storage.connect(_on_update_storage)
+
+func _on_update_storage(storage:Dictionary) -> void:
+	for element in storage:
+		labels[element].text = str(storage[element])
+
+#func _on_icon_hover(icon:Object) -> void:
+	#
+"
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lcvqc"]
 texture_margin_left = 1.0
 texture_margin_top = 1.0
@@ -584,7 +587,7 @@ tile_set = SubResource("TileSet_wrm1d")
 metadata/_edit_lock_ = true
 
 [node name="Clutter" type="TileMapLayer" parent="Backgroud"]
-tile_map_data = PackedByteArray("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")
+tile_map_data = PackedByteArray("AAD+/xMAAQACAAAAAAD//wUAAQABAAEAAAD//w4AAQACAAEAAAADABIAAQADAAEAAAAIABMAAQACAAEAAAALAAMAAQACAAEAAAAOAAAAAQAAAAEAAAAPABIAAQADAAIAAAAQAAEAAQACAAIAAAAQAA4AAQACAAAAAAASAP7/AwACAAMAAAASAP//AQAAAAEAAAATAAgAAQADAAEAAAAUAAoAAQABAAIAAAAVAAkAAQAAAAIAAAAWAAEAAQADAAIAAAAWAAUAAQABAAIAAAAXAAMAAQADAAEAAAAXAAgAAQADAAIAAAAYAP//AAAEAAEAAAAYAAYAAQAAAAIAAAAYABEAAQADAAEAAAAZAP//AQABAAIAAAAZAAIAAQABAAIAAAAZAA8AAQABAAIAAAAbAAMAAQACAAIAAAAbAA0AAQACAAAAAAAcAP7/AQAAAAAAAAAdAAIAAQAAAAEAAAAdAAYAAQABAAIAAAAeAP//AQADAAEAAAAeAAoAAQAAAAIAAAAfAA0AAQAAAAIAAAAfABIAAQADAAEAAAAgAAEAAQAAAAIAAAAgAAsAAQADAAEAAAAgAA8AAQAAAAIAAAAhAP//AQABAAIAAAAhAAUAAQACAAEAAAATAA4AAwAAAAIAAAD+/wgAAwACAAMAAAAAAAYAAwACAAIAAAAEAAMAAwABAAIAAAAHABQAAwACAAIAAAAIAP7/AwABAAMAAAAKABQAAwABAAIAAAANAP//AwADAAIAAAAPAP7/AwACAAIAAAAQABEAAwABAAIAAAARAAIAAwABAAIAAAARAA4AAwACAAIAAAATAAIAAwAAAAMAAAAVABQAAwAAAAIAAAAWABIAAwACAAMAAAAXAAwAAAAFAAAAAAAYAAEAAwACAAMAAAAZAAcAAwABAAMAAAAcAAQAAwACAAMAAAAcAA4AAwACAAIAAAAcABEAAwACAAMAAAAdAAkAAwAAAAIAAAAeAAEAAwACAAIAAAAeABEAAwABAAMAAAAgAAkAAwACAAMAAAAgABMAAwACAAMAAAAhAAQAAwACAAIAAAAhAAsAAwAAAAIAAAAYAAsAAAAEAAAAAAAcAAkAAAACAAAAAAAdAAwAAAADAAMAAAATAAUAAAAAAAAAAAANAAQAAAAFAAAAAAANAAsAAAADAAMAAAAeAAYAAAAEAAIAAAAOAAgAAwABAAIAAAAQAAwAAwAAAAIAAAARAAUAAwAAAAIAAAAMAAEAAwABAAIAAAAUABAAAQABAAEAAAD5/wUAAQABAAEAAADy/w4AAQAAAAIAAAD0/woAAQACAAEAAAD0/xEAAQAAAAEAAAD4/wcAAQAAAAEAAAD4/w8AAQABAAIAAADx/w4AAAADAAEAAADz/xAAAAACAAIAAAD3/wkAAAAEAAMAAAD4/wgAAAAAAAAAAAD+//r/AAAFAAIAAAD3//3/AQAAAAIAAAADAAAAAAAEAAIAAAD+/wMAAAAFAAEAAAD///3/AAABAAAAAAAjAAUAAAABAAEAAAAlAAYAAAABAAMAAAAsAA8AAAABAAEAAAAqAAYAAAACAAEAAAD7/xUAAAADAAEAAAD8/xgAAAAEAAMAAAD//xkAAAACAAIAAAALABQAAAABAAEAAAAXABcAAAACAAMAAAAjAAYAAQAAAAIAAAAkAAMAAQABAAAAAAAmABMAAQADAAIAAAAoAAAAAQADAAEAAAAoAAwAAQABAAEAAAAsAAAAAQACAAAAAAAtABIAAQAAAAAAAAAtABQAAQABAAAAAAD3/xoAAQADAAIAAAD4/xgAAQAAAAAAAAD5/xUAAQABAAEAAAABABcAAQAAAAIAAAAHABYAAQAAAAAAAAAHABoAAQABAAEAAAAkABgAAQABAAAAAAD4//v/AQAAAAIAAAAFAPf/AQACAAIAAAAGAPj/AQADAAAAAAAGAP7/AQADAAAAAAAKAPz/AQADAAIAAAALAPv/AQAAAAAAAAAYAPj/AQABAAEAAAAaAPb/AQADAAAAAAAbAPn/AQADAAEAAAAiAP3/AQABAAIAAAAlAP7/AQACAAEAAAD1/wAAAQACAAIAAAD1/wsAAQABAAIAAAD2/wcAAQACAAAAAAD4/wMAAQACAAAAAAAEAA4AAQAAAAIAAAAIAA8AAQACAAEAAAA=")
 tile_set = SubResource("TileSet_ewbju")
 metadata/_edit_lock_ = true
 
@@ -629,126 +632,6 @@ show_behind_parent = true
 position = Vector2(0, 22)
 scale = Vector2(3, 3)
 texture = ExtResource("11_jpnbm")
-
-[node name="Storage" type="Node2D" parent="."]
-position = Vector2(359, 152)
-script = SubResource("GDScript_56h2t")
-
-[node name="Carrots" type="Sprite2D" parent="Storage"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("10_56bk2")
-region_enabled = true
-region_rect = Rect2(1, 16, 15, 16)
-
-[node name="CarrotLabel" type="Label" parent="Storage/Carrots"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -28.2
-offset_top = -19.0
-offset_right = -22.2
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("20_gqd4u")
-text = "0"
-horizontal_alignment = 2
-
-[node name="Onions" type="Sprite2D" parent="Storage"]
-position = Vector2(0, 22)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("12_56h2t")
-region_enabled = true
-region_rect = Rect2(1, 16, 15, 16)
-
-[node name="OnionLabel" type="Label" parent="Storage/Onions"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -28.2
-offset_top = -19.0
-offset_right = -22.2
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("20_gqd4u")
-text = "0"
-horizontal_alignment = 2
-
-[node name="Radish" type="Sprite2D" parent="Storage"]
-position = Vector2(0, 44)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("13_lcvqc")
-region_enabled = true
-region_rect = Rect2(1, 16, 15, 16)
-
-[node name="RadishLabel" type="Label" parent="Storage/Radish"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -28.2
-offset_top = -19.0
-offset_right = -22.2
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("20_gqd4u")
-text = "0"
-horizontal_alignment = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Potato" type="Sprite2D" parent="Storage"]
-position = Vector2(0, 66)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("14_p6run")
-region_enabled = true
-region_rect = Rect2(1, 16, 15, 16)
-
-[node name="PotatoLabel" type="Label" parent="Storage/Potato"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -28.2
-offset_top = -19.0
-offset_right = -22.2
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("20_gqd4u")
-text = "0"
-horizontal_alignment = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Turnip" type="Sprite2D" parent="Storage"]
-position = Vector2(0, 88)
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("15_jebrn")
-region_enabled = true
-region_rect = Rect2(1, 16, 15, 16)
-
-[node name="TurnipLabel" type="Label" parent="Storage/Turnip"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -28.2
-offset_top = -19.0
-offset_right = -22.2
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("20_gqd4u")
-text = "0"
-horizontal_alignment = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
@@ -795,6 +678,7 @@ uppercase = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+tooltip_text = "Lista dos últimos comandos executados"
 theme_override_colors/default_color = Color(0.8, 0.8, 0.792157, 1)
 theme_override_fonts/normal_font = SubResource("FontVariation_rku1e")
 theme_override_font_sizes/normal_font_size = 16
@@ -816,6 +700,7 @@ offset_right = -7.0
 offset_bottom = 15.0
 grow_horizontal = 0
 size_flags_horizontal = 3
+tooltip_text = "Limpa o console de saída"
 focus_mode = 0
 theme_override_colors/font_hover_color = Color(1, 0.79869, 0.560991, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.647059, 0, 1)
@@ -913,21 +798,27 @@ autowrap_mode = 3
 
 [node name="CodePanel" type="Control" parent="UI/CommandPanel"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 30.0
 offset_right = -2.0
-offset_bottom = 320.0
+offset_bottom = -40.0
 grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Painel de comandos:
+Arraste os blocos aqui para programar o robô"
+metadata/_edit_use_anchors_ = true
 
 [node name="CodeTabs" type="TabContainer" parent="UI/CommandPanel/CodePanel"]
 custom_minimum_size = Vector2(0, 290)
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 290.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_unselected_color = Color(0.584314, 0.639216, 0.607843, 1)
 theme_override_colors/font_hovered_color = Color(0.788235, 0.811765, 0.54902, 1)
 theme_override_colors/font_selected_color = Color(0.937255, 0.807843, 0.537255, 1)
@@ -950,6 +841,7 @@ layout_mode = 1
 offset_left = -154.0
 offset_right = 7.0
 offset_bottom = 70.0
+tooltip_text = "Descrição dos blocos"
 theme_override_styles/panel = SubResource("StyleBoxFlat_pa3qg")
 
 [node name="Info" type="RichTextLabel" parent="UI/CommandPanel/InfoPanel"]
@@ -963,6 +855,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.937255, 0.807843, 0.537255, 1)
 theme_override_fonts/normal_font = ExtResource("13_yox4t")
 theme_override_font_sizes/normal_font_size = 16
@@ -994,6 +887,7 @@ offset_left = -79.0
 offset_top = 70.0
 offset_right = -1.0
 offset_bottom = 270.0
+tooltip_text = "Blocos de comando"
 theme_override_styles/panel = SubResource("StyleBoxFlat_4ti5a")
 
 [node name="VBox" type="VBoxContainer" parent="UI/CommandPanel/BlocksPanel"]
@@ -1006,6 +900,7 @@ offset_right = -1.0
 offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="UI/CommandPanel/BlocksPanel/VBox"]
 layout_mode = 2
@@ -1400,6 +1295,7 @@ alignment = 1
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Executar o código atual"
 focus_mode = 0
 theme_override_styles/hover = SubResource("StyleBoxEmpty_7pdpw")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_gqd4u")
@@ -1413,6 +1309,7 @@ expand_icon = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Parar a execução do código"
 focus_mode = 0
 theme_override_styles/hover = SubResource("StyleBoxEmpty_7pdpw")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_gqd4u")
@@ -1426,6 +1323,7 @@ expand_icon = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Limpar todo o código"
 focus_mode = 0
 theme_override_styles/hover = SubResource("StyleBoxEmpty_d3jd4")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_56bk2")
@@ -1458,6 +1356,199 @@ clamp_to_viewport = true
 active_handles = 4
 metadata/_custom_type_script = "uid://bvtbtorqf117e"
 
+[node name="Storage" type="Control" parent="UI/CommandPanel"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = -119.0
+offset_top = 122.0
+offset_right = -79.0
+offset_bottom = 268.0
+
+[node name="Storage" type="Node2D" parent="UI/CommandPanel/Storage"]
+position = Vector2(24, 30)
+script = SubResource("GDScript_56h2t")
+
+[node name="Carrots" type="Sprite2D" parent="UI/CommandPanel/Storage/Storage"]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("10_56bk2")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="CarrotLabel" type="Label" parent="UI/CommandPanel/Storage/Storage/Carrots"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("20_gqd4u")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Tooltip" type="Control" parent="UI/CommandPanel/Storage/Storage/Carrots"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -8.0
+offset_right = -7.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Cenouras"
+
+[node name="Onions" type="Sprite2D" parent="UI/CommandPanel/Storage/Storage"]
+position = Vector2(0, 22)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("12_56h2t")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="OnionLabel" type="Label" parent="UI/CommandPanel/Storage/Storage/Onions"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("20_gqd4u")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Tooltip" type="Control" parent="UI/CommandPanel/Storage/Storage/Onions"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -8.0
+offset_right = -7.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Cebolas"
+
+[node name="Radish" type="Sprite2D" parent="UI/CommandPanel/Storage/Storage"]
+position = Vector2(0, 44)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("13_lcvqc")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="RadishLabel" type="Label" parent="UI/CommandPanel/Storage/Storage/Radish"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("20_gqd4u")
+text = "0"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Tooltip" type="Control" parent="UI/CommandPanel/Storage/Storage/Radish"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -8.0
+offset_right = -7.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Rabanetes"
+
+[node name="Potato" type="Sprite2D" parent="UI/CommandPanel/Storage/Storage"]
+position = Vector2(0, 66)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("14_p6run")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="PotatoLabel" type="Label" parent="UI/CommandPanel/Storage/Storage/Potato"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("20_gqd4u")
+text = "0"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Tooltip" type="Control" parent="UI/CommandPanel/Storage/Storage/Potato"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -8.0
+offset_right = -7.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Batatas"
+
+[node name="Turnip" type="Sprite2D" parent="UI/CommandPanel/Storage/Storage"]
+position = Vector2(0, 88)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("15_jebrn")
+region_enabled = true
+region_rect = Rect2(1, 16, 15, 16)
+
+[node name="TurnipLabel" type="Label" parent="UI/CommandPanel/Storage/Storage/Turnip"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.2
+offset_top = -19.0
+offset_right = -22.2
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("20_gqd4u")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Tooltip" type="Control" parent="UI/CommandPanel/Storage/Storage/Turnip"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -8.0
+offset_right = -7.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Nabos"
+
 [node name="ObjectivesPanel" type="PanelContainer" parent="UI"]
 z_index = -2
 custom_minimum_size = Vector2(40, 40)
@@ -1465,11 +1556,13 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = 169.0
 offset_bottom = 44.0
+tooltip_text = "Objetivos do nível atual"
 theme_override_styles/panel = ExtResource("16_lemb1")
 script = ExtResource("28_56bk2")
 
 [node name="VFlow" type="GridContainer" parent="UI/ObjectivesPanel"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/h_separation = 0
 
 [node name="LvlInfo" type="Label" parent="UI/ObjectivesPanel/VFlow"]
@@ -1479,6 +1572,7 @@ text = "Lv.1 Movimentando o Robô:"
 
 [node name="List" type="VBoxContainer" parent="UI/ObjectivesPanel/VFlow"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Objective" parent="UI/ObjectivesPanel/VFlow/List" instance=ExtResource("28_d3jd4")]
 layout_mode = 2
@@ -1538,6 +1632,7 @@ offset_bottom = -45.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 3
+tooltip_text = "Traduzir o código para forma textual"
 focus_mode = 0
 theme_override_colors/font_hover_color = Color(1, 0.79869, 0.560991, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.647059, 0, 1)
