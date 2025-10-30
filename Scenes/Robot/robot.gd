@@ -155,14 +155,14 @@ func harvest_crop() -> bool:
 	if not outside_grid:
 		var storage_left = get_storage_left()
 		var result : LogResult = farm.harvest_crop_at(grid_pos)
+		var anim = harvest_anim.instantiate()
+		add_child(anim)
+		await create_tween().tween_interval(1.1).finished
 		if result.type == Globals.MSG_TYPE.warning:
 			#await warning animation
 			#se der um aviso, mostrar alguma dica ou informação sobre o aviso
 			pass
 		else : # vegetal maduro coletado
-			var anim = harvest_anim.instantiate()
-			add_child(anim)
-			await create_tween().tween_interval(1.1).finished
 			if storage_left <= 0:
 				result.msg = "A planta no canteiro %s foi removida, mas não havia espaço para a carregar!" % grid_pos
 				result.type = Globals.MSG_TYPE.warning

@@ -1663,6 +1663,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 1
 metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="UI/Output/ClearBtn" to="UI/Output" method="_on_clear_btn_pressed"]

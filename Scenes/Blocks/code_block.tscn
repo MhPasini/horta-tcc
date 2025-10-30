@@ -142,10 +142,14 @@ theme_override_constants/minimum_character_width = 2
 theme_override_fonts/font = ExtResource("3_oc8c7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_2dql6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2dql6")
+text = "0"
 placeholder_text = "x"
 alignment = 1
 max_length = 3
 emoji_menu_enabled = false
+virtual_keyboard_type = 3
+drag_and_drop_selection_enabled = false
+select_all_on_focus = true
 
 [node name="Y" type="LineEdit" parent="MarginContainer/Methods/Coords"]
 layout_mode = 2
@@ -155,9 +159,14 @@ theme_override_constants/minimum_character_width = 2
 theme_override_fonts/font = ExtResource("3_oc8c7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_2dql6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2dql6")
+text = "0"
 placeholder_text = "y"
 alignment = 1
 max_length = 3
+emoji_menu_enabled = false
+virtual_keyboard_type = 3
+drag_and_drop_selection_enabled = false
+select_all_on_focus = true
 
 [node name="SeedSelection" type="OptionButton" parent="MarginContainer/Methods"]
 unique_name_in_owner = true
@@ -201,12 +210,15 @@ theme_override_constants/minimum_character_width = 2
 theme_override_fonts/font = ExtResource("3_oc8c7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_2dql6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2dql6")
+text = "1.0"
 placeholder_text = "1.0"
 alignment = 1
 max_length = 4
 expand_to_text_length = true
 emoji_menu_enabled = false
 virtual_keyboard_type = 3
+drag_and_drop_selection_enabled = false
+select_all_on_focus = true
 
 [node name="IfElse" type="VBoxContainer" parent="MarginContainer"]
 visible = false
@@ -342,6 +354,8 @@ emoji_menu_enabled = false
 virtual_keyboard_type = 2
 shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+select_all_on_focus = true
 
 [node name="Do" type="Label" parent="MarginContainer/IfElse/args"]
 layout_mode = 2
@@ -546,6 +560,8 @@ emoji_menu_enabled = false
 virtual_keyboard_type = 2
 shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+select_all_on_focus = true
 
 [node name="Do" type="Label" parent="MarginContainer/While/args"]
 layout_mode = 2
@@ -607,6 +623,8 @@ emoji_menu_enabled = false
 virtual_keyboard_type = 2
 shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+select_all_on_focus = true
 
 [node name="Do" type="Label" parent="MarginContainer/ForLoop/args"]
 layout_mode = 2
