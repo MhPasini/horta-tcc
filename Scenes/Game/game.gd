@@ -32,30 +32,35 @@ func _on_reset_btn_pressed() -> void:
 	robot.reset_vars()
 	farm.reset_grid()
 	$UI/ObjectivesPanel.reset_lvl()
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 	if is_instance_valid(active_translation):
 		active_translation.queue_free()
 
 func _on_next_btn_pressed() -> void:
 	robot.reset_vars()
 	farm.reset_grid()
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 	$UI/ObjectivesPanel.load_next_lvl()
 	check_level_range()
 
 func _on_prev_btn_pressed():
 	robot.reset_vars()
 	farm.reset_grid()
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 	$UI/ObjectivesPanel.load_prev_lvl()
 	check_level_range()
 
 func _on_level_completed(ID:int) -> void:
 	Globals.levels_completed[ID] = true
 	DataManager.save_data()
+	SoundManager.play_sfx("res://Sounds&Music/Collectables/retro_collect_pickup_coin_03.wav")
 	var node = COMPLETED_POPUP.instantiate()
 	$UI.add_child(node)
 
 func _on_translation_btn_pressed() -> void:
 	Globals.cmd_panel.update_program()
 	Events.request_translation.emit("portugol")
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 
 func _on_translation_requested(to:String = "portugol") -> void:
 	if  not is_instance_valid(active_translation):
@@ -84,6 +89,7 @@ func _on_screen_deletion() -> void:
 
 func _on_options_btn_pressed():
 	var node = OPTIONS.instantiate()
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 	$UI.add_child(node)
 
 func check_level_range() -> void:

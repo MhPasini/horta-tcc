@@ -36,6 +36,7 @@ func _drop_data(_at_position: Vector2, data: Variant):
 		block_node.parent_container.emit_update_signal()
 		block_node.parent_container = self
 	self.list.move_child(block_node, drop_index)
+	SoundManager.play_sfx("res://Sounds&Music/whoosh_swish_small_20.wav", 1.5)
 	emit_update_signal()
 
 func _get_drop_index(drop_position:Vector2) -> int:

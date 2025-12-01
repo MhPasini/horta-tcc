@@ -196,9 +196,11 @@ func _on_wait_time_text_changed(new_text:String):
 func _get_drag_data(_at_position: Vector2):
 	var preview = BlockPreview.new(block_data.block_text, block_data.color)
 	set_drag_preview(preview)
+	SoundManager.play_sfx("res://Sounds&Music/whoosh_swish_small_12.wav")
 	self.hide()
 	return self
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
+		#SoundManager.play_sfx("res://Sounds&Music/whoosh_swish_small_20.wav")
 		self.show()

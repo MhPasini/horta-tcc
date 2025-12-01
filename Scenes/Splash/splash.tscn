@@ -8,9 +8,6 @@
 resource_name = "Splash"
 script/source = "extends Node
 
-func _ready():
-	SoundManager.set_bgm_volume(0.5)
-
 func _load_main_scene() -> void:
 	SceneTransition.change_to_scene(\"menu\", \"Diamond\", Color.BLACK, false, 1.0)
 

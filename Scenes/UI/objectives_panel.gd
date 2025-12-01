@@ -82,6 +82,7 @@ func reset_lvl() -> void:
 
 func _on_quest_tip_btn_pressed():
 	if not is_instance_valid(Globals.tip_panel):
+		SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 		var tip_p = questTipPanel.instantiate()
 		tip_p.tip_text = tip_text
 		get_parent().add_child(tip_p)

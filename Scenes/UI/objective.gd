@@ -30,6 +30,7 @@ func set_completed() -> void:
 	check.texture = check_icons[1]
 	label.self_modulate = Color.LIME_GREEN
 	progress_label.self_modulate = Color.LIME_GREEN
+	SoundManager.play_sfx("res://Sounds&Music/Collectables/retro_collect_pickup_coin_20.wav", 0.5)
 
 func _on_progress_set(value:int) -> void:
 	progress = value

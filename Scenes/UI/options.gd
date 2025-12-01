@@ -15,7 +15,7 @@ func _ready():
 func _on_gui_input(event):
 	if event is InputEvent:
 		if event.is_action_pressed("click"):
-			SoundManager.play_sfx("res://Sounds&Music/UI/3. Exit & Cancel/Cancel_2.wav")
+			SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 			queue_free()
 
 func _on_continue_pressed():
@@ -51,5 +51,5 @@ func _on_confirm_pressed():
 func _on_cancel_pressed():
 	$Panel/Btns/CloseApp/HBox.hide()
 	$Panel/Btns/CloseApp.text = "Encerrar App"
-	SoundManager.play_sfx("res://Sounds&Music/UI/3. Exit & Cancel/Cancel_2.wav")
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 	

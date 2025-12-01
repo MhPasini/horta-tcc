@@ -14,6 +14,7 @@ func _get_drag_data(_at_position: Vector2):
 	var preview = BlockPreview.new(label.text, blockColor)
 	drag_data.color = blockColor
 	set_drag_preview(preview)
+	SoundManager.play_sfx("res://Sounds&Music/whoosh_swish_small_12.wav", 1.5)
 	return drag_data
 
 func create_block_data(ID:int) -> BlockData:

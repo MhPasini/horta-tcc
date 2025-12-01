@@ -22,4 +22,5 @@ func clear_console() -> void:
 	add_console_message("Console Iniciado!")
 
 func _on_clear_btn_pressed():
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 	console.clear()

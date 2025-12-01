@@ -4,7 +4,7 @@ extends Node
 @onready var sfx_player: AudioStreamPlayer
 
 var master_volume: float = 1.0
-var bgm_volume: float = 0.5
+var bgm_volume: float = 0.1
 var sfx_volume: float = 0.8
 
 var current_bgm: String = ""
@@ -55,8 +55,11 @@ func _start_new_bgm(path: String, fade_duration: float) -> void:
 			var tween = create_tween()
 			tween.tween_property(bgm_player, "volume_db", 
 				linear_to_db(bgm_volume * master_volume), fade_duration)
+			print(linear_to_db(bgm_volume * master_volume))
 		else:
 			bgm_player.volume_db = linear_to_db(bgm_volume * master_volume)
+			print(linear_to_db(bgm_volume * master_volume))
+			
 
 
 func stop_bgm(fade_duration: float = 1.0) -> void:

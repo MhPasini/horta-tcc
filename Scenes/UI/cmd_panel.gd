@@ -166,17 +166,21 @@ func _on_play_pressed() -> void:
 	set_play_pause_visibility(true)
 	update_program()
 	run_program()
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 
 func _on_clear_pressed():
 	if state == PLAYING:
 		robot.send_log_message("[color=Orange]*Parada requisitada*[/color]")
 	stop_requested = true
 	clear_program()
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 
 func _on_stop_pressed():
 	robot.send_log_message("[color=Orange]*Parada requisitada*[/color]")
 	stop_requested = true
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_error_03.wav")
 
 func _on_code_tabs_tab_changed(tab):
 	Globals.active_code_tab = tab
 	Events.code_tab_changed.emit(tab)
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav")

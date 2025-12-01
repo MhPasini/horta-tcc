@@ -435,6 +435,7 @@ func _drop_data(_at_position, data:Variant):
 	if data is CodeBlock:
 		var code_container = data.parent_container
 		code_container.remove_code_block(data)
+		SoundManager.play_sfx(\"res://Sounds&Music/whoosh_swish_small_02.wav\", 1.2)
 
 func _on_mouse_entered() -> void:
 	Input.set_custom_mouse_cursor(load(\"res://UI/Cursors/trash.png\"), Input.CURSOR_CAN_DROP, Vector2(6, 6))
@@ -467,6 +468,7 @@ func _can_drop_data(_at_position, data:Variant):
 func _drop_data(_at_position, data:Variant):
 	if data is CodeBlock or data is BlockData:
 		Events.create_new_function.emit(data)
+		SoundManager.play_sfx(\"res://Sounds&Music/Menu_UI_Beeps/retro_simple_beep_09.wav\", 0.9)
 
 func _on_mouse_entered() -> void:
 	Input.set_custom_mouse_cursor(load(\"res://UI/Cursors/save.png\"), Input.CURSOR_CAN_DROP, Vector2(6, 6))

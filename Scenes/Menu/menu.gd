@@ -39,7 +39,7 @@ func _on_confirm_pressed():
 func _on_cancel_pressed():
 	$UI/Panel/Btns/CloseApp/HBox.hide()
 	$UI/Panel/Btns/CloseApp.text = "SAIR"
-	SoundManager.play_sfx("res://Sounds&Music/UI/3. Exit & Cancel/Cancel_2.wav")
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 
 func _on_sfx_button_toggled(toggled_on):
 	Globals.sfx_on = toggled_on
