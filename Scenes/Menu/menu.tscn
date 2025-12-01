@@ -48,15 +48,25 @@ content_margin_bottom = 5.0
 content_margin_top = 4.0
 content_margin_bottom = 4.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3fcxt"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u2ioa"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wv7rd"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k0qon"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jqvb7"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6j47b"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m7ue0"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 
 [sub_resource type="GDScript" id="GDScript_wv7rd"]
 script/source = "extends Label
@@ -558,21 +568,21 @@ alignment = 1
 [node name="SFXButton" type="CheckButton" parent="UI/Sounds"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_3fcxt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_u2ioa")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_wv7rd")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_k0qon")
-disabled = true
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wv7rd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_k0qon")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jqvb7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6j47b")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m7ue0")
 icon = ExtResource("6_qok0p")
 
 [node name="BGMButton" type="CheckButton" parent="UI/Sounds"]
 layout_mode = 2
 focus_mode = 0
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_jqvb7")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_u2ioa")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_wv7rd")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_k0qon")
-disabled = true
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wv7rd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_k0qon")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jqvb7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6j47b")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m7ue0")
 icon = ExtResource("7_hgg7c")
 
 [node name="Info1" type="Label" parent="UI"]

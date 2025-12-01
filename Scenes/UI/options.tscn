@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b10dwyug0hjs1"]
+[gd_scene load_steps=23 format=3 uid="uid://b10dwyug0hjs1"]
 
 [ext_resource type="Script" uid="uid://b0yx6ul34gip" path="res://Scenes/UI/options.gd" id="1_j6lap"]
 [ext_resource type="FontVariation" uid="uid://by0ta8qasx0nw" path="res://Fonts/MatchupPro_tabs.tres" id="2_35y0k"]
@@ -24,6 +24,8 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v1jig"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j3ni8"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jme0m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jej0m"]
@@ -31,6 +33,24 @@ anti_aliasing = false
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r2srd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_orckb"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f267f"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0168g"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4fe4t"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b545w"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qamcq"]
 
@@ -133,20 +153,20 @@ alignment = 1
 layout_mode = 2
 focus_mode = 0
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_v1jig")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_j3ni8")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_jme0m")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_jej0m")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_r2srd")
-disabled = true
 icon = ExtResource("4_jme0m")
 
 [node name="BGMButton" type="CheckButton" parent="Panel/Btns/Sounds"]
 layout_mode = 2
 focus_mode = 0
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_orckb")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_jme0m")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_jej0m")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_r2srd")
-disabled = true
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_f267f")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0168g")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4fe4t")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b545w")
 icon = ExtResource("5_qamcq")
 
 [node name="CloseApp" type="Button" parent="Panel/Btns"]

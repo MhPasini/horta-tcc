@@ -24,6 +24,7 @@ DataManager="*res://MiscScripts/DataManager.gd"
 Globals="*res://MiscScripts/Globals.gd"
 ObjectiveManager="*res://Scenes/Game/ObjectiveManager.gd"
 SceneTransition="*res://Scenes/SceneTransition/scene_transition.tscn"
+SoundManager="*res://Scenes/sound_manager.gd"
 
 [debug]
 

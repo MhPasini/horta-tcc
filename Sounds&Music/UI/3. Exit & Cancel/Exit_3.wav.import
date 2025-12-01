@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bykfr4fovd6w0"
+path="res://.godot/imported/Exit_3.wav-e63d54fb69390fb4b30aced68d234fcd.sample"
+
+[deps]
+
+source_file="res://Sounds&Music/UI/3. Exit & Cancel/Exit_3.wav"
+dest_files=["res://.godot/imported/Exit_3.wav-e63d54fb69390fb4b30aced68d234fcd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
