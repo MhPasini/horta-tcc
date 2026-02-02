@@ -36,7 +36,7 @@ var block_info: Control
 var cmd_btns: Control
 var objectives_panel: Control
 var translate_btn: Control
-var farm_grid
+var farm_grid : FarmGrid : set = _set_farm_grid
 
 
 func _ready():
@@ -57,6 +57,10 @@ func _set_sfx(v:bool) -> void:
 func _set_tutorial_on(v:bool) -> void:
 	tutorial_on = v
 	DataManager.save_data()
+
+func _set_farm_grid(v:FarmGrid) -> void:
+	farm_grid = v
+	Events.grid_loaded.emit()
 
 func set_mouse_cursors() -> void:
 	Input.set_custom_mouse_cursor(load("res://UI/Cursors/hand_open.png"), Input.CURSOR_POINTING_HAND, Vector2(6, 6))

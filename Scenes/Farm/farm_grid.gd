@@ -17,6 +17,7 @@ func  _ready() -> void:
 	_place_farm_slots()
 	await get_tree().process_frame
 	Events.update_grid.connect(_on_update_grid)
+	Globals.farm_grid = self
 
 func _place_farm_slots() -> void:
 	for x in size.x:

@@ -47,6 +47,10 @@ func load_objectives(ID:int) -> void:
 		show_popup(objective_data.title)
 
 func load_grid_state(objective_data) -> void:
+	if is_instance_valid(Globals.farm_grid):
+		pass
+	else :
+		await Events.grid_loaded
 	if not objective_data.grid_state.is_empty():
 		for slot in objective_data.grid_state:
 			var i = objective_data.grid_state[slot]

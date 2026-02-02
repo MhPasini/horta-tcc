@@ -38,7 +38,7 @@ var DATA = [
 			]},
 		  {"info": "Colher 1 cenoura madura", "has_progression": true, "progress_max": 1,
 			"steps":[
-				{"type": "harvest_at", "target": Vector2i(0, 1), "target_crop":"Cenoura", "completed": false, "progress_step": false}
+				{"type": "harvest_at", "target": Vector2i(0, 1), "target_crop":"Cenoura", "completed": false, "progress_step": true}
 			]}],
 		"tip": "Mova-se até o canteiro indicado e use 'Plantar', 'Regar' e 'Colher'",
 		"grid_state": {}

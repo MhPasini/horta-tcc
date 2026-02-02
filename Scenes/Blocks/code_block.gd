@@ -79,6 +79,7 @@ func _build_function() -> void:
 func _on_else_btn_toggled(toggled_on):
 	%ElseChilds.visible = toggled_on
 	%ElseBtn.flip_v = toggled_on
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav", 0.8)
 
 func _set_line_edit_filters() -> void:
 	val_if.text_changed.connect(_on_LineEdit_text_changed.bind(val_if))
@@ -106,6 +107,7 @@ func _on_if_condition_item_selected(index):
 	else: 
 		block_data.condition[0] = text
 		block_data.condition_text = text
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav", 0.8)
 
 func _on_while_condition_item_selected(index):
 	var text = $MarginContainer/While/args/Condition.get_item_text(index)
@@ -120,6 +122,7 @@ func _on_while_condition_item_selected(index):
 	else: 
 		block_data.condition[0] = text
 		block_data.condition_text = text
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav", 0.8)
 
 func _create_new_condition(text, aux) -> String:
 	var new_condition = text
@@ -153,24 +156,29 @@ func _create_new_condition(text, aux) -> String:
 func _on_seed_selection_item_selected(index):
 	block_data.plant_seed = index + 1
 	block_data.seed_name = %SeedSelection.get_item_text(index)
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav", 0.8)
 
 func _on_if_condition_2_item_selected(index):
 	var id = $MarginContainer/IfElse/args/Condition.get_selected_id()
 	var text = $MarginContainer/IfElse/args/Condition.get_item_text(id)
 	block_data.condition[0] = _create_new_condition(text, index)
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav", 0.8)
 
 func _on_if_condition_3_item_selected(index):
 	var value = true if index == 0 else false
 	block_data.condition[2] = value
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav", 0.8)
 
 func _on_while_condition_2_item_selected(index):
 	var id = $MarginContainer/While/args/Condition.get_selected_id()
 	var text = $MarginContainer/While/args/Condition.get_item_text(id)
 	block_data.condition[0] = _create_new_condition(text, index)
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav", 0.8)
 
 func _on_while_condition_3_item_selected(index):
 	var value = true if index == 0 else false
 	block_data.condition[2] = value
+	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav", 0.8)
 
 func _on_child_list_updated(container:CodeContainer) -> void:
 	block_data.child_blocks = container.get_code_blocks()

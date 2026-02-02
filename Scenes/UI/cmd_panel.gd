@@ -10,6 +10,7 @@ var state = IDLE
 
 @onready var code_container = $CodePanel/CodeTabs/Main/CodeContainer as CodeContainer
 @onready var info_text = $InfoPanel/Info
+@onready var code_tabs = $CodePanel/CodeTabs
 
 enum {PLAYING, IDLE}
 
@@ -172,7 +173,12 @@ func _on_clear_pressed():
 	if state == PLAYING:
 		robot.send_log_message("[color=Orange]*Parada requisitada*[/color]")
 	stop_requested = true
-	clear_program()
+	if code_tabs.current_tab == 0:
+		clear_program()
+	else :
+		var tab = code_tabs.get_current_tab_control().get_child(0) as CodeContainer
+		program.clear()
+		tab.clear_code_blocks()
 	SoundManager.play_sfx("res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_01.wav")
 
 func _on_stop_pressed():

@@ -48,7 +48,7 @@ func _on_close_btn_pressed():
 
 func _on_translation_btn_item_selected(index):
 	Events.request_translation.emit(translation_btn.get_item_text(index))
-	SoundManager.play_sfx(\"res://Sounds&Music/UI/2. Clicks/Click_12.wav\")
+	SoundManager.play_sfx(\"res://Sounds&Music/Menu_UI_Beeps/retro_ui_menu_simple_click_12.wav\", 0.8)
 
 func reset_position() -> void:
 	position = start_position
