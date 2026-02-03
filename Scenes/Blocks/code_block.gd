@@ -212,3 +212,5 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		#SoundManager.play_sfx("res://Sounds&Music/whoosh_swish_small_20.wav")
 		self.show()
+	elif what == NOTIFICATION_PREDELETE:
+		parent_container.remove_code_block(self)

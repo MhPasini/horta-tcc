@@ -89,8 +89,9 @@ func create_code_block(data:BlockData, at_index:int = 0) -> void:
 
 func remove_code_block(block:CodeBlock) -> void:
 	block.queue_free()
-	await get_tree().process_frame
-	emit_update_signal()
+	if is_inside_tree():
+		await get_tree().process_frame
+		emit_update_signal()
 
 func clear_code_blocks() -> void:
 	for child in $List.get_children():
